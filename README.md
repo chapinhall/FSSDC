@@ -1,4 +1,4 @@
-# FSSDC
+# Family Self-Sufficiency Data Resources
 This repository has been created as a way to share resources for program administrators and researchers looking to use data for family 
 self-sufficiency research.
 
@@ -12,7 +12,7 @@ the Data Center has the ability to show how agency administrative data can be tu
 and analysis); provide technical assistance including webinars, sample code, and briefs addressing common challenges putting administrative data into data model formats; 
 and make publically available code in multiple languages that can be used to run common analyses on data in the data model format. 
 
-Learn more about the FSSDC [here]<http://harris.uchicago.edu/centers/fssdc>.
+Learn more about the FSSDC [here](http://harris.uchicago.edu/centers/fssdc).
 
 
 Available Resources
