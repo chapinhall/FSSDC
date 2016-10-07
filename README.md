@@ -17,7 +17,9 @@ Learn more about the FSSDC [here](http://harris.uchicago.edu/centers/fssdc).
 
 Available Resources
 -------------------
-Current resources on this repository include samples of a basic TANF data model and an R script to explore and present that data. 
+Current resources on this repository include:
+- Samples of a basic TANF data model and an R script to explore and present that data;
+- A script used to create case spells and case spell variables in a PostgreSQL environment.
 
 The FSSDC is hosting a workshop in early October with staff from about a dozen states.  That workshop will be used to pilot content and determine the 
 most appropriate resources to add and extend this repository.
