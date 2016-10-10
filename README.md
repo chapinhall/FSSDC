@@ -14,12 +14,22 @@ and make publically available code in multiple languages that can be used to run
 
 Learn more about the FSSDC [here](http://harris.uchicago.edu/centers/fssdc).
 
-
 Available Resources
 -------------------
 Current resources on this repository include:
 - Samples of a basic TANF data model and an R script to explore and present that data;
-- A script used to create case spells and case spell variables in a PostgreSQL environment.
+- Resources and sample scripts describing the creation of spells files from point-in-time data.
 
-The FSSDC is hosting a workshop in early October with staff from about a dozen states.  That workshop will be used to pilot content and determine the 
-most appropriate resources to add and extend this repository.
+To Use and Contribute to this Repository
+----------------------------------------
+This repository is publically accessible. All code is provided under the [MIT license](https://www.github.com/chapinhall/fssdc/LICENSE.md).
+
+The simplest way for administrators and researchers to use these resources is to browse this website and download files of interest. We also welcome contributions. If you are 
+unfamiliar with Git and/or GitHub and working with repositories, there are a lot of online resources to help you get started. We are interested in developing a 
+collection of resources to make using and contributing to this repository as easy as possible.  In the meantime, if you find helpful resources, please 
+share them with us, and if you are interested in contributing but are struggling to get started, please contact us. Knowing your questions will help us understand 
+what specific barriers to address.
+
+**Questions? Comments? Contact us at fssdc@chapinhall.org.**
+
+![fssdc logo](https://raw.github.com/chapinhall/fssdc/logo.png)
