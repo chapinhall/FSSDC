@@ -109,7 +109,6 @@ INSERT INTO fss_co.case_spells_co
 --View initial results
 -- SELECT 'Initial import of spells from payments_by_case_month_temp -- ONLY payments that show NO payments for this case in the previous month' AS message;
 -- SELECT * FROM fss_co.case_spells_co ORDER BY CS_ID, start_month LIMIT 30; 
-SELECT * FROM fss_co.case_spells_co WHERE CS_ID IN ('1B0Z7D2') ORDER BY start_month;
 
 --Average difference between start and emd months of each spell should be ZERO at this point.
 SELECT ROUND(AVG(end_month - start_month),1) AS avg_diff  FROM fss_co.case_spells_co WHERE (end_month - start_month) < 89  ;
@@ -181,8 +180,6 @@ UPDATE fss_co.case_spells_co
   SET spell_months = 
    ( DATE_PART('YEAR', TO_DATE( LEFT(LTRIM(TO_CHAR(end_month,'999999')),4) || RIGHT(LTRIM(RTRIM(TO_CHAR(end_month,'999999'))),2) || '01', 'YYYYMMDD')) - DATE_PART('YEAR', TO_DATE( LEFT(LTRIM(TO_CHAR(start_month,'999999')),4) || RIGHT(LTRIM(RTRIM(TO_CHAR(start_month,'999999'))),2) || '01', 'YYYYMMDD')) )  *12  + ( DATE_PART('MONTH', TO_DATE( LEFT(LTRIM(TO_CHAR(end_month,'999999')),4) || RIGHT(LTRIM(RTRIM(TO_CHAR(end_month,'999999'))),2) || '01', 'YYYYMMDD')) -  DATE_PART('MONTH', TO_DATE( LEFT(LTRIM(TO_CHAR(start_month,'999999')),4) || RIGHT(LTRIM(RTRIM(TO_CHAR(start_month,'999999'))),2) || '01', 'YYYYMMDD')) ) +1 ;
 
-SELECT * FROM fss_co.case_spells_co WHERE CS_ID IN ('1B0Z7D2') ORDER BY start_month;
-   
 --*******************************************************************************************************************
 --Determine the number of months of benefits PREVIOUS to any given month (including all prior spells)
 --NOTE: this query JOINS the spells table with a copy of itself.
