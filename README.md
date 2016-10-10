@@ -22,7 +22,7 @@ Current resources on this repository include:
 
 To Use and Contribute to this Repository
 ----------------------------------------
-This repository is publically accessible. All code is provided under the [MIT license](https://www.github.com/chapinhall/fssdc/LICENSE.md).
+This repository is publically accessible. All code is provided under the [MIT license](https://www.github.com/chapinhall/fssdc/blob/master/LICENSE.md).
 
 The simplest way for administrators and researchers to use these resources is to browse this website and download files of interest. We also welcome contributions. If you are 
 unfamiliar with Git and/or GitHub and working with repositories, there are a lot of online resources to help you get started. We are interested in developing a 
@@ -32,4 +32,4 @@ what specific barriers to address.
 
 **Questions? Comments? Contact us at fssdc@chapinhall.org.**
 
-![fssdc logo](https://raw.github.com/chapinhall/fssdc/logo.png)
+![fssdc logo](https://raw.github.com/chapinhall/fssdc/blob/master/logo.png)
