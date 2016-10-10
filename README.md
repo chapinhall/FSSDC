@@ -32,4 +32,4 @@ what specific barriers to address.
 
 **Questions? Comments? Contact us at fssdc@chapinhall.org.**
 
-![fssdc logo](https://raw.github.com/chapinhall/fssdc/blob/master/logo.png)
+![fssdc logo](https://github.com/chapinhall/fssdc/blob/master/logo.png)
