@@ -44,6 +44,24 @@ Spell Creation in SAS
 
 In SAS, where data is always processed sequentially, the script relies on repeatedly sorting the data and retaining key fields. 
 
+1. The raw data is point-in-time, sorted by case ID and chronologically by the sequence field update ID (note that the fixupdt macro is called to work on a dataset-specific
+issue in update IDs). Every case/time combination from when the case first originates is represented, with an indicator that is 1 for active benefit receipt and 0 for months
+of non-receipt.
+
+2. Two fields are created with a retain statement: one indicating spell start and one indicating whether benefits were received in the prior month.  For each new case ID, these
+are reset to match the current line of data. Otherwise, if the previous row had the same benefit status, the start date is unchanged. If benefit status changes between months,
+the strat date changes and a new spell starts.
+
+3. After the retain processing, only the last observation with any given start date is kept, so that there is only one line per spell.
+
+4. This initial spell data is sorted in reverse chronological order, with the new (chronologically) start date for each row retained for reference. This facilitates the creation
+of a spell end date.
+
+5. Spells of benefit non-receipt are filtered out.
+
+Subsequent code repeats similar operations at the individual or case/individual levels, and with logic ignoring one month gaps.
+ 
+
 Spell Creation in R
 -------------------
 
