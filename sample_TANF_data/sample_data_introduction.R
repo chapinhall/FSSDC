@@ -4,7 +4,7 @@
 
 library("ggplot2")
 
-# setwd("")
+setwd("")
 # Set working directory to folder containing GitRepo
 
 # Read in case data and review basic data structure
@@ -45,23 +45,23 @@ print(caseload_by_child_count)
 
 # Looking at change in caseload size and composition over time
 
-caseload_over_time <- ggplot(data=cases[cases$active_ind==1,], aes(x=month)) + geom_line(stat="bin")
+caseload_over_time <- ggplot(data=cases[cases$active_ind==1,], aes(x=month)) + geom_line(stat="bin", bins=20)
 print(caseload_over_time)
 
-caseload_over_time_by_type <- ggplot(data=cases[cases$active_ind==1,], aes(x=month, group=case_type, color=case_type)) + geom_line(stat="bin")
+caseload_over_time_by_type <- ggplot(data=cases[cases$active_ind==1,], aes(x=month, group=case_type, color=case_type)) + geom_line(stat="bin", bins=20)
 print(caseload_over_time_by_type)
 
 
 # Explore changes in caseload in more detail
 
-starts_over_time <- ggplot(data=cases[cases$first_month==1,], aes(x=month)) + geom_line(stat="bin")
+starts_over_time <- ggplot(data=cases[cases$first_month==1,], aes(x=month)) + geom_line(stat="bin", bins=20)
 print(starts_over_time)
 
-stops_over_time <- ggplot(data=cases[cases$last_month==1,], aes(x=month)) + geom_line(stat="bin")
+stops_over_time <- ggplot(data=cases[cases$last_month==1,], aes(x=month)) + geom_line(stat="bin", bins=20)
 print(stops_over_time) # Note surge at end of period is product of data structure
 
-new_over_time <- ggplot(data=cases[cases$first_month_ever==1,], aes(x=month)) + geom_line(stat="bin")
+new_over_time <- ggplot(data=cases[cases$first_month_ever==1,], aes(x=month)) + geom_line(stat="bin", bins=20)
 print(new_over_time)
 
-returns_over_time <- ggplot(data=cases[cases$first_month==1 & cases$first_month_ever!=1,], aes(x=month)) + geom_line(stat="bin")
+returns_over_time <- ggplot(data=cases[cases$first_month==1 & cases$first_month_ever!=1,], aes(x=month)) + geom_line(stat="bin", bins=20)
 print(returns_over_time)
