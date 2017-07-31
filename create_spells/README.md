@@ -32,7 +32,7 @@ An example of specifying your inputs in the terminal might look like this: `pyth
 8. Lines 55-64 take the spells which we have been keeping track of in the variable `records` and outputs them to a csv file with the name chosen by the user when initially calling the Python script via the terminal.
 
 #### Testing The Python Script
-A file to test the Python code against a few simple use cases is available in *test_spells.py*. This file uses the [pytest](https://docs.pytest.org/en/latest/) library. Test data is provided in  [test_data](https://github.com/chapinhall/FSSDC/tree/master/test_data). If you make changes to the Python file to add a new feature you may wish to run some tests to ensure they work correctly. Update the new expected output based on your additions inside the *test_spells.py* file and rerun the tests. You can run the test file by typing `py.test test_spells.py` in your terminal.
+A file to test the Python code against a few simple use cases is available in *test_spells.py*. This file uses the [pytest](https://docs.pytest.org/en/latest/) library. Test data is provided in  [test_data](https://github.com/chapinhall/FSSDC/tree/master/create_spells/test_data). If you make changes to the Python file to add a new feature you may wish to run some tests to ensure they work correctly. Update the new expected output based on your additions inside the *test_spells.py* file and rerun the tests. You can run the test file by typing `py.test test_spells.py` in your terminal.
 
 ## Specific Use Cases of Spell Creation
 This repository also includes two sample scripts created by FSSDC staff to create spell data formats in working with our partner states.  The first, `build_case_spells.sql`,
