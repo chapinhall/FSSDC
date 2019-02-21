@@ -9,3 +9,5 @@ Many people have written online tutorials about the topics we are covering. We s
 
 [Introduction to Running Programs in a Terminal](introduction_to_running_programs_in_a_terminal.md)
 
+[Installation Guide for R](installation_guide_for_r.md)
+
