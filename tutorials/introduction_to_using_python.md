@@ -43,3 +43,9 @@ Will print "Hello, Alex" if you type:
 
 #### Finding a Text Editor to Read and Write Python Files
 You can read and write Python (.py) files in a text editor that comes with your computer, like notepad. However, some text editors provide syntax highlighting that can make reading and writing programs much easier. A text editor like [Atom](https://atom.io/), which is an open source text editor created by GitHub, can tell that you have a Python script open and will highlight key words in different colors, making it easier to read and edit files.
+
+## Further information
+
+[Python for Beginners](https://www.python.org/about/gettingstarted/) Python guide written by the maintainers of Python. Includes installation instructions.
+[Learn Python the Hard Way](https://learnpythonthehardway.org/) An online book for new Python Programmers.
+[Data Camp Introduction to Python](https://www.datacamp.com/courses/intro-to-python-for-data-science) Online course on Python for data analysis.

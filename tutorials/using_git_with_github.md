@@ -8,3 +8,9 @@ information from a repository, contact us and we can help you work on it.
 First, [download](https://git-scm.com/downloads) Git for your operating system. After installation, you should see several programs available such as *Git Bash*, *Git CMD*, *Git GUI*. The first two are terminal programs that let you use Git from the terminal. *Git Bash* is like a Unix terminal and *Git CMD* is like a Windows terminal. *Git GUI* is a way to use Git locally without using the terminal but by clicking with your mouse instead.
 
 Play around with a [simulated version](https://try.github.io/levels/1/challenges/1) of using Git with your terminal in your web browser to learn the commands.
+
+## Further information
+
+[Git Basics](https://git-scm.com/book/en/v1/Getting-Started-Git-Basics) Introduction to Git written by the maintainers of Git.
+[Flight Rules for Git](https://github.com/k88hudson/git-flight-rules) Troubline shooting guide. Look here to fix Git mistakes.
+[Resources to Learn Git](https://try.github.io/) Interactive tutorials for Git.
