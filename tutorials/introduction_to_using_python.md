@@ -47,5 +47,7 @@ You can read and write Python (.py) files in a text editor that comes with your 
 ## Further information
 
 [Python for Beginners](https://www.python.org/about/gettingstarted/) Python guide written by the maintainers of Python. Includes installation instructions.
+
 [Learn Python the Hard Way](https://learnpythonthehardway.org/) An online book for new Python Programmers.
+
 [Data Camp Introduction to Python](https://www.datacamp.com/courses/intro-to-python-for-data-science) Online course on Python for data analysis.

@@ -27,5 +27,7 @@ You may want to intall aditional packages that can do a variety of tasks beyond 
 The instructions above are designed to help you run the code available in this repository. There are a many tutorials and guides available for R. We recommend the following:
 
 - [An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf) Free, online guide written by the makers of R
+
 - [Data Camp Introduction to R Course](https://www.datacamp.com/courses/free-introduction-to-r) An online course in R for data analysis. The first sessions are free.
+
 - [Hands-On Programming with R by Garrett Grolemund](https://www.amazon.com/dp/1449359019/ref=cm_sw_su_dp) A book-format through introduction to R.
