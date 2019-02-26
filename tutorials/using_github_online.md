@@ -25,4 +25,10 @@ We will receive an alert that you have submitted a contribution. Once we approve
 You can also use GitHub by interacting with Git directly on your own personal computer. This has several advantages, but a large one is using version control on your own work as you make incremental changes. Version control lets you easily see and revert to previous versions of your code without having to save files like my_code_v1, my_code_v2, etc. For a more in-depth discussion of how to use Git and how to use it with GitHub, see the Using Git with GitHub section of this tutorial.
 
 ### Creating an Issue
-If you have an idea for an improvement, but do not have the time to implement the change, want to discuss it with other team members first, or are not sure how to get started, you can create an issue. This will add to the issue discussion forum and others may implement your suggestions. See GitHub's [documentation](https://help.github.com/articles/creating-an-issue/) on how to create an issue.
+If you have an idea for an improvement, but do not have the time to implement the change, want to discuss it with other team members first, or are not sure how to get started, you can create an issue. This will add to the issue discussion forum and others may implement your suggestions. See GitHub's [documentation](https://help.github.com/articles/creating-an-issue/) on how to create an issue
+
+## Further information
+
+[Git Basics](https://git-scm.com/book/en/v1/Getting-Started-Git-Basics) Introduction to Git written by the maintainers of Git.
+[Flight Rules for Git](https://github.com/k88hudson/git-flight-rules) Troubline shooting guide. Look here to fix Git mistakes.
+[Resources to Learn Git](https://try.github.io/) Interactive tutorials for Git.
