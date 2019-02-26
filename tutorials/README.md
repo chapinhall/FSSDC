@@ -7,7 +7,5 @@ Many people have written online tutorials about the topics we are covering. We s
 
 [Introduction to Using Python](introduction_to_using_python.md)
 
-[Introduction to Running Programs in a Terminal](introduction_to_running_programs_in_a_terminal.md)
-
-[Installation Guide for R](installation_guide_for_r.md)
+[Introduction to Using R](introduction_to_using_r.md)
 
