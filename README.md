@@ -1,122 +1,33 @@
-# Data File Orientation Toolkit
+# Family Self-Sufficiency Data Resources
+This repository has been created as a way to share resources for program administrators and researchers looking to use data for family
+self-sufficiency research.
 
-Welcome to the Data File Orientation toolkit. The goal of this toolkit is to allow for an automated assessment of the quality of various administrative datasets.
+## About the Family Self-Sufficiency Data Center
+The Family Self-Sufficiency Data Center (FSSDC) was established to support states to better use data and to increase the amount and quality of data available for research related to family self-sufficiency (FSS).  This includes administrative datasets for the Temporary Assistance for Needy Families (TANF) program, Supplemental Nutritional Assistance Program (SNAP) and other food assistance programs, workforce development and training programs, early care and education, and health insurance. This repository is dedicated to sharing public, open-source tools to improve the use of FSS data by program administrators and researchers.
 
-This toolkit is written using the R programming language and utilizes RMarkdown for reporting.
+This work is supported by the Family Self-Sufficiency Research Consortium, Grant Number #90PD0272, funded by the Office of Planning, Research and Evaluation in the Administration for Children and Families, U.S. Department of Health and Human Services. The contents of this repository are solely the responsibility of the authors and do not necessarily represent the official views of the Office of Planning, Research and Evaluation, the Administration for Children and Families, or the U.S. Department of Health and Human Services.
 
-## How to utilize this toolkit
-In order to use this toolkit, you must have two-three programs installed on your computer -- R, RStudio, and (optionally) Git. 
-- [R Homepage](https://www.r-project.org/)
-- [RStudio Homepage](https://www.rstudio.com/)
-- (Optional) [Git Homepage](https://git-scm.com/)
+Learn more about the FSSDC [here](http://harris.uchicago.edu/centers/fssdc).
 
-## R Packages Required
-- "tinytex", 
-- "data.table",
-- "tabplot",
-- "readxl",
-- "bit64",
-- "descr",
-- "dplyr",
-- "stringr",
-- "gdata",
-- "knitr",
-- "ggplot2",
-- "ggthemes",
-- "dataQualityR",
-- "lvplot",
-- "fda",
-- "tables",
-- "RDIDQ",
-- "validate",
-- "VIM",
-- "lvplot",
-- "tidyr",
-- "gridExtra", 
-- "yaml" 
+## Available Resources
+Current resources on this repository include:
+- Samples of a basic TANF data model and an R script to explore and present that data;
+- Resources and sample scripts describing the creation of spells files from point-in-time data.
 
-### Using Without Git (Zip File)
-To utilize this toolkit with the zip file, simple unzip the downloaded file in a location of your choosing.
-### Using with Git
-After installing these programs, use Git to clone this repository. To do this:
-- On the main Data File Orientation Toolkit GitHub page, click on "Clone or Download" and copy the link inside the resulting box.
-- Open up a Command Prompt window and change your directory to a desired location using the "cd" command.
-- Type "git clone" and add the copied link from the GitHub page.
+## To Use and Contribute to this Repository
+This repository is publically accessible. All code is provided under the [MIT license](https://www.github.com/chapinhall/fssdc/blob/master/LICENSE.md).
 
-After using the git clone command, a copy of the toolkit will be in downloaded and copied to the folder you specified.
+### Reading the Files
+The simplest way for administrators and researchers to use these resources is to browse this website and download files of interest. Reading sample code and looking at examples of what data may look like can provide new ideas and guide discussion.
 
-Next, using RStudio, open the "DQToolkit" file in the data-quality-toolkit folder. Also, you can open the setup.yml file in the same folder.
+### Running the Files
+The script files can also be run on your own data if the general format of your data matches the fake data provided or you can modify the code to be more applicable to your own data. We have provided sample code files in several languages. You can tell a file is a code file and what language it is in by looking at its extension. For example, SAS files end in .sas and Python files end in .py.
 
-## Setting up the report
-The YAML file is where you will provide the necessary information of the variables in your dataset. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs.  
+To run the code you will need the relevant programming languages installed and knowledge of how to use them. Many of these programs are open source and do not require funding to install. Others require a license that your organization may already have. For a quick course in how to use these programs please see the [tutorial](https://github.com/chapinhall/FSSDC/tree/master/tutorials) section.
 
-In the main DQToolkit.Rmd file, you can specify the location of your case and member files, create new variables for analysis, add new labels for your variables, or even subset your data.  
-## Running the report
-In the DQToolkit RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and an HTML document will appear when it is finished.
+### Changing the Files on This Website
+We also welcome contributions. You can use this website to make your contributions. A guide to getting started with GitHub and Git can be found in the tutorial section. If you are interested in contributing but are struggling to get started, please contact us. Knowing your questions will help us understand what specific barriers to address.
 
-## Modifying the output
-If you'd like to modify the report functionality, you can do it in two ways -- adding/removing components or modifying existing elements.
-### Adding/removing components
-At the bottom of the DQToolkit.Rmd file, you will find a series of lines that refer to the creating of various report subcomponents. You can remove components from your final report by removing these lines.
-For instance, if you want to remove outlier analysis, simple comment out or remove the following lines:
-```{r outliers, child='outliers/outliers.rmd', echo=True}
-```
-If you'd like to add elements back into the report, simply add these lines back into the report.
+**Questions? Comments? Contact us at <fssdc@chapinhall.org>.**
 
-### Modifying existing elements
-If you'd like to modify the output of various report subcomponents, you can change the existing code. To do this, open the subfolder associated with that functionality. For instance, the outlier analysis is located in the "outliers" folder.
-Most of the readily available input modifications are located at the top of each subcomponent's code. 
-
-# Description of Elements
-
-## DQToolkit (DQToolkit.Rmd)
-Master script for the toolkit, including data input  
-Variables to Modify:
-- input_yaml: Location of the yaml to detail variables for analysis. For documentation on how to modify YAML, refer to the existing YAML file (setup.yml).
-- subset_param: Select subsetting parameters, including time period, for report output
-
-
-## Technical Checks (Technical_Checks.Rmd)
-Check whether the data conform to rules based on the codebook or other sources  
-Variables to Modify:  
-- selected_var: Select variables for section's analyses
-- zip_str: Regular expression used to check zip code consistency that can be modified or marked out
-- zip_detect: For verifying zip code; Can be marked out if zip code not in dataset
-- v: Validator object where user can specify variable rules
-- var2: Set grouping variable for record-level rule check plot (plot2)
-- varlabel2: Label for grouping variable for record-level rule check plot (plot2)
-- var3: Set grouping variable for record-level rule check plot (plot3)
-- varlabel3: Label for grouping variable for record-level rule check plot (plot3)
-## Outliers (Outliers.Rmd)
-Assess distributions of single variables and detect potential outliers  
-Variables to Modify:
-- selected_var: Select variables for section's analyses
-
-## Completeness
-
-### Unit Completeness (Completeness_unit.Rmd)
-Assess completeness of data with respect to units in the dataset  
-Variables to Modify:
-- subset_param: Select subsetting parameters for section's analyses
-- time_var: Designate the time variable
-- location_var: Designate the location/geographic variable for analysis
-
-### Values Completeness (Completeness_values.Rmd)
-Assess completeness of data with respect to variables within units (Item nonresponse)
-
-## Comparability
-
-### Distribution (Comparability_Distribution.Rmd)
-Assess comparability based on variable distributions and comparisons among domains
-
-### Patterns Over Time (Patterns_over_time.Rmd)
-Assess comparability of data over time  
-Variables to Modify:
-- selected_var: Select variables for section's analyses
-- subgroup: Select subgroup variable for examining tableplots by subgroup
-
-### Relationships Among Variables (Relationships_among_variables.Rmd)
-Assess comparability with respect to relationships among variables and by groups
-Variables to Modify:  
-- sort_var: Select sort variable to examine relationship among variables via tableplots
-- subgroup: Select subgroup variable for examining tableplots by subgroup
+![fssdc logo](https://github.com/chapinhall/fssdc/blob/master/logo.png)
