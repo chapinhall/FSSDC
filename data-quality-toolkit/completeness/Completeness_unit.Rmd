@@ -1,0 +1,101 @@
+
+## 1.	Are there units that are missing or not available for the analysis?
+
+**Reference Script**: completeness\\Completeness_unit.Rmd
+
+**Description**: In the absence of a reference list or register, it is at least possible to check that data of all geographic units is present in the dataset. For example, if data from a particular state is missing from a dataset that should include information from all of them further inquiries can be made to know why this is happening. In a similar way, it is possible to compare the number of units available for analysis from one time to another to assess whether or not there is a potential missing unit problem for some particular years or months.     
+  
+  
+### Completeness over time
+
+To study the completeness over time the user should select the time variable. By default, this program will choose the first time variable specified previously by the user when there is more than one time variable. 
+
+**Select time variable:**
+```{r completeness_unit_2}
+##### SELECT TIME VARIABLE ##### 
+time_var <- time_vars[1]
+################################
+
+# Check that time variable is not null, that belongs to the time variables set, 
+# and that it is just one variable.
+if (is.null(time_var) | 
+    !all(is.element(time_var, c(time_vars))) | 
+    !(length(time_var)==1) )  {
+  print("Time variable is not a variable of the time set, or there is more than one time variable")
+  time_var <- NULL
+} 
+```
+
+**Frequency bar plots:**
+```{r completeness_unit_3}
+# Frequency bar plots
+if (!is.null(time_var)) {
+  time_units <- nlevels(as.factor(subsetted[[time_var]]))
+
+# To appropriately  label the time axis, we calculate the number of time
+# units to be graphed. If the number exceeds 15, then we use labels 
+# every five time units. 
+  if (time_units >= 15) {
+      print(ggplot(data=subsetted, aes_string(x = as.factor(subsetted[[time_var]]) )) + 
+              geom_bar() + 
+              theme_economist() + 
+              theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+              scale_x_discrete( breaks=function(x) x[seq(1, length(x), by=5)] ) +
+              labs(x = "Time", y = "Number of units") + 
+              ggtitle(paste0("Frequency by ", time_var), subtitle = paste0("Subset: ",subset_text )) ) 
+  } else {
+        print(ggplot(data=subsetted, aes_string(x = as.factor(subsetted[[time_var]]) )) +             geom_bar() + 
+              theme_economist() + 
+              theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+              labs(x = "Time", y = "Number of units") + 
+              ggtitle(paste0("Number of cases by ", time_var), subtitle = paste0("Subset: ",subset_text )) ) 
+  }
+} else {
+  print("No valid time variable")
+}
+```
+
+**Interpretation**: The graph shows the trend of the number of units over time. Check if there are discrete jumps in the number of units from one time unit to another. Drastic changes can reflect changes in policy or law, but also problems in the collection of the data.   
+   
+
+
+### Completeness by geography
+
+To study the completeness by geography the user may select the location variable. The analysis will be run over the same subset of cases as the previous one.
+
+**Select location variable:**
+```{r completeness_unit_4}
+##### SELECT LOCATION VARIABLE ##### 
+location_var <- location_vars[1]
+####################################
+
+# Check that time variable is not null, that belongs to the time variables set, 
+# and that it is just one variable.
+if (is.null(location_var) | 
+    !all(is.element(location_var, c(location_vars))) | 
+    !(length(location_var)==1) )  {
+  print("Location variable is not a variable of the location set, or there is more than one location variable")
+  location_var <- NULL
+} 
+```
+
+**Frequency bar plots:**
+```{r completeness_unit_5}
+if (!is.null(time_var)) {
+  # Frequency bar plots
+  location_units <- nlevels(as.factor(subsetted[[location_var]]))
+  
+  print(ggplot(data=subsetted, aes_string(x = as.factor(subsetted[[location_var]]) )) +             geom_bar() + 
+        theme_economist() + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+        labs(x = "Geographic identifier", y = "Number of units") + 
+        ggtitle(paste0("Number of cases by ", location_var), subtitle = paste0("Subset: ",subset_text )) ) 
+  
+  kable(table(subsetted[[location_var]]), col.names=c(location_var,"Counts"))
+} else {
+  print("No valid location variable")
+}
+```
+
+**Interpretation**: Refer to a list of geographies and populations, and see if there are any missing that one would expect to have data available.    
+ 

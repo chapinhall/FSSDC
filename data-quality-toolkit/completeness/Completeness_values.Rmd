@@ -1,0 +1,126 @@
+ 
+## Item nonresponse: Examining missing data for variables within records 
+
+**Reference Script**: completeness\\Completeness_values.Rmd
+
+**Description**: This question looks at the absence of values for the variables that are part of the analysis. It is relevant to describe the dataset both in terms of the missingness of each variable and also in terms of units with at least one missing value in any key variable. In the case of longitudinal analysis units with missing values during the period of reference are also identified. It is also important to characterize units with missing data in terms of characteristics that are available to all units to assess possible biases.   
+  
+  
+### Examining proportions of missing values
+
+We plot two graphs in this analysis. The first one shows the proportion of missing values for each variable. The second one shows the number of times (y-axis) that different combinations of variables (x-axis) are missing, where the color red indicates the variables in a specific combination.
+
+**Bar plots and missing value pattern matrix:**
+```{r prop_miss_values_2}
+# Bar plots and missing value pattern matrix:
+subsetted_aggr = aggr(subset(subsetted,select=c(key_vars, domain_vars, id_vars, time_vars, location_vars)), numbers=TRUE, prop=c(TRUE,FALSE), cex.axis=.7, gap=3, ylab=c("Proportion of missingness","Missingness Pattern"))
+```
+
+**Interpretation**: The graph on the left shows the proportion of missing values for each variable.  Check if the missing values are concentrated in some variables and if these are key or domain variables.  
+In some cases, it is possible that certain variables are missing together. For example, cases where a subsidy receipt indicator is missing may also have a missing value in the amount received. The graph on the right shows help to assess if missing values are concentrated in one variable or in certain combinations of variables.  
+
+
+
+### Relationships in missingness among variables
+
+We provide guidance to assess whether the extent of item nonresponse varies among the domains of interest. For categorical variables, the following graphs show the proportion of missing values in each key variable, by the different values of the domain variables. In this way, it is possible to assess whether missing values of a key variable are concentrated on some on units with specific characteristics. For continuous variables, we show two histograms, one for cases with missing key variables and one for cases with non-missing values. Note: We do not plot key variables that do not have missing values.   
+
+**Histograms and frequency bar plots:**
+```{r rel_miss_values_0}
+# For each key variable, we assess whether the variable has missing values
+for (i in c(key_vars)) {
+    
+    # Check if variable has missing values
+    subsetted$miss <- 0
+    subsetted$miss[is.na(subsetted[[i]])] <- 1
+    subsetted$miss <- as.factor(subsetted$miss)
+    if (nlevels(subsetted$miss) == 1 & subsetted$miss[1] == 0) 
+      subsetted$miss <- factor(subsetted$miss, labels = c("Not missing"))
+    else if (nlevels(subsetted$miss) == 1 & subsetted$miss[1] == 1) 
+      subsetted$miss <- factor(subsetted$miss, labels = c("Missing"))
+    else 
+      subsetted$miss <- factor(subsetted$miss, labels = c("Not missing", "Missing"))
+
+# Only plot variables with missing values
+if(sum(as.numeric(is.na(subsetted[[i]]))) > 0) {
+  
+  for (j in c(domain_vars)) {
+      
+      # If the number of categories of the variable is less than 15 we use frequency bar plots, otherwise we use histograms. 
+      if (class(subsetted[[j]]) == "factor" & nlevels(as.factor(subsetted[[j]])) < 15) {
+          
+        group_var <- j
+        summ <- paste0('sum(is.na(', i, '))/n()')
+        summ_name <- paste0('prop_', i)  
+        # Creates temporary data frame with data for frequency bar plot
+        temp <- subsetted %>%
+          group_by_(.dots = group_var) %>%
+          summarise_(.dots = setNames(summ, summ_name))
+        
+        suppressMessages(print(
+          ggplot(temp, aes_string(x = j, y = summ_name)) + 
+            geom_bar(stat = "identity") +
+            scale_y_continuous(labels = scales::percent_format()) + 
+            ggtitle(paste0("Prop. of values missing for ", i, ", by ", j), subtitle = paste0("Subset: ",subset_text ) ) +
+        labs(x = j, y = paste0("Proportion of values missing for ",i))
+        ))
+      }
+      # Case where we use histogram instead of frequency bar plot
+      else {
+        suppressMessages(print(
+          ggplot(subsetted, aes(x=subsetted[[j]])) +
+          geom_histogram(color="black") + 
+          facet_grid(miss ~ .) + 
+          ggtitle(paste0("Histogram of ", j, ", by missing status of ", i), subtitle = paste0("Subset: ",subset_text ) ) +
+          labs(x = j)
+        ))
+      }
+    }
+  }
+}
+
+
+```
+
+**Interpretation**: Variables are only displayed if they have missing values. In the case of discrete domain variables, examine the proportion of missing values in the key variable in each category of the domain variable. Are missing values concentrated in a particular category of the domain variable? Are they evenly distributed across all the categories? In the case of continuous domain variables, compare the distribution of values of the domain variable when the key variable is missing and when it is not. Are these two distributions similar or different? Are values of the domain variable concentrated in certain range when the key variable is missing?
+
+When missingness is related to key variables for analysis, excluding the records with missing values from the analysis can lead to systematic errors. Imputation of missing data is one common way to resolve this issue. For resources on imputation, see Schafer (1997) or Van Buuren (2018).
+   
+
+
+### Units with at least one missing value
+
+Here we graph the proportion of units with at least one missing value over time.
+
+```{r units_miss_1}
+
+subsetted$nmiss <- rowSums(is.na(subsetted)) #>=1
+subsetted$nmiss[subsetted$nmiss>=1] <- 1
+subsetted$nmiss <- as.factor(subsetted$nmiss)
+
+# Frequency bar plots
+time_units <- nlevels(as.factor(subsetted[[time_vars[1]]]))
+
+if (time_units >= 15) {
+    print(ggplot(data=subsetted, aes_string(x = as.factor(subsetted[[time_vars[1]]]), fill=subsetted$nmiss )) + 
+            geom_bar(position="fill") + 
+            theme_economist() + 
+            scale_y_continuous(labels = scales::percent_format()) + 
+            theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+            scale_x_discrete( breaks=function(x) x[seq(1, length(x), by=5)] ) +
+            labs(x = "Time", y = "Proportion of units", fill="Missing") + 
+            ggtitle(paste0("Prop. units with at least one missing value", ""), subtitle = paste0("Subset: ",subset_text )) ) 
+} else {
+      print(ggplot(data=subsetted, aes_string(x = as.factor(subsetted[[time_vars[1]]]), fill=subsetted$nmiss  )) +             
+            geom_bar(position="fill") + 
+            theme_economist() + 
+            scale_y_continuous(labels = scales::percent_format()) +
+            theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+            labs(x = "Time", y = "Proportion of units", fill="Missing") + 
+            ggtitle(paste0("Prop. units with at least one missing value",""), subtitle = paste0("Subset: ",subset_text )) ) 
+}
+
+
+```
+
+**Interpretation**: Check if units with missing values concentrated in certain months/years. When doing certain analysis, such as regression models, all units with at least one missing value would be excluded. In that case, what proportion of units would be excluded from the analysis? How is a longitudinal analysis affected by the missing value problem?  

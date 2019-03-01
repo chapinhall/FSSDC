@@ -1,0 +1,50 @@
+# Below, input your dataset description using the following format
+# variables:
+#    variable_name:
+#       classification: See rules below
+#       type: See rules below
+#    variable_name2:
+#    ...
+
+# Notes on Classifications and Types
+# Classifications:
+# Make sure your classification is id, time, location, key, or domain as described below:
+# id: Identification variable (e.g. caseid)
+# location: Location variable describing area of case (e.g. zip code)
+# time: Time variable denoting a period of time (e.g. reporting month)
+# key: Most important variables that are focuses of the analysis (e.g. benefit receipt, outcomes)
+# domain: Specify different groups of interest for comparison for the research
+
+# Types
+# Make sure your type is categorical or numeric as described below:
+# Categorical: belong to a discrete category (e.g. "Group_1", "Group_2")
+# Numeric: Is of a continuous, numeric nature (e.g. 1, 2, 100.3, 3.5)
+
+variables:
+   caseid:
+      classification: "id"
+      type: "categorical"
+   rptmn:
+      classification: "time"
+      type: "categorical"
+   cash:
+      classification: "key"
+      type: "numeric"
+   funding:
+      classification: "domain"
+      type: "categorical"
+   rec_fs:
+      classification: "domain"
+      type: "categorical"
+   num_mths:
+      classification: "domain"
+      type: "numeric"
+   ccare:
+      classification: "domain"
+      type: "numeric"
+   county:
+      classification: "location"
+      type: "categorical"
+   zip:
+      classification: "location"
+      type: "categorical"

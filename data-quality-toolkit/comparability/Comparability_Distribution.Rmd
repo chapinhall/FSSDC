@@ -1,0 +1,47 @@
+
+## How do variable distributions compare to expected distributions?
+
+**Reference Script**: comparability\\Comparability_Distribution.Rmd
+
+**Description**: This question looks into the distribution of key and domain variables to look for incongruences with expected distributions. In many cases, judgment will be needed to determine if there is a problem in the distribution, although some guidance can be provided to look for particular features of relevance. For example, in the case of a variable measuring income, it is expected that the distribution will be skewed to the right, with few observations with very high values.    
+
+We use histograms to assess the distribution of continuous variables and frequency bar plots for categorical or factor variables.  
+  
+  
+### Distributions of key and domain variables
+
+We graph the distribution of the key and domain variables. In the case of histograms, a line is also graphed that indicates the median value of the distribution.
+
+**Histograms and frequency bar plots:** For each key and domain variable, we provide either a histogram or a frequency bar plot to assess their distribution.
+```{r distrib_vars2}
+
+# Remove the use of scientific notation
+options(scipen = 999)
+
+# Histograms and frequencies of all key and domain variables
+for (i in c(key_vars, domain_vars)) {
+  
+  if (class(subsetted[[i]]) == "integer" | class(subsetted[[i]]) == "numeric" | class(subsetted[[i]]) == "double") {
+    suppressMessages(print(ggplot(subsetted, aes_string(x=i)) + 
+            geom_histogram() + 
+            theme_economist() + 
+            ggtitle(paste0("Histogram of ", i), subtitle = paste0("Subset: ",subset_text,". Median value in blue." )) +
+            geom_vline(aes_string(xintercept=median(subsetted[[i]],na.rm=TRUE)), color="blue", linetype="dashed", size=1)))
+  }
+  
+  else if (class(subsetted[[i]]) == "factor" | class(subsetted[[i]]) == "character") {
+    suppressMessages(print(ggplot(data=subsetted, aes_string(x = i)) + 
+            geom_bar() + 
+            theme_economist() + 
+            ggtitle(paste0("Frequency of ", i), subtitle = paste0("Subset: ",subset_text )) ) )
+  }
+  
+}
+
+```
+
+**Interpretation**: When looking at each histogram, consider the following questions about the data:  
+* *One or many peaks?*: The peaks are the tallest bars and indicate the most frequent values in the data. Distributions with more than one peak usually indicate that there is more than one group represented in the data. For example, the distribution of height of a population may exhibit two peaks, one representing the most common value for men and the other representing this value for women.  
+* *Should the data be symmetrical? Is it skewed?*: Variables such as height, weight, and intelligence measures follow an approximate symmetrical distribution with most values clustered symmetrically near the median and few values on the tails. In skewed distributions, we do not observe such symmetry and it's common to have one tail of the distribution considerably longer than the other tail. This is typically the case for income data, where there are few people/households with very high income, that makes the tail of extreme values extend longer towards the positive, or right side. If not symmetrical, should the data be skewed to the right? Or to the left?  
+* *Should there be upper or lower limits on data values?*: Some variables have natural limits on the possible values of the data. For example, age cannot be negative or larger than, say 120 years; and the profit margin of a company cannot be larger than 100%. Data can also be restricted in the values it can take based on the metadata, such as a variable used to register the number of people living in a household that does not accept more than two-digit numbers. Are these limits apparent in the histogram above? Values beyond these limits could be the effect of errors in data processing or data collection.   
+* *How likely are extreme values of data?*: When extreme values are likely, we will observe fatter tails. On the other hand, it is possible to have all data values in a range equally likely (uniform distribution). An example is the distribution of day or month of birth, where we should observe a similar proportion of people in each day or month.  

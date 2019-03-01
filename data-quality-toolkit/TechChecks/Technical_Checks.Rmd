@@ -1,0 +1,245 @@
+
+## Do the data conform to expected rules and value ranges?
+
+**Reference Script**: TechChecks\\Technical_Checks.Rmd
+
+**Description**: To perform data analysis it is important to understand the quality of the inputs to the analysis. This understanding can be gained by comparing the variables of interest to their respective formatting rules. If, for example, a variable called "county" based on FIPS codes may only assume integer values between 1 and 999 then any value above or below these thresholds or any non-integer value would denote an entry of dubious quality. A record which does not conform to this rule could imply that the variable for that specific record is inaccurate or in extreme cases that the entire record is of suspect quality. Ideally, the review of any deviations from expected formats should be performed by an analyst with a solid understanding of the nature of the data and what the deviations may mean for analysis that will use the offending records. Here we use various visualizations to explore the quality and amount of format deviations for each variable of interest, as well as the dataset overall, and finally at the record/case- level.
+
+### Checks for variable rules and value ranges (based on codebook)
+
+In this section begin by defining any variables that will be useful for determining codebook adherence of  the dataset. For example, a [regular expression](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html)  and evaluation of that expression for each value in the data can be used to create a binary "pass/fail" variable to use in the codebook validation.  
+
+**Notes  for Setup:** In the below code, all expressions for  rules to check are placed within the validator function. Each argument to the validator function has three components: (1) a new variable which has the same name as the variable of interest concatenated with the suffix "c_", (2) the variable of interest, and (3) the rule that the variable of interest should follow (e.g. a range of values, certain length of characters). Care should be taken to ensure that the rule matches the codebook specifications and that the rule will be specified appropriately given the variable's class.
+
+
+```{r tech_check_by_variable}
+
+##### SELECT VARIABLES FOR DESCRIPTIVE STATISTICS OUTPUT#####
+selected_var <- c(key_vars, domain_vars,id_vars,time_vars,location_vars)
+
+##### EDIT THIS SECTION TO CREATE ADDITIONAL VARIABLES FOR QUALITY ASSESMENT AND TO DEFINE CODEBOOK RULES #####
+
+zip_str <- "((^[0-9]{5}$)|(^[0-9]{4}$)|(^[0-9]{3}$)|(^[0-9]{5}-[0-9]{4}$)|(^[0-9]{5}-$)|(^[0-9]{4}-$)|(^[0-9]{3}-$))"
+merged_universe$zip_detect <- str_detect(merged_universe$zip, zip_str)
+merged_universe$zip_detect[merged_universe$zip_detect==TRUE] <- "Plausible" 
+merged_universe$zip_detect[merged_universe$zip_detect==FALSE] <- "Suspect" 
+
+v <- validator(
+  c_county = county %in% c(1:999),
+  c_rptmn = as.numeric(rptmn) >= 200101 & as.numeric(rptmn) <=201805 & as.numeric(rptmn) %% 1 ==0 & as.numeric(substr(as.character(200101),5,6)) %in% c(1:12) ,
+  c_caseid = nchar(trim(caseid)) >= 1,
+  c_zip = zip_detect=="Plausible",
+  c_funding=funding%in% c("Federal", "Only State"),
+  c_rec_fs=rec_fs%in% c("Yes", "No"),
+  c_cash=cash>=0,
+  c_ccare=ccare>=0,
+  c_tot_recip=tot_recip<30,
+  c_num_par = num_par %in% c("Child-only","1-parent","2-parent")
+)
+
+##############################################################################
+
+cf <- confront(merged_universe[,c(selected_var,"zip_detect")],v)
+summcf <- summary(cf)
+
+summcf$fail_perc <- with(summcf,fails/(items-nNA))
+
+# THIS CODE ASSUMES THAT THE NAMES USED IN THE VALIDATOR RULES PREFIX EACH VARIABLE NAME WITH 2 CHARACTERS (E.G. "c_")
+summcf$variable <- substring(summcf$name,3,str_length(summcf$name))
+
+#print(summcf[,1:7])
+kable(summcf[,c(10,2:(ncol(summcf)-1))],caption="Rule Checks by Variable")
+
+
+```
+
+The summcf object includes metrics regarding the quality of each variable in the data
+
+ "Name" is the rule/variable name
+ 
+ "Items" is the total number of records considered
+ 
+ "Passes" is the total number of records that follow the rule
+ 
+ "Fails" is the total number of records that violate the rule
+ 
+ "nNA" is the total number of records that have a missing/NA value
+ 
+ "Error" indicates that the rule is not validly specified and should be corrected (e.g. variable name incorrect or rule is syntactically incorrect)
+ 
+ "Warning" indicates that the rule generates a warning and may require further consideration
+ 
+ "Expression" is the rule/expression that was evaluated
+ 
+ "Fail_perc" is the proportion of non-null values that adhere to codebook rules
+ 
+  **What to look for**:  
+  
+  - *Number of fails*: A high number of fails indicates a variable of poor data quality.  Consideration should be given to this variable if it will be used in any analysis.
+  
+  - *Number of missing values*: A high number of missing (nNA) values indicates potentially incomplete data. Consideration should be given to this variable if it will be used in any analysis.
+  
+  - *Error in the expression*: If the "Error" field equals "TRUE" then the rule for the variable is misspecified.  The rule should be evaluated for accuracy and appropriateness given the class of the variable.
+  
+  - *Warning in the expression*: If the "Warning" field equals "TRUE" then the rule for the variable may have an issue.  The rule should be evaluated for accuracy and appropriateness given the class of the variable.
+
+
+### Visualization of variable-level rule checks
+
+Here we visualize the distribution of accuracy/completeness for each key variable chosen.  The data quality is then analyzed by a grouping variable.  Variables that do not deviate from codebook formatting guidelines will not be displayed.
+
+```{r vis_var_level}
+
+summcf_incna<- summcf[which(summcf$fails>0 | summcf$nNA>0),]
+
+if (nrow(summcf_incna)==0) { 
+  cat("All of the records adhere to the codebook rules for all values.  There is no more output to display")
+} else {
+plot1 <-  barplot(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1)),
+          legend = c("Correct","Incorrect","Missing"),
+          args.legend = list(x='top',cex=.7),
+          col=c("blue","orange","gray"),
+          cex.names=.7,
+          axisnames=T,
+          names.arg=summcf_incna$variable,
+          las=1,
+          axes=T,
+          space=1,
+          xlab="Percent",
+          width=1,
+          ylim=c(0,(3*nrow(summcf_incna))),
+          horiz=T,
+          main=paste("Distribution of codebook conformity by variable")) 
+  text(0,plot1,signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],3),col="white",cex=.8,pos=4)
+  text(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],plot1,signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[2,],3),col="white",cex=.8)
+cat("All other fields comply with codebook and do not have missing values.")
+}
+
+```
+
+**Interpretation**: Variables with higher levels of fails and missingness may require further consideration before using them in an analysis.  For example, missing values may be imputed when a model can be constructed to accurately estimate their values.  
+
+When missingness is related to key variables for analysis, excluding the records with missing values from the analysis can lead to systematic errors. Imputation of missing data is one common way to resolve this issue. For resources on imputation, see Schafer (1997) or Van Buuren (2018).
+
+  
+### Overall fail metrics across all variables
+
+
+```{r overall_fail_metrics}
+
+if (nrow(summcf_incna)>0) { 
+items <- sum(summcf$items)
+fails <- sum(summcf$fails)
+nNA <- sum(summcf$nNA)
+
+# OVERALL FAIL METRICS ACROSS ALL VARIABLES
+overall_fail_perc <- fails/(items-nNA)
+fail_perc_min <- min(summcf$fail_perc,na.rm=TRUE)
+fail_perc_max <- max(summcf$fail_perc,na.rm=TRUE)
+fail_perc_med <- median(summcf$fail_perc,na.rm=TRUE)
+any_fail <- subset(summcf,fail_perc > 0,select=variable)
+any_fail <- as.character(any_fail)
+any_fail <- gsub(pattern="c\\(",replacement="", x=any_fail)
+any_fail <- gsub(pattern="\\)",replacement="", x=any_fail)
+any_fail <- gsub(pattern="\"",replacement="", x=any_fail)
+
+# BECAUSE R WILL DEFAULT TO STORING MANY SIGNIFCANT DIGITS FOR THE PERCENTAGES AND BECAUSE IT MAY OR MAY NOTS STORE THEM IN SCIENTIFIC NOTATION FORMAT IT IS NECESSARY TO FORCE THE FORMATTING TO BE IN SCIENTIFIC NOTATION TO MAKE AUTOMATED CODING POSSIBLE. THE FOLLOWING CODE ENSURES THAT ALL VALUES ARE CONSISTENTLY STORED IN SCIENTIFIC NOTATION.
+
+fail_perc_max <- format(fail_perc_max, scientific=T)
+scaleplot <- as.numeric(substring(fail_perc_max,regexpr("e",fail_perc_max)[1]+2,str_length(fail_perc_max)))
+
+scaleplot <- as.numeric(substring(fail_perc_max,regexpr("e",fail_perc_max)[1]+2,str_length(fail_perc_max)))
+
+cat(paste("The overall fail rate is", 
+formatC(overall_fail_perc, format = "e", digits = 2)))
+cat("\n")
+cat(paste("The lowest fail rate for any variable is",formatC(fail_perc_min, format = "e", digits = 2)))
+cat("\n")
+cat(paste("The highest fail rate for any variable is",formatC(fail_perc_max, format = "e", digits = 2)))
+cat("\n")
+cat(paste("The median fail rate across variables is",formatC(fail_perc_med, format = "e", digits = 2)))
+cat("\n")
+cat(paste("The following variables had at least one failure:",as.character(any_fail)))
+}
+```
+
+**Interpretation**: Understanding to what degree the data adhere to the codebook will help determine what analyses are appropriate.  The overall, lowest, highest, and median fail rates all give an indication of the quality of the data.  Variables with at least one failure can be investigated further to better understand the degree to which data quality may be compromised.  In some cases the reasons for having inconsistent values in the data can be adequately understood and the values can be recoded. In other cases the data may be best left as is in order to avoid introducing inaccuracies.
+
+#### Record-level rule checks 
+
+```{r record_level_tech_checks}
+#IF THERE IS AT LEAST ONE VARIABLE WITH MISSING OR OUT-OF-RANGE DATA THEN A RECORD-LEVEL DATASET WITH INDICATORS FOR CODEBOOK FORMAT ADHERENCE FOR EACH VARIABLE WILL CONSTRUCTED. THIS DATASET AND THE STATISTICS DERIVED FROM IT ARE THEN USED AS INPUTS TO PLOTTING FUNCTIONS TO VISUALIZE DATA QUALITY. RESTRUCTURING OF THE "cf" OBJECT IS REQUIRED TO CREATE A USABLE DATA FRAME WITH A USEABLE STRUCTURE.
+
+if (nrow(summcf_incna)>0) { 
+cfdf <-as.data.frame(cf)
+cfseq<-seq(from=1,to=nrow(cfdf),by=nrow(merged_universe))
+cfdf2 <- NULL
+for (i in 1:(length(cfseq))) {
+  cfdf2<- cbind(cfdf2,cfdf[c(cfseq[i]:(cfseq[i]+nrow(merged_universe)-1)),2])
+}
+
+colnames(cfdf2)<-summcf$name
+cfdf2[,colnames(cfdf2)] <- sapply(cfdf2[,colnames(cfdf2)],
+                                  function(x) {abs(1-as.numeric(x))})
+
+cfdf2<-as.data.frame(cfdf2)
+
+cfdf2$num_fail=rowSums(cfdf2[,colnames(cfdf2)])
+cfdf2$any_fail=ifelse(cfdf2$num_fail>=1,1,0)
+
+merged_universe<-cbind(merged_universe,cfdf2)
+
+##### EDIT THIS SECTION TO SELECT THE X AXIS VARIABLE FOR RECORD-LEVEL TECHNICAL CHECK BAR CHART #####
+  var2<-merged_universe$year
+  varlabel2<- "year"
+#####################################################
+
+plot2 <-  barplot(100*with(merged_universe,prop.table(table(any_fail,var2),margin=2)),
+          legend = c("Valid","Fail"),
+          args.legend = list(x='right',cex=.7),
+          col=c("blue","orange"),
+          cex.names=.7,
+          axisnames=T,
+          las=1,
+          axes=T,
+          space=1,
+          width=1,
+          xlim=c(0,(length(unique(var2))*2+2)),
+          ylim=c(0,101),
+          xlab=varlabel2,
+          ylab="Percent",
+          main=paste("Distribution of overall formatting conformity by", varlabel2),
+          cex.main=1)  
+text(plot2,5,signif(100*with(merged_universe,prop.table(table(any_fail,var2),margin=2))[1,],3),col="white",cex=.8)
+text(plot2,100*with(merged_universe,prop.table(table(any_fail,var2),margin=2))[1,],signif(100*with(merged_universe,prop.table(table(any_fail,var2),margin=2))[2,],2),col="white",cex=.8)
+
+
+var3<-merged_universe$num_par
+varlabel3<- "Parent-Child Status"
+#####################################################
+
+plot3 <-  barplot(100*with(merged_universe,prop.table(table(any_fail,var3),margin=2)),
+                  legend = c("Valid","Fail"),
+                  args.legend = list(x='right',cex=.7),
+                  col=c("blue","orange"),
+                  cex.names=.7,
+                  axisnames=T,
+                  las=1,
+                  axes=T,
+                  space=1,
+                  width=1,
+                  xlim=c(0,(length(unique(var3))*2+2)),
+                  ylim=c(0,101),
+                  xlab=varlabel3,
+                  ylab="Percent",
+                  main=paste("Distribution of overall formatting conformity by", varlabel3),
+                  cex.main=1)  
+text(plot3,5,signif(100*with(merged_universe,prop.table(table(any_fail,var3),margin=2))[1,],3),col="white",cex=.8)
+text(plot3,100*with(merged_universe,prop.table(table(any_fail,var3),margin=2))[1,],signif(100*with(merged_universe,prop.table(table(any_fail,var3),margin=2))[2,],2),col="white",cex=.8)
+
+
+}
+
+```
+
+**Interpretation**: Differences in record-level codebook adherence by fiscal year, for example, or any other appropriate grouping variable can help identify differences in data quality within the data file. While fiscal year is an obvious choice for longitudinal data, it could be advantageous to make comparisons across categories of other key variables for analysis .
