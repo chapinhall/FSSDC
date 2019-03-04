@@ -47,7 +47,7 @@ if(sum(as.numeric(is.na(subsetted[[i]]))) > 0) {
   for (j in c(domain_vars)) {
       
       # If the number of categories of the variable is less than 15 we use frequency bar plots, otherwise we use histograms. 
-      if (class(subsetted[[j]]) == "factor" & nlevels(as.factor(subsetted[[j]])) < 15) {
+      if (nlevels(as.factor(subsetted[[j]])) < 15) {
           
         group_var <- j
         summ <- paste0('sum(is.na(', i, '))/n()')
@@ -61,12 +61,33 @@ if(sum(as.numeric(is.na(subsetted[[i]]))) > 0) {
           ggplot(temp, aes_string(x = j, y = summ_name)) + 
             geom_bar(stat = "identity") +
             scale_y_continuous(labels = scales::percent_format()) + 
+            scale_x_discrete(labels = function(x) str_wrap(x, width = 10)) +
             ggtitle(paste0("Prop. of values missing for ", i, ", by ", j), subtitle = paste0("Subset: ",subset_text ) ) +
         labs(x = j, y = paste0("Proportion of values missing for ",i))
         ))
       }
+    
+      else if (nlevels(as.factor(subsetted[[j]])) < 50) {
+          
+        group_var <- j
+        summ <- paste0('sum(is.na(', i, '))/n()')
+        summ_name <- paste0('prop_', i)  
+        # Creates temporary data frame with data for frequency bar plot
+        temp <- subsetted %>%
+          group_by_(.dots = group_var) %>%
+          summarise_(.dots = setNames(summ, summ_name))
+        
+        suppressMessages(print(
+          ggplot(temp, aes_string(x = j, y = summ_name)) + 
+            geom_bar(stat = "identity") +
+            scale_y_continuous(labels = scales::percent_format()) + 
+            coord_flip() +
+            ggtitle(paste0("Prop. of values missing for ", i, ", by ", j), subtitle = paste0("Subset: ",subset_text ) ) +
+        labs(x = j, y = paste0("Proportion of values missing for ",i))
+        ))
+      }     
       # Case where we use histogram instead of frequency bar plot
-      else {
+      else if (class(subsetted[[j]]) == "numeric") {
         suppressMessages(print(
           ggplot(subsetted, aes(x=subsetted[[j]])) +
           geom_histogram(color="black") + 

@@ -33,6 +33,7 @@ for (i in c(key_vars, domain_vars)) {
     suppressMessages(print(ggplot(data=subsetted, aes_string(x = i)) + 
             geom_bar() + 
             theme_economist() + 
+            scale_x_discrete(labels = function(x) str_wrap(x, width = 10)) +
             ggtitle(paste0("Frequency of ", i), subtitle = paste0("Subset: ",subset_text )) ) )
   }
   

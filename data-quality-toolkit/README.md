@@ -1,17 +1,12 @@
 # Data File Orientation Toolkit
 
-This Data File Orientation Toolkit enables automated assessment of the quality of administrative data files to provide guidance as to the strengths and weaknesses of the file for conducting policy research. 
+This Data File Orientation Toolkit enables automated assessment of the quality of administrative data files to provide guidance as to the strengths and weaknesses of the file for conducting policy research. After going through a few set up set up steps, this toolkit will provide valuable insight into your data file.
 
-It is particularly suited for data from state and local agencies that the Family Self-Sufficiency Data Center supports. Each analysis presented includes guidance on how to interpret the results and take further steps to understand the quality of your data file. The toolkit focuses on checks on data accuracy, the completenteness of records, and the comparability of the data over time and among subgroups of interest. It incorporates exploratory data analysis and data visualization to draw attention to sets of records or variables that contain outliers or for which data quality may be a concern.
+It is particularly suited for data from state and local agencies that the Family Self-Sufficiency Data Center supports, although it can run on any file that meets the format requirements. Each analysis presented includes guidance on how to interpret the results and take further steps to understand the quality of your data file. The toolkit focuses on checks on data accuracy, the completenteness of records, and the comparability of the data over time and among subgroups of interest. It incorporates exploratory data analysis and data visualization to draw attention to sets of records or variables that contain outliers or for which data quality may be a concern. 
 
 This toolkit is written using the R programming language and utilizes RMarkdown for reporting.
 
 To learn more about this effort, see our [slide deck](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1029&context=admindata_conferences_presentations_2018) from the 2018 ADRF Network Research Conference and [article](https://ijpds.org/article/view/937/1031) in the International Journal of Population Data Science.
-
-This toolkit is under development at [NORC at the University of Chicago](http://www.norc.org/Pages/default.aspx) and includes contributions from Rupa Datta, Evan Herring-Nathan, Andrew Latterner, Zachary Seeskin, and Gabriel Ugarte. We particularly thank Bob Goerge and Emily Wiegand for their valuable guidance and feedback.
-
-The work is supported by the Family Self-Sufficiency Research Consortium, Grant Number #90PD0272, funded by the Office of Planning, Research, and Evaluation in the Administration for Children and Families, U.S Department of Health and Human Services to the University of Chicago, with NORC at the University of Chicago as a sub-grantee. The contents of the toolkit are solely the responsibility of the developers and do not necessarily represent the official views of the Office of Planning, Research, and Evaluation, the Administration for Children and Families, or the U.S. Department of Health and Human Services.
-
 
 ## How to utilize this toolkit
 In order to use this toolkit, you must install R and RStudio on your computer. You may need to work with your IT team to have these programs installed in a place that can access the data file you wish to analyze. The following steps are needed to install this software.
@@ -131,3 +126,10 @@ Assess comparability with respect to relationships among variables and by groups
 Variables to Modify:  
 - sort_var: Select sort variable to examine relationship among variables via tableplots
 - subgroup: Select subgroup variable for examining tableplots by subgroup
+
+## Contributors and Acknowledgments
+
+This toolkit is under development at [NORC at the University of Chicago](http://www.norc.org/Pages/default.aspx) and includes contributions from Rupa Datta, Evan Herring-Nathan, Andrew Latterner, Zachary Seeskin, and Gabriel Ugarte. We particularly thank Bob Goerge and Emily Wiegand for their valuable guidance and feedback.
+
+The work is supported by the Family Self-Sufficiency Research Consortium, Grant Number #90PD0272, funded by the Office of Planning, Research, and Evaluation in the Administration for Children and Families, U.S Department of Health and Human Services to the University of Chicago, with NORC at the University of Chicago as a sub-grantee. The contents of the toolkit are solely the responsibility of the developers and do not necessarily represent the official views of the Office of Planning, Research, and Evaluation, the Administration for Children and Families, or the U.S. Department of Health and Human Services.
+
