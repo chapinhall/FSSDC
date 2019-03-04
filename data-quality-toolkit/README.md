@@ -1,12 +1,12 @@
 # Data File Orientation Toolkit
 
-This Data File Orientation Toolkit enables automated assessment of the quality of administrative data files to provide guidance as to the strengths and weaknesses of the file for conducting research. 
+This Data File Orientation Toolkit enables automated assessment of the quality of administrative data files to provide guidance as to the strengths and weaknesses of the file for conducting policy research. 
 
-It is particularly suited to provide guidance for data from state and local agencies that the Family Self-Sufficiency Data Center supports. Each analysis presented includes guidance on how to interpet the results and take further steps to understand the quality of your data file.
+It is particularly suited for data from state and local agencies that the Family Self-Sufficiency Data Center supports. Each analysis presented includes guidance on how to interpret the results and take further steps to understand the quality of your data file. The toolkit focuses on checks on data accuracy, the completenteness of records, and the comparability of the data over time and among subgroups of interest. It incorporates exploratory data analysis and data visualization to draw attention to sets of records or variables that contain outliers or for which data quality may be a concern.
 
 This toolkit is written using the R programming language and utilizes RMarkdown for reporting.
 
-To learn more about this effort, see our [slide deck](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1029&context=admindata_conferences_presentations_2018) and [article](https://ijpds.org/article/view/937/1031) in the International Journal of Population Data Science.
+To learn more about this effort, see our [slide deck](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1029&context=admindata_conferences_presentations_2018) from the 2018 ADRF Network Research Conference and [article](https://ijpds.org/article/view/937/1031) in the International Journal of Population Data Science.
 
 This toolkit is under development at [NORC at the University of Chicago](http://www.norc.org/Pages/default.aspx) and includes contributions from Rupa Datta, Evan Herring-Nathan, Andrew Latterner, Zachary Seeskin, and Gabriel Ugarte. We particularly thank Bob Goerge and Emily Wiegand for their valuable guidance and feedback.
 
