@@ -1,6 +1,8 @@
 # This set up directs you to set the specifications of the variables needed for the toolkit 
 # analyses, including which variables are for identification, time periods, key for analysis,
-# key domains or groups to compare, and location-related variables.
+# key domains or groups to compare, and location-related variables. These variables provide 
+# inputs for analyses in the toolkit to assess the accuracy and completeness of key variables 
+# as well as the comparability over time and among groups. 
 # 
 # Longitudinal data files should be set up so that the id and time variables uniquely identify 
 # records. That is, there should be no more than one records for each unit/household/family,
