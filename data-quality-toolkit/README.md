@@ -6,6 +6,8 @@ It is particularly suited to provide guidance for data from state and local admi
 
 This toolkit is written using the R programming language and utilizes RMarkdown for reporting.
 
+To learn more about this effort, see our [slide deck](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1029&context=admindata_conferences_presentations_2018) and [article](https://ijpds.org/article/view/937/1031) in the International Journal of Population Data Science.
+
 ## How to utilize this toolkit
 In order to use this toolkit, you must have two-three programs installed on your computer -- R, RStudio, and (optionally) Git. 
 - [R Homepage](https://www.r-project.org/)
