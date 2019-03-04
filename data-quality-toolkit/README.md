@@ -1,6 +1,8 @@
 # Data File Orientation Toolkit
 
-Welcome to the Data File Orientation toolkit. The goal of this toolkit is to allow for an automated assessment of the quality of various administrative datasets.
+This Data File Orientation Toolkit enables automated assessment of the quality of administrative data files to provide guidance as to the strengths and weaknesses of the file for conducting research. 
+
+It is particularly suited to provide guidance for data from state and local adminstrative that the Family Self-Sufficiency Center supports. Each analysis presented includes guidance on how to interpet the results and take further steps to understand the quality of your data file.
 
 This toolkit is written using the R programming language and utilizes RMarkdown for reporting.
 
