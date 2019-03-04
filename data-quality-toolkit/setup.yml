@@ -31,30 +31,24 @@
 # Numeric: Is of a continuous, numeric nature (e.g. 1, 2, 100.3, 3.5)
 
 variables:
-   caseid:
+   hh_id:
       classification: "id"
       type: "categorical"
-   rptmn:
+   month:
       classification: "time"
       type: "categorical"
-   cash:
+   amount:
       classification: "key"
       type: "numeric"
-   funding:
+   source:
       classification: "domain"
       type: "categorical"
-   rec_fs:
+   other_benef:
       classification: "domain"
       type: "categorical"
-   num_mths:
+   type_case:
+      classification: "domain"
+      type: "categorical"
+   num_recip:
       classification: "domain"
       type: "numeric"
-   ccare:
-      classification: "domain"
-      type: "numeric"
-   county:
-      classification: "location"
-      type: "categorical"
-   zip:
-      classification: "location"
-      type: "categorical"
