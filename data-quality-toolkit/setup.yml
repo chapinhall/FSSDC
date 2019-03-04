@@ -1,3 +1,11 @@
+# This set up directs you to set the specifications of the variables needed for the toolkit 
+# analyses, including which variables are for identification, time periods, key for analysis,
+# key domains or groups to compare, and location-related variables.
+# 
+# Longitudinal data files should be set up so that the id and time variables uniquely identify 
+# records. That is, there should be no more than one records for each unit/household/family,
+# at each time period.
+#
 # Below, input your dataset description using the following format
 # variables:
 #    variable_name:
@@ -9,8 +17,8 @@
 # Notes on Classifications and Types
 # Classifications:
 # Make sure your classification is id, time, location, key, or domain as described below:
-# id: Identification variable (e.g. caseid)
-# location: Location variable describing area of case (e.g. zip code)
+# id: Identification variable (e.g. caseid), for variables that uniquely identify different units
+# location: Location variable describing area of case (zip codes or other geographic indicators)
 # time: Time variable denoting a period of time (e.g. reporting month)
 # key: Most important variables that are focuses of the analysis (e.g. benefit receipt, outcomes)
 # domain: Specify different groups of interest for comparison for the research

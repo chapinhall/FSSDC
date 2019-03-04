@@ -51,17 +51,12 @@ To install these packages, open RStudio once you have installed it (and R). The 
 4. Confirm packages installed: Step 3 installs packages and additional package dependencies. Your RStudio console should print “package ‘dplyr’ successfully unpacked” if the install worked correctly (similar messages should print for the other packages). To confirm, try loading the package with the command “library(dplyr)”. Repeat this process for “data.table” and remaining packages. If no error messages are received, the install is complete. 
 
 ### Using with Git
-After installing these programs, use Git to clone this repository. To do this:
-- On the main Data File Orientation Toolkit GitHub page, click on "Clone or Download" and copy the link inside the resulting box.
-- Open up a Command Prompt window and change your directory to a desired location using the "cd" command.
-- Type "git clone" and add the copied link from the GitHub page.
+After installing these programs, use Git to clone this repository. You can click above on "Clone or Download" to save the files to a convenient location on your computer.
 
-After using the git clone command, a copy of the toolkit will be in downloaded and copied to the folder you specified.
-
-Next, using RStudio, open the "DQToolkit" file in the data-quality-toolkit folder. Also, you can open the setup.yml file in the same folder.
+Next, using RStudio, open the master "DQToolkit.Rmd" file in the data-quality-toolkit folder. You may also open the setup file setup.yml file in the same folder.
 
 ## Setting up the report
-The YAML file is where you will provide the necessary information of the variables in your dataset. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs.  
+The YAML file setup.yml is a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed including which variables are for identification, time periods, key for analysis, key domains or groups to compare, and location-related variables.  Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs.  
 
 In the main DQToolkit.Rmd file, you can specify the location of your case and member files, create new variables for analysis, add new labels for your variables, or even subset your data.  
 ## Running the report
