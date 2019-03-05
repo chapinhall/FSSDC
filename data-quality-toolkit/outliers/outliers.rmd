@@ -20,7 +20,7 @@ selected_var <- c(key_vars, domain_vars,id_vars,time_vars,location_vars)
 # BASIC DATA QUALITY
 num.file <- "dq_num.csv"
 cat.file <- "dq_cat.csv"
-checkDataQuality(data= merged_universe[,c(key_vars, domain_vars,id_vars,time_vars,location_vars)], out.file.num= num.file, out.file.cat= cat.file)
+checkDataQuality(data= analysis_file[,c(key_vars, domain_vars,id_vars,time_vars,location_vars)], out.file.num= num.file, out.file.cat= cat.file)
 
 ### Numeric Variables: Data Quality Check
 
@@ -73,8 +73,8 @@ contvars <- as.character(numfile$X)
 testnums <- contvars
 rm_vars <- as.character()
 for (i in 1:length(testnums)) {
-  min <- min(merged_universe[,testnums[i]],na.rm = T)
-  max <- max(merged_universe[,testnums[i]],na.rm = T)
+  min <- min(analysis_file[,testnums[i]],na.rm = T)
+  max <- max(analysis_file[,testnums[i]],na.rm = T)
   if (min==max) print(paste0("Variable ", testnums[i], " assumes only 1 value across the entire dataset. That value is ",min,". Plots and outlier status will be suppressed."))
   if (min==max) rm_vars=rbind(rm_vars,testnums[i])
 }
@@ -83,40 +83,40 @@ contvars=setdiff(contvars,rm_vars)
 for (i in c(1:length(contvars))) {
   cat("\n")
   cat("\n","Distributions, Plots and Potential Outliers for",contvars[i])
-  if (length(unique(merged_universe[[contvars[i]]])) < 30) {
-    tablecont <-kable(table(merged_universe[[contvars[i]]],useNA="ifany",dnn=c(contvars[i])))
+  if (length(unique(analysis_file[[contvars[i]]])) < 30) {
+    tablecont <-kable(table(analysis_file[[contvars[i]]],useNA="ifany",dnn=c(contvars[i])))
     print(tablecont)
   } else {
-    print(histogram(merged_universe[[contvars[i]]],xlab=contvars[i]))
+    print(histogram(analysis_file[[contvars[i]]],xlab=contvars[i]))
   }
-  desc <- summary(merged_universe[[contvars[i]]])
+  desc <- summary(analysis_file[[contvars[i]]])
   iqr <- desc["3rd Qu."] - desc["1st Qu."]
   
   cat("\n")
-  print(kable(table(merged_universe[[contvars[i]]]> desc["3rd Qu."]+1.5*iqr,dnn="Mild High Outlier")))
-  maxout<- merged_universe[which(merged_universe[[contvars[i]]]> desc["3rd Qu."]+1.5*iqr),]
+  print(kable(table(analysis_file[[contvars[i]]]> desc["3rd Qu."]+1.5*iqr,dnn="Mild High Outlier")))
+  maxout<- analysis_file[which(analysis_file[[contvars[i]]]> desc["3rd Qu."]+1.5*iqr),]
   print(paste("Number of mild high outliers based on quartile method for variable",contvars[i],"is",nrow(maxout)))
-  print(kable(table(merged_universe[[contvars[i]]]> desc["3rd Qu."]+3*iqr,dnn="Extreme High Outlier")))
-  maxout<- merged_universe[which(merged_universe[[contvars[i]]]> desc["3rd Qu."]+3*iqr),]  
+  print(kable(table(analysis_file[[contvars[i]]]> desc["3rd Qu."]+3*iqr,dnn="Extreme High Outlier")))
+  maxout<- analysis_file[which(analysis_file[[contvars[i]]]> desc["3rd Qu."]+3*iqr),]  
   print(paste("Number of extreme high outliers based on quartile method for variable",contvars[i],"is",nrow(maxout)))
 
-  print(kable(table(merged_universe[[contvars[i]]]< desc["1st Qu."]-1.5*iqr,dnn="Mild Low Outlier")))
-  minout <- merged_universe[which(merged_universe[[contvars[i]]]< desc["1st Qu."]-1.5*iqr),]
+  print(kable(table(analysis_file[[contvars[i]]]< desc["1st Qu."]-1.5*iqr,dnn="Mild Low Outlier")))
+  minout <- analysis_file[which(analysis_file[[contvars[i]]]< desc["1st Qu."]-1.5*iqr),]
   print(paste("Number of mild low outliers based on quartile method for variable",contvars[i],"is",nrow(minout)))
-  print(kable(table(merged_universe[[contvars[i]]]< desc["1st Qu."]-3*iqr,dnn="Extreme Low Outlier")))
-  minout <- merged_universe[which(merged_universe[[contvars[i]]]< desc["1st Qu."]-3*iqr),]
+  print(kable(table(analysis_file[[contvars[i]]]< desc["1st Qu."]-3*iqr,dnn="Extreme Low Outlier")))
+  minout <- analysis_file[which(analysis_file[[contvars[i]]]< desc["1st Qu."]-3*iqr),]
   print(paste("Number of extreme low outliers based on quartile method for variable",contvars[i],"is",nrow(minout)))
 
   
-  boxplot(merged_universe[[contvars[i]]],main=paste("Boxplot for",contvars[i],"variable"))
+  boxplot(analysis_file[[contvars[i]]],main=paste("Boxplot for",contvars[i],"variable"))
   
-  LVboxplot(merged_universe[!is.na(merged_universe[[contvars[i]]]),contvars[i]], alpha = 0.95, k = NULL, perc = NULL,
+  LVboxplot(analysis_file[!is.na(analysis_file[[contvars[i]]]),contvars[i]], alpha = 0.95, k = NULL, perc = NULL,
             horizontal = TRUE, xlab = contvars[i], ylab = NULL, col = "grey30",
             bg = "grey90", width = 0.9, width.method = "linear",
             median.col = "grey10",
             main=paste("Letter Value Plot for",contvars[i],"variable"))
   
-lv_table <- lvtable(merged_universe[!is.na(merged_universe[[contvars[i]]]),contvars[i]],k=determineDepth(nrow(merged_universe[!is.na(merged_universe[[contvars[i]]]),]),alpha=.05),alpha=.95)
+lv_table <- lvtable(analysis_file[!is.na(analysis_file[[contvars[i]]]),contvars[i]],k=determineDepth(nrow(analysis_file[!is.na(analysis_file[[contvars[i]]]),]),alpha=.05),alpha=.95)
 
 lv_table<-cbind(lv_table,rep(0,nrow(lv_table)))
 colnames(lv_table)[5]<-"lv_thresh_h"
@@ -140,16 +140,16 @@ lv_table[is.na(lv_table[['lv_thresh_l']]),'lv_thresh_l'] <-  0
 
 if (any(lv_table[['lv_thresh_h']]==1)) {
   lv_threshval_h<-min(subset(lv_table,lv_thresh_h==1,select="97.5%"))
-  print(kable(table(merged_universe[[contvars[i]]]>=lv_threshval_h,dnn="Letter Value High Outliers")))
-  print(paste0("Number of letter value high outliers for variable ",contvars[i]," is ",nrow(subset(merged_universe,get(contvars[i])>=lv_threshval_h)),".  Values above ",lv_threshval_h," are considered outliers with this method."))
+  print(kable(table(analysis_file[[contvars[i]]]>=lv_threshval_h,dnn="Letter Value High Outliers")))
+  print(paste0("Number of letter value high outliers for variable ",contvars[i]," is ",nrow(subset(analysis_file,get(contvars[i])>=lv_threshval_h)),".  Values above ",lv_threshval_h," are considered outliers with this method."))
 }  else {
   print(paste("There are no letter value high outliers for variable",contvars[i]))
 }
 
 if (any(lv_table[['lv_thresh_l']]==1)) {
   lv_threshval_l<-max(subset(lv_table,lv_thresh_l==1,select="2.5%"))
-  print(kable(table(merged_universe[[contvars[i]]]<=lv_threshval_l,dnn="Letter Value Low Outliers")))
-  print(paste0("Number of letter value low outliers for variable ",contvars[i]," is ",nrow(subset(merged_universe,get(contvars[i])<=lv_threshval_l)),".  Values below ",lv_threshval_l," are considered outliers with this method."))
+  print(kable(table(analysis_file[[contvars[i]]]<=lv_threshval_l,dnn="Letter Value Low Outliers")))
+  print(paste0("Number of letter value low outliers for variable ",contvars[i]," is ",nrow(subset(analysis_file,get(contvars[i])<=lv_threshval_l)),".  Values below ",lv_threshval_l," are considered outliers with this method."))
 }  else {
   print(paste("There are no letter value low outliers for variable",contvars[i]))
 }

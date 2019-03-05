@@ -14,13 +14,13 @@ list.of.packages <- c("tinytex", "data.table","tabplot","readxl","bit64","descr"
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) print(paste0("The following packages need to be installed: ",new.packages))
 
-library(tinytex)
+library(dplyr)
 library(data.table)
 library(tabplot)
 library(readxl)
 library(bit64)
 library(descr)
-library(dplyr)
+library(tinytex)
 library(stringr)
 library(gdata)
 library(knitr)
@@ -50,17 +50,16 @@ The toolkit begins by guiding qualitative assessment of the dataset's **relevanc
 
 The findings of this report will help the user understand the strengths and weaknesses of their data file for conducting research. We include a series of analyses with discussion of how to interpret each and what further steps may be taken when a possible issue is detected. Results may inform decisions regarding how to use the data file for research as well as any caveats to draw from research findings. Further, findings may inform feedback for future maintenance of the data file.  
 
-This report is particularly geared toward the state and local administrative datasets and includes guidance for the issues common to these datasets. The design of this report was developed based on testing on state data for the Temporary Assistance for Needy Families (TANF) program. However, other data files with similar formats may benefit from the use of the toolkit.  
+This report is particularly geared toward state and local administrative datasets and includes guidance for the issues common to these datasets. While the design of thsi report is tailored to such datasets, other data files with similar formats may also benefit from the use of the toolkit.  
 
-When a strange result or pattern is detected in these analyses, it is often difficult to know whether the pattern reflects an issue with the data or just a notable pattern, for example changes in benefit amounts due to legal changes. While the toolkit will often not be able to distinguish between data issues and other notable patterns, observing these patterns can be greatly informative for understanding your data and guiding interpretations of research findings. Further, understanding the program details affecting the dataset analyzed can great assist with interpretation of findings in this report.  
+When a strange result or pattern is detected in these analyses, it is often difficult to know whether the pattern reflects an issue with the data or just a notable pattern, for example changes in benefit amounts due to legal changes. While the toolkit will often not be able to distinguish between data issues and other notable patterns, observing these patterns can be highly informative for understanding your data and guiding interpretations of research findings. Further, understanding the program details affecting the dataset analyzed can greatly assist with interpretation of findings in this report.  
 
 Among the many analyses available in this report, the user may navigate to the sections of most interest using the links available in the Table of Contents above.  
 
 This report is generated using R Markdown, available with R and RStudio. The sections of this report include R code chunks that refer to different code needed to implement analyses. Convenient defaults are included for this code for its for TANF data. We encourage the user to modify the script to the specific needs of their analyses. For each section, the R script to refer to for making changes is designated by the "**Reference Script**."  
 
-Places where we recommend the user consider modifying the code are designated in the report below and are also designated in "Guidance_for_User_Input.xlsx". We also have set up the R code to read inputs from modifying "setup.yml." Thus, a user can make modifications to this input file for key inputs for the toolkit in place of modifying the R code.  
-
-For troubleshooting relating to output for this report, please see the instructions in the User Documentation and refer to R documentation for more specific issues.  
+Places where we recommend the user consider modifying the code are designated in the report below. We also have set up the R code to read inputs from modifying "setup.yml." Thus, a user can make modifications to this input file for key inputs for the toolkit in place of modifying the R code.  
+For troubleshooting relating to output for this report, please see the instructions in the README on our GitHub page and refer to R documentation for more specific issues.  
   
 
 # Format of Analyses for the Report
@@ -101,11 +100,11 @@ Note that accuracy and completeness analyses are included in the same section of
 ## Comparability
 *Comparability* is the extent to which differences among statistics reflect real phenomena rather than methodological differences. Types of comparability include over time, across geographies, and among domains.  
 
-Different analyses may be more or less important based on the user's research questions. For example, if the user is particular interested in cross-sectional analysis making comparisons in outcomes among groups, the comparability dimension may be particularly important.  
+Different analyses may be more or less important based on the user's research questions. For example, if the user is particular interested in making comparisons in outcomes among groups, the comparability dimension may be particularly important.  
 
 #Relevance
 
-An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before continuing into the other steps, to avoid spending time and resources toward examining other data quality aspects for a data source that is not relevant.  
+An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data for specific questions. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before continuing into the other steps, to avoid spending time and resources toward examining other data quality aspects for a data source that is not relevant.  
 
 In addition to reviewing metadata and documentation, it is also important to understand how legal changes and changes in eligibility for program receipt make affect the suitability of the data source for research. We recommend the user gather available information on the legal and programmatic requirements that may affect the data source.  
 
@@ -115,14 +114,14 @@ The following list of questions can guide you in the assessment of the relevance
 |--------|----------------|----------------------------|
 | 1. Units | 1.1. What unit is represented at the record level of the data file? | For example, persons, households, transactions.
 | | 1.2. Do grouped units represent another aggregate unit? | For example, households as a group of persons
-| | 1.3. Are the units included in the data set relevant to the study? | In many cases, the unit of the administrative data  is different from the relevant unit of analysis. Usually, administrative data   is at the event level such as the payment to a welfare recipient, which is   different from a database at the recipient level.
-| 2. Population | 2.1. Is the population of units in the data set what   is needed for the study? | Administrative data stores detailed information of a particular group that is of interest for the administration of the activity or program. However, this group may or may not be the relevant population of   analysis.
-| 3. Variables | 3.1. What variables in the data capture conceptually   what is of interest in studying? | For example, whether an income variable in the   dataset captures the right income concept of interest for research.
-| 4. Time | 4.1. Is the time reference of the data set what is   needed for the analysis? | For example, to study the effect of a new policy,   data will need to be available from after the policy was implemented.
-| | 4.2. Is there administrative delay in the data? | In some cases data are recorded sometime after an   event occurs. For example, the employment status of a TANF recipient could change in practice, but this might not be reflected until the next time the TANF program data are updated with data from the employment records system.
+| | 1.3. Are the units included in the data file relevant to the study? | In many cases, the unit of the administrative data is different from the relevant unit of analysis. Usually, administrative data is at the event level (for example, payment to a benefit recipient). A dataset that only includes information at the recipient level may not be relevant for such an analysis.
+| 2. Population | 2.1. Is the population of units in the data file what is needed for the study? | Administrative data stores detailed information of a particular group that is of interest for the administration of the activity or program. However, this group may or may not be the relevant population for analysis.
+| 3. Variables | 3.1. What variables in the data capture conceptually what is of interest for the research? | For example, whether an income variable in the dataset captures the correct income concept of interest for research.
+| 4. Time | 4.1. Is the time reference of the data set what is needed for the analysis? | For example, to study the effect of a new policy, data will need to be available from after the policy was implemented.
+| | 4.2. Is there administrative delay in the data? | In some cases data are recorded sometime after an event occurs. For example, the employment status of a TANF recipient could change in practice, but this might not be reflected until the next time the TANF program data are updated with data from the employment records system.
 | 5. Groups | 5.1. What groups of interest are needed in the analysis? | E.g. race, poverty, location.
 | | 5.2. What variables can help to identify these relevant groups? | Are there variables to distinguish different groups of interest for comparison? These are also called domain variables.
-|  6. Policy changes | 6.1 What changes in policy and in law can you identify during the time reference?  6.2 Does any of these changes impact your analysis? | For example, when there are major changes to the tax   code, the data collected on tax forms can change and may impact time series   estimates constructed from income tax records  
+|  6. Policy changes | 6.1 What changes in policy and in law occurred during the reference time period? 6.2 Do any of these changes impact your analysis? | For example, when there are changes to the tax code, the data collected on tax forms may also change and may impact time series   estimates constructed from income tax records.  
 
 The previous table was adapted from Laitila et al. (2011).  
 
@@ -130,31 +129,15 @@ The previous table was adapted from Laitila et al. (2011).
 
 Once the dataset is judged to be relevant for the analysis, it might require some processing before continuing to the next steps. In case the unit of analysis is not the same as the record of the data, the dataset will need to be converted to the appropriate level of analysis. Additionally, the following steps will guide you to define the relevant parameters of the toolkit.  
 
-The initially provided code is based on case-level data for a state for TANF, and variables in the corresponding member-level file are aggregated to case-level and merged into the input file. A user can input their own flat file for use for the toolkit, with requirements describe in the User Documentation. That file will need to ultimately be read to the object "merged_universe."  
+The initially provided code is based on the example data file included on the GitHub repo 'test_data_file.csv', representing longitudinal benefits data for a state pgoram. A user may input a flat file in a similar format for analysis with the toolkit, with requirements described the repo's README. 
 
 *Defining file name*
 ```{r user_definitions, echo=TRUE}
 ##### EDIT THIS SECTION TO DEFINE FILE NAME ##### 
 
 ### Read case-level file for a particular state
-case_level_df <- fread("insert_path_to_case_file_here")
+analysis_file <- fread("test_data_file.csv")
 
-### Read member-level file for a particular state
-member_level_df <- fread("insert_path_to_member_file_here")
-
-### Aggregates member-level data to the case level and then merges aggregates to the case-level file
-#Creates indicator for adults who are TANF recipients
-member_level_df$recip_adult[(member_level_df$position>=1 & member_level_df$position<=6) & member_level_df$affil == 1] <- 1
-member_level_df$recip_adult[is.na(member_level_df$recip_adult)] <- 0
-# Creates indicator for children who are TANF recipients
-member_level_df$recip_child[(member_level_df$position>=7 & member_level_df$position<=16) & member_level_df$affil == 1] <- 1
-member_level_df$recip_child[is.na(member_level_df$recip_child)] <- 0
-# Aggregate to the case-level
-num_recip_child <- member_level_df[, .(num_recip_child = sum(recip_child)), by = c("fips","caseid","rptmn")]
-num_recip_adult <- member_level_df[, .(num_recip_adult = sum(recip_adult)), by = c("fips","caseid","rptmn")]
-# Merge aggregates to the case-level file
-merged_universe <- merge(case_level_df, num_recip_child, by=c("fips","caseid","rptmn"))
-merged_universe <- merge(merged_universe, num_recip_adult, by=c("fips","caseid","rptmn"))
 
 ```
 
@@ -174,16 +157,12 @@ variables_dataframe_filled <- rbind.fill(variables_dataframe)
 variables_dataframe_filled['name'] <- all_variables
 
 ##### EDIT THIS SECTION TO CREATE NEW VARIABLES ##### 
-merged_universe$year <- floor(merged_universe[["rptmn"]]/100)
-merged_universe$num_par[merged_universe$num_recip_child>0 & merged_universe$num_recip_adult==0] <- 0
-merged_universe$num_par[merged_universe$num_recip_child>=0 & merged_universe$num_recip_adult==1] <- 1
-merged_universe$num_par[merged_universe$num_recip_child>=0 & merged_universe$num_recip_adult>=2] <- 2
-merged_universe$tot_recip <- merged_universe$num_recip_child + merged_universe$num_recip_adult
+analysis_file$year <- floor(analysis_file[["month"]]/100)
 
 # ADDING NEW VARIABLES TO YAML CODEBOOK
-new_classifications <- c("domain", "key", "time")
-new_types <- c("categorical", "numeric", "numeric")
-new_names <- c("num_par", "tot_recip", "year")
+new_classifications <- c("time")
+new_types <- c("numeric")
+new_names <- c("year")
 variables_dataframe_filled <- rbind(data.frame(classification=new_classifications,type=new_types,name=new_names, stringsAsFactors = FALSE),variables_dataframe_filled)
 #####################################################
 ```
@@ -202,17 +181,16 @@ key_vars <- variables_dataframe_filled[variables_dataframe_filled$classification
 domain_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='domain', 'name']
 
 # We only keep variables selected by the user
-merged_universe <- select(merged_universe,c(id_vars, time_vars, location_vars, key_vars, domain_vars))
+analysis_file <- select(analysis_file,c(id_vars, time_vars, location_vars, key_vars, domain_vars))
 
 # Modifying categorical variables to be strings and factors
 to_categories <- variables_dataframe_filled[variables_dataframe_filled$type=='categorical', 'name']
-merged_universe <- merged_universe[, (to_categories):=lapply(.SD, as.factor), .SDcols = to_categories]
-merged_universe <- merged_universe[, (to_categories):=lapply(.SD, as.character), .SDcols = to_categories]
+analysis_file <- analysis_file[, (to_categories):=lapply(.SD, as.factor), .SDcols = to_categories]
+analysis_file <- analysis_file[, (to_categories):=lapply(.SD, as.character), .SDcols = to_categories]
 
 ##### EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES  #####
-merged_universe$funding <- factor(merged_universe$funding, levels=c(1,2) , labels = c("Federal","State"))
-merged_universe$rec_fs <- factor(merged_universe$rec_fs, levels=c(1,2) ,  labels = c("Yes", "No"))
-merged_universe$num_par <- factor(merged_universe$num_par, levels=c(0,1,2) , labels = c("Child-only", "1-parent", "2-parent"))
+analysis_file$source <- factor(analysis_file$source, levels=c(1,2) , labels = c("FundSource1","FundSource2"))
+analysis_file$other_benef <- factor(analysis_file$other_benef, levels=c(1,2) ,  labels = c("Yes", "No"))
 
 
 ######################################################################
@@ -220,9 +198,9 @@ merged_universe$num_par <- factor(merged_universe$num_par, levels=c(0,1,2) , lab
 # The rest of the variables will be defined as numeric and data is converted to data frame
 charvars <- variables_dataframe_filled[variables_dataframe_filled$type=='character', 'name']
 numvars <- variables_dataframe_filled[variables_dataframe_filled$type=='numeric', 'name']
-merged_universe <- as.data.frame(merged_universe)
-merged_universe[,numvars] <- sapply(merged_universe[,numvars],as.numeric)
-str(merged_universe)
+analysis_file <- as.data.frame(analysis_file)
+analysis_file[,numvars] <- sapply(analysis_file[,numvars],as.numeric)
+str(analysis_file)
 
 ```
 
@@ -232,7 +210,7 @@ In this section, the user should specify the parameters to subset the data file,
 
 ```{r subset_data, results='hide'}
 ##### SELECT SUBSETTING PARAMETERS ##### 
-subset_param <- "rptmn>=200810 & rptmn<=201609"
+subset_param <- "rptmn>=201101 & rptmn<=201512"
 ########################################
 
 # Subsetting dataset
@@ -243,20 +221,20 @@ if (subset_param =="" | is.null(subset_param)) {
 }
 
 # If error in subsetting parameters, we use all the data
-subsetted <- try( subset(merged_universe,eval(parse(text = paste0(subset_param)))), silent=TRUE)
+subsetted <- try( subset(analysis_file,eval(parse(text = paste0(subset_param)))), silent=TRUE)
 if (class(subsetted) == "try-error") {
   print("Subsetting parameters are not correct. Using all the data.")
   subset_text <- "All"
-  subsetted <- merged_universe
+  subsetted <- analysis_file
 }
 
-merged_universe <- subsetted
+analysis_file <- subsetted
 
 ```
 
 # Accuracy and Completeness
 
-```{r tech_checks, child='TechChecks/Technical_Checks.rmd', echo=TRUE}
+```{r data_checks, child='DataChecks/Data_Checks.rmd', echo=TRUE}
 ```
 
 ```{r outliers, child='outliers/outliers.rmd', echo=TRUE}

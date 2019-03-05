@@ -15,7 +15,7 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 
 2. Install RStudio: RStudio is a development environment that makes using R easier. It is also free to download. You can download RStudio from the RStudio website (https://www.rstudio.com/products/rstudio/download/). Select the RStudio Desktop Open Source option.
 
-3. Install the following list of R packages: 
+3. Install the following list of R packages (Modify to add script): 
 
 - "dplyr",
 - "data.table",
@@ -41,13 +41,9 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 - "gridExtra", 
 - "yaml". 
 
-To install these packages, open RStudio once you have installed it (and R). The panel on the bottom of your screen is the console. You can type commands to R here. Install each package one line at a time. For "dplyr", enter 
+To install these packages, open RStudio once you have installed it (and R). The panel on the bottom of your screen is the console. You can type commands to R here. To install each package type the installation instructions into the console as illustrated below for the "dplyr" package. For more information on packages, see this DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
 
-> install.packages("dplyr")
-
-and for other packages, do similarly. For more information on packages, see this DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
-
-4. Confirm packages installed: Step 3 installs packages and additional package dependencies. Your RStudio console should print “package ‘dplyr’ successfully unpacked” if the install worked correctly (similar messages should print for the other packages). To confirm, try loading the package with the command “library(dplyr)”. Repeat this process for “data.table” and remaining packages. If no error messages are received, the install is complete. The toolkit also includes a check that will alert you if any of the above packages are not installed.
+4. Confirm packages installed: Step 3 installs packages and additional package dependencies. Your RStudio console should print “package ‘dplyr’ successfully unpacked” if the install worked correctly (similar messages should print for the other packages). To confirm, try loading the package with the command “library(dplyr)”. Repeat this process for “data.table” and remaining packages. If no error messages are received, the install is complete. 
 
 ### Using with Git
 After installing these programs, use Git to clone this repository. You can click above on "Clone or Download" to save the files to a convenient location on your computer.
@@ -86,7 +82,7 @@ Variables to Modify:
 - subset_param: Select subsetting parameters, including time period, for report output
 
 
-## Technical Checks (Technical_Checks.Rmd)
+## Data Checks (Data_Checks.Rmd)
 Check whether the data conform to rules based on the codebook or other sources  
 Variables to Modify:  
 - selected_var: Select variables for section's analyses
@@ -107,7 +103,6 @@ Variables to Modify:
 ### Unit Completeness (Completeness_unit.Rmd)
 Assess completeness of data with respect to units in the dataset  
 Variables to Modify:
-- subset_param: Select subsetting parameters for section's analyses
 - time_var: Designate the time variable
 - location_var: Designate the location/geographic variable for analysis
 
@@ -119,13 +114,13 @@ Assess completeness of data with respect to variables within units (Item nonresp
 ### Distribution (Comparability_Distribution.Rmd)
 Assess comparability based on variable distributions and comparisons among domains
 
-### Patterns Over Time (Patterns_over_time.Rmd)
+### Patterns Over Time (Comparability_Patterns_over_time.Rmd)
 Assess comparability of data over time  
 Variables to Modify:
 - selected_var: Select variables for section's analyses
 - subgroup: Select subgroup variable for examining tableplots by subgroup
 
-### Relationships Among Variables (Relationships_among_variables.Rmd)
+### Relationships Among Variables (Comparability_Relationship_among_variables.Rmd)
 Assess comparability with respect to relationships among variables and by groups
 Variables to Modify:  
 - sort_var: Select sort variable to examine relationship among variables via tableplots

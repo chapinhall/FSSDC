@@ -1,0 +1,20 @@
+test_data_file.csv is a fake dataset generated at NORC at the University of Chicago as 
+an example for users to demonstrate and test the Data File Orientation Toolkit.
+
+The variables included are as follows:
+
+hh_id - Unique identifier for household/case
+
+month - Month reported in YYYMM format
+
+source - Indicator for funding source for benefit with 2 sources (indicated 1 and 2)
+
+other_benef - Indicator for whether other benefits received by households that month
+	1 = Yes
+	2 = No
+
+amount - Amount of benefit received in $
+
+type_case - Indicator for type of case with three types (indicated by 0, 1, and 2)
+
+num_recip - Number of recipients for household/case

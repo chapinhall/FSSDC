@@ -81,7 +81,7 @@ if (is.null(location_var) |
 
 **Frequency bar plots:**
 ```{r completeness_unit_5}
-if (!is.null(time_var)) {
+if (!is.null(location_var)) {
   # Frequency bar plots
   location_units <- nlevels(as.factor(subsetted[[location_var]]))
   

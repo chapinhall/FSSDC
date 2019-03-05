@@ -25,7 +25,7 @@ sort_var <- NULL
 if (is.null(sort_var) | !all(is.element(sort_var, key_vars)) )  {
   sort_var <- NULL
   for (i in key_vars) {
-    if (is.numeric(merged_universe[[i]])) {
+    if (is.numeric(analysis_file[[i]])) {
       sort_var <- c(sort_var,i)
     }
   }
