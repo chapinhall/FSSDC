@@ -54,10 +54,22 @@ We include in this repository an example data file which can be used to test and
 
 The master R script Toolkit.Rmd and set up file setup.yml are prepared with convenient defaults to analyze this data file. An example output report from the toolkit based on this data file is also provided in Toolkit_Output_Example.html.
 
-## Setting up the report
-The YAML file setup.yml is a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed including which variables are for identification, time periods, key for analysis, key domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit to assess the accuracy and completeness of key variables as well as the comparability over time and among groups. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs.  
+## Format of Data Files Needed for Toolkit
+test_data_file.csv provides an example of the data file format needed for the toolkit. The toolkit is best suited to analyze data that come in a longitudinal "long" format with an ID variable identifying unique entities (for example, households) and a time variable to track the entities over time. There should be one "rectangular" data file with rows for the units/time periods and columns for the variables. A user should avoid duplicate records for units/time period.
 
-In the main Toolkit.Rmd master script, you can specify the location of your data file, create new variables for analysis, add new labels for your variables, and there is an option  to subset your data. 
+As in test_data_file.csv, a header row in the data file should provide the variable names/labels.
+
+The input YAML file setup.yml (described below) can be used to identify the ID variable and time variable in the dataset by designating the classifications as "id" or "time". 
+
+While the toolkit requires a variable to be identified as a "time" variable, the toolkit can also run on a cross-sectional data file (that does not involve different time periods) but adding a filler variable with the same value for all records. For example, a user may create a variable titled "time" with the value 1 for all rows.
+
+
+## Setting up the report
+The YAML file setup.yml is a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed including which variables are for identification, time periods, key for analysis, key domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit to assess the accuracy and completeness of key variables as well as the comparability over time and among groups. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs. Each variable should have a classification as "id", "time", "key", "domain", or "location" and a type as "categorical" or "numeric".
+
+As mentioned previously, there should be one variable classified as "id" and one variable classified as "time." The id variable should be categorical and the time variable should be numeric.
+
+In the main Toolkit.Rmd master script, you can specify the name and location of your data file, create new variables for analysis, add new labels for your variables, and there is also an option to subset your data. 
  
 ## Running the report
 In the Toolkit.Rmd RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and, if there are no errors, produce an HTML document Toolkit.html when it is finished.
@@ -79,9 +91,12 @@ Most of the readily available input modifications are located at the top of each
 
 # Description of Elements
 
+To run the toolkit on your data file, this section describes places where we expect changes will be needed to adapt the toolkit to your data file.
+
 ## Toolkit (Toolkit.Rmd)
 Master script for the toolkit, including data input  
-Variables to Modify:
+Elements to Modify:
+- analysis_file: Enter directory and name of your data file to read in. There is no need for a directory if the data file is saved in the same location as Toolkit.Rmd.
 - input_yaml: Location of the yaml to detail variables for analysis. For documentation on how to modify the YAML, refer to the existing YAML file (setup.yml).
 - subset_param: Select subsetting parameters, including time period, for report output
 

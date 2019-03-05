@@ -34,11 +34,11 @@ for (i in c(key_vars)) {
     subsetted$miss <- 0
     subsetted$miss[is.na(subsetted[[i]])] <- 1
     subsetted$miss <- as.factor(subsetted$miss)
-    if (nlevels(subsetted$miss) == 1 & subsetted$miss[1] == 0) 
+    if (nlevels(subsetted$miss) == 1 & subsetted$miss[1] == 0) {
       subsetted$miss <- factor(subsetted$miss, labels = c("Not missing"))
-    else if (nlevels(subsetted$miss) == 1 & subsetted$miss[1] == 1) 
+    } else if (nlevels(subsetted$miss) == 1 & subsetted$miss[1] == 1) {
       subsetted$miss <- factor(subsetted$miss, labels = c("Missing"))
-    else 
+    } else 
       subsetted$miss <- factor(subsetted$miss, labels = c("Not missing", "Missing"))
 
 # Only plot variables with missing values
@@ -54,8 +54,8 @@ if(sum(as.numeric(is.na(subsetted[[i]]))) > 0) {
         summ_name <- paste0('prop_', i)  
         # Creates temporary data frame with data for frequency bar plot
         temp <- subsetted %>%
-          group_by_(.dots = group_var) %>%
-          summarise_(.dots = setNames(summ, summ_name))
+          group_by(group_var) %>%
+          summarise(setNames(summ, summ_name))
         
         suppressMessages(print(
           ggplot(temp, aes_string(x = j, y = summ_name)) + 
@@ -74,8 +74,8 @@ if(sum(as.numeric(is.na(subsetted[[i]]))) > 0) {
         summ_name <- paste0('prop_', i)  
         # Creates temporary data frame with data for frequency bar plot
         temp <- subsetted %>%
-          group_by_(.dots = group_var) %>%
-          summarise_(.dots = setNames(summ, summ_name))
+          group_by(.dots = group_var) %>%
+          summarise(.dots = setNames(summ, summ_name))
         
         suppressMessages(print(
           ggplot(temp, aes_string(x = j, y = summ_name)) + 

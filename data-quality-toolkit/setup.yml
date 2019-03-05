@@ -25,6 +25,11 @@
 # key: Most important variables that are focuses of the analysis (e.g. benefit receipt, outcomes)
 # domain: Specify different groups of interest for comparison for the research
 
+# Please identify one id variable and one numeric time variable. For a dataset that is 
+# cross-sectional, or does not involve a time component, a filler variable can be added taking the 
+# same value for all records. For example, a user may create a variable titled "time" with the value 
+# 1 for all rows.
+
 # Types
 # Make sure your type is categorical or numeric as described below:
 # Categorical: belong to a discrete category (e.g. "Group_1", "Group_2")
@@ -37,6 +42,9 @@ variables:
    month:
       classification: "time"
       type: "categorical"
+   year:
+      classification: "time"
+      type: "numeric"
    amount:
       classification: "key"
       type: "numeric"
