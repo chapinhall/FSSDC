@@ -48,22 +48,22 @@ To install these packages, open RStudio once you have installed it (and R). The 
 ### Using with Git
 After installing these programs, use Git to clone this repository. You can click above on "Clone or Download" to save the files to a convenient location on your computer.
 
-Next, using RStudio, open the master "DQToolkit.Rmd" file in the data-quality-toolkit folder. You may also open the setup file setup.yml file in the same folder.
+Next, using RStudio, open the master "Toolkit.Rmd" file in the data-quality-toolkit folder. You may also open the setup file setup.yml file in the same folder.
 
 ## Setting up the report
 The YAML file setup.yml is a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed including which variables are for identification, time periods, key for analysis, key domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit to assess the accuracy and completeness of key variables as well as the comparability over time and among groups. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs.  
 
-In the main DQToolkit.Rmd master script, you can specify the location of your data file, create new variables for analysis, add new labels for your variables, or even subset your data. 
+In the main Toolkit.Rmd master script, you can specify the location of your data file, create new variables for analysis, add new labels for your variables, or even subset your data. 
  
 ## Running the report
-In the DQToolkit RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and an HTML document will appear when it is finished.
+In the Toolkit RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and an HTML document will appear when it is finished.
 
-The DQToolkit.Rmd master script sets up the data file for analysis and calls other scripts saved in the subfolders to conduct analysis for specific elements of data quality. Setting up and running DQToolkit.Rmd allows for running to entire set of data quality analyses.
+The Toolkit.Rmd master script sets up the data file for analysis and calls other scripts saved in the subfolders to conduct analysis for specific elements of data quality. Setting up and running Toolkit.Rmd allows for running to entire set of data quality analyses.
 
 ## Modifying the output
 If you'd like to modify the report functionality, you can do it in two ways -- adding/removing components for analysis or modifying the existing elements in the R scripts for analysis.
 ### Adding/removing components
-At the bottom of the DQToolkit.Rmd file, you will find a series of lines that refer to the creating of various report subcomponents. You can remove components from your final report by removing these lines.
+At the bottom of the Toolkit.Rmd file, you will find a series of lines that refer to the creating of various report subcomponents. You can remove components from your final report by removing these lines.
 For instance, if you want to remove outlier analysis, simple comment out or remove the following lines:
 ```{r outliers, child='outliers/outliers.rmd', echo=True}
 ```
@@ -75,7 +75,7 @@ Most of the readily available input modifications are located at the top of each
 
 # Description of Elements
 
-## DQToolkit (DQToolkit.Rmd)
+## Toolkit (Toolkit.Rmd)
 Master script for the toolkit, including data input  
 Variables to Modify:
 - input_yaml: Location of the yaml to detail variables for analysis. For documentation on how to modify the YAML, refer to the existing YAML file (setup.yml).
