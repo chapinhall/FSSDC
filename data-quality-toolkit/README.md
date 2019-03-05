@@ -45,9 +45,14 @@ To install these packages, open RStudio once you have installed it (and R). With
 
 For more information on R packages, see this DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
 
-5. After installing these programs, clone this repository to use it on your computer. Within our GitHub site, you can click above on "Clone or Download" to save the files to a convenient location on your computer.
+4. After installing these programs, clone this repository to use it on your computer. Within our GitHub site, you can click above on "Clone or Download" to save the files to a convenient location on your computer.
 
-Next, using RStudio, navigate to teh data-quality-toolkit folder and open the master "Toolkit.Rmd". You may also open the setup file setup.yml file in the same folder.
+Next, using RStudio, navigate to the data-quality-toolkit folder and open the master "Toolkit.Rmd". You may also open the setup file setup.yml file in the same folder.
+
+## Example Data File and Report for Testing
+We include in this repository an example data file which can be used to test and explore the toolkit: test_data_file.csv. The file represents a longitudinal dataset of benefit recipients, tracking cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file "Codebook for test_data_file.txt."
+
+The master R script Toolkit.Rmd and set up file setup.yml are prepared with convenient defaults to analyze this data file. An example output report from the toolkit based on this data file is also provided in Toolkit_Output_Example.html.
 
 ## Setting up the report
 The YAML file setup.yml is a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed including which variables are for identification, time periods, key for analysis, key domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit to assess the accuracy and completeness of key variables as well as the comparability over time and among groups. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs.  
@@ -55,7 +60,7 @@ The YAML file setup.yml is a convenient setup for describing the variable types 
 In the main Toolkit.Rmd master script, you can specify the location of your data file, create new variables for analysis, add new labels for your variables, and there is an option  to subset your data. 
  
 ## Running the report
-In the Toolkit.Rmd RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and an HTML document Toolkit.html will appear when it is finished.
+In the Toolkit.Rmd RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and, if there are no errors, produce an HTML document Toolkit.html when it is finished.
 
 The Toolkit.Rmd master script sets up the data file for analysis and calls other scripts saved in the subfolders to conduct analysis for specific elements of data quality. Setting up and running Toolkit.Rmd allows for running the entire set of data quality analyses.
 
