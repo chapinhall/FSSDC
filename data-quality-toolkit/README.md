@@ -15,7 +15,7 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 
 2. Install RStudio: RStudio is a development environment that makes using R easier. It is also free to download. You can download RStudio from the RStudio website (https://www.rstudio.com/products/rstudio/download/). Select the RStudio Desktop Open Source option.
 
-3. Install the following list of R packages (Modify to add script): 
+3. Use the R script Step1_InstallPackages.R to install a set of additional R packages with functionalities needed for the toolkit: 
 
 - "dplyr",
 - "data.table",
@@ -41,24 +41,23 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 - "gridExtra", 
 - "yaml". 
 
-To install these packages, open RStudio once you have installed it (and R). The panel on the bottom of your screen is the console. You can type commands to R here. To install each package type the installation instructions into the console as illustrated below for the "dplyr" package. For more information on packages, see this DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
+To install these packages, open RStudio once you have installed it (and R). Within R Studio, open the script Step1_InstallPackages.R. Run this script by clicking the run button. The script includes check to verify that the packages were installed successfully.  
 
-4. Confirm packages installed: Step 3 installs packages and additional package dependencies. Your RStudio console should print “package ‘dplyr’ successfully unpacked” if the install worked correctly (similar messages should print for the other packages). To confirm, try loading the package with the command “library(dplyr)”. Repeat this process for “data.table” and remaining packages. If no error messages are received, the install is complete. 
+For more information on R packages, see this DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
 
-### Using with Git
-After installing these programs, use Git to clone this repository. You can click above on "Clone or Download" to save the files to a convenient location on your computer.
+5. After installing these programs, clone this repository to use it on your computer. Within our GitHub site, you can click above on "Clone or Download" to save the files to a convenient location on your computer.
 
-Next, using RStudio, open the master "Toolkit.Rmd" file in the data-quality-toolkit folder. You may also open the setup file setup.yml file in the same folder.
+Next, using RStudio, navigate to teh data-quality-toolkit folder and open the master "Toolkit.Rmd". You may also open the setup file setup.yml file in the same folder.
 
 ## Setting up the report
 The YAML file setup.yml is a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed including which variables are for identification, time periods, key for analysis, key domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit to assess the accuracy and completeness of key variables as well as the comparability over time and among groups. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs.  
 
-In the main Toolkit.Rmd master script, you can specify the location of your data file, create new variables for analysis, add new labels for your variables, or even subset your data. 
+In the main Toolkit.Rmd master script, you can specify the location of your data file, create new variables for analysis, add new labels for your variables, and there is an option  to subset your data. 
  
 ## Running the report
-In the Toolkit RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and an HTML document will appear when it is finished.
+In the Toolkit.Rmd RMarkdown file, click on the "Knit" button at the top of the RStudio screen. This will run the entire script and an HTML document Toolkit.html will appear when it is finished.
 
-The Toolkit.Rmd master script sets up the data file for analysis and calls other scripts saved in the subfolders to conduct analysis for specific elements of data quality. Setting up and running Toolkit.Rmd allows for running to entire set of data quality analyses.
+The Toolkit.Rmd master script sets up the data file for analysis and calls other scripts saved in the subfolders to conduct analysis for specific elements of data quality. Setting up and running Toolkit.Rmd allows for running the entire set of data quality analyses.
 
 ## Modifying the output
 If you'd like to modify the report functionality, you can do it in two ways -- adding/removing components for analysis or modifying the existing elements in the R scripts for analysis.
