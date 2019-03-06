@@ -1,6 +1,6 @@
 # This set up directs you to set the specifications of the variables needed for the toolkit 
 # analyses, including which variables are for identification, time periods, key for analysis,
-# key domains or groups to compare, and location-related variables. These variables provide 
+# domains or groups to compare, and location-related variables. These variables provide 
 # inputs for analyses in the toolkit to assess the accuracy and completeness of key variables 
 # as well as the comparability over time and among groups. 
 # 
@@ -20,15 +20,16 @@
 # Classifications:
 # Make sure your classification is id, time, location, key, or domain as described below:
 # id: Identification variable (e.g. caseid), for variables that uniquely identify different units
-# location: Location variable describing area of case (zip codes or other geographic indicators)
 # time: Time variable denoting a period of time (e.g. reporting month)
 # key: Most important variables that are focuses of the analysis (e.g. benefit receipt, outcomes)
 # domain: Specify different groups of interest for comparison for the research
+# location: Location variable describing area of case (zip codes or other geographic indicators)
 
-# Please identify one id variable and one numeric time variable. For a dataset that is 
+# Please identify at least for each of id variables, time variables, key variables, 
+# and domain variables. Location variables are optional. For a dataset that is 
 # cross-sectional, or does not involve a time component, a filler variable can be added taking the 
 # same value for all records. For example, a user may create a variable titled "time" with the value 
-# 1 for all rows.
+# '1' for all rows.
 
 # Types
 # Make sure your type is categorical or numeric as described below:
@@ -42,9 +43,6 @@ variables:
    month:
       classification: "time"
       type: "categorical"
-   year:
-      classification: "time"
-      type: "numeric"
    amount:
       classification: "key"
       type: "numeric"

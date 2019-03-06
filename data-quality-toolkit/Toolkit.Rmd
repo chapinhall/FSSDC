@@ -14,6 +14,7 @@ list.of.packages <- c("tinytex", "data.table","tabplot","readxl","bit64","descr"
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) print(paste0("The following packages need to be installed: ",new.packages))
 
+library(plyr)
 library(dplyr)
 library(data.table)
 library(tabplot)
@@ -37,7 +38,6 @@ library(lvplot)
 library(tidyr)
 library(gridExtra)
 library(yaml)
-library(plyr)
 
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -144,8 +144,7 @@ analysis_file <- fread("test_data_file.csv")
 
 *Creating variables*
 
-In this section, the user has the option to create variables that you might need for further analysis. The example provided creates a variable year based upon the month variable provided in the example data file. Note that for each new variable created, the variable type, classification, and name will be needed to add to the objects 'new_classifications', 'new_types', and 'new_names', in vector format. If no new variables are created, each of these three objects will need to be set to NULL.
-
+This section reads in parameters needed for the different variables to be analyzed from the setup file setup.yml. Please refer to the README and setup file for instructions for setup.yml.
 
 ```{r create_vars, results='hide'}
 # THIS SECTION OS READING FROM THE FILE SETUP.YAML WHICH INCLUDES ALL THE VARIABLE DESCRIPTIONS
@@ -155,36 +154,29 @@ variables_dataframe <- lapply(input_yaml$variables, data.frame)
 variables_dataframe_filled <- rbind.fill(variables_dataframe)
 variables_dataframe_filled['name'] <- all_variables
 
-##### EDIT THIS SECTION TO CREATE NEW VARIABLES ##### 
-#analysis_file$year <- floor(analysis_file[["month"]]/100)
-
-# ADDING NEW VARIABLES ACCORDING TO SETUP IN setup.yml YAML CODEBOOK
-# 'new_classifications' is a vector indicating whether each new variable is id, location, time, 
-# key, # or domain
-# 'new_types' is a vector indicating whether each new variable is numeric or categorical
-# 'new_names' is a vector providing the new variable names
-# Set 'new_classifications', 'new_types', and 'new_names' to NULL if there are 
-# no newly created variables
-
-#new_classifications <- c("time")
-#new_types <- c("numeric")
-#new_names <- c("year")
-#variables_dataframe_filled <- rbind(data.frame(classification=new_classifications,type=new_types,name=new_names, stringsAsFactors = FALSE),variables_dataframe_filled)
 #####################################################
 ```
 
 *Defining relevant variables*
 
-In this section, the user should define the relevant variables for the analysis. At least one ID, key and domain variables are required, which should be indicated in the id_vars, key_vars, and domain_vars sets below. Then, the user should identify all the character variables in the charvars set below, which are all variables who are neither numeric nor dates, including IDs. It is important to make sure that only variables that were identified in the previous step are included here. Finally, the character variables are converted into factors and the user should indicate the labels of these variables where appropriate.    
+In this section, the user should define the relevant variables for the analysis. At least one ID, time, key, and domain variable are required, which should be indicated in the id_vars, time_vars, key_vars, and domain_vars sets below. If there are no time variables, then using a filler variable with the same value for all records, for example '1' can be used. The user can optionally specify location variables in location_vars.
+
+Then, the user should identify all the character variables in charvars set below, which are all variables who are neither numeric nor dates, including IDs. It is important to make sure that only variables that were identified in the previous step are included here. Finally, the character variables are converted into factors and the user should indicate the labels of these variables where appropriate. 
+
+All inputs here are set up automatically for users who use the setup.yml input file.
+
+NOTE: There is a section below where the user may apply labels for any categorical variables in the dataset. Some examples are provided for the 'source' and 'other_benef' variables in the example file.
 
 ```{r define_vars, results='hide'}
 
-# Setting relevant variables as defined by yaml
+# Setting relevant variables as defined by yaml. At least one variable for each of the following 4 groups should be included.
 id_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='id', 'name']
 time_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='time', 'name']
-location_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='location', 'name']
 key_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='key', 'name']
 domain_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='domain', 'name']
+
+# Location variables can optionally be specified
+location_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='location', 'name']
 
 # We only keep variables selected by the user
 analysis_file <- select(analysis_file,c(id_vars, time_vars, location_vars, key_vars, domain_vars))
@@ -216,7 +208,7 @@ In this section, the user should specify the parameters to subset the data file,
 
 ```{r subset_data, results='hide'}
 ##### SELECT SUBSETTING PARAMETERS ##### 
-subset_param <- "rptmn>=201101 & rptmn<=201512"
+subset_param <- ""
 ########################################
 
 # Subsetting dataset

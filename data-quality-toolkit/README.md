@@ -61,13 +61,13 @@ As in test_data_file.csv, a header row in the data file should provide the varia
 
 The input YAML file setup.yml (described below) can be used to identify the ID variable and time variable in the dataset by designating the classifications as "id" or "time". 
 
-While the toolkit requires a variable to be identified as a "time" variable, the toolkit can also run on a cross-sectional data file (that does not involve different time periods) but adding a filler variable with the same value for all records. For example, a user may create a variable titled "time" with the value 1 for all rows.
+While the toolkit requires a variable to be identified as a "time" variable, the toolkit can also run on a cross-sectional data file (that does not involve different time periods) but adding a filler variable with the same value for all records. For example, a user may create a variable titled "time" with the value '1' for all rows.
 
 
 ## Setting up the report
 The YAML file setup.yml is a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed including which variables are for identification, time periods, key for analysis, key domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit to assess the accuracy and completeness of key variables as well as the comparability over time and among groups. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs. Each variable should have a classification as "id", "time", "key", "domain", or "location" and a type as "categorical" or "numeric".
 
-As mentioned previously, there should be one variable classified as "id" and one variable classified as "time." The id variable should be categorical and the time variable should be numeric.
+There should be at least one variable classified as each of "id", "time", "key", and "domain." 
 
 In the main Toolkit.Rmd master script, you can specify the name and location of your data file, create new variables for analysis, add new labels for your variables, and there is also an option to subset your data. 
  
@@ -98,11 +98,12 @@ Master script for the toolkit, including data input
 Elements to Modify:
 - analysis_file: Enter directory and name of your data file to read in. There is no need for a directory if the data file is saved in the same location as Toolkit.Rmd.
 - input_yaml: Location of the yaml to detail variables for analysis. For documentation on how to modify the YAML, refer to the existing YAML file (setup.yml).
-- subset_param: Select subsetting parameters, including time period, for report output
+- Add labels for categorical variables: See the example for adding labels to categorical variables under "EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES"
+- subset_param: Select subsetting parameters, including time period, for report output. Can set to "" if the user does not need subsetting.
 
 
 ## Data Checks (Data_Checks.Rmd)
-Check whether the data conform to rules based on the codebook or other sources  
+Check whether the data conform to rules based on the codebook or other sources. In this section, the user should add variable rules based on the codebook and verify the extent to which any of these rules are violated. The main section for adding codebook rules is for the validation object 'v'. See examples provided in the script based on the example file.
 Variables to Modify:  
 - selected_var: Select variables for section's analyses
 - zip_str: Regular expression used to check zip code consistency that can be modified or marked out
