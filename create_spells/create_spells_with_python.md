@@ -7,9 +7,13 @@ Running the file requires python to be installed and knowledge of how to use a t
 `spells.py` takes the following arguments:
 
 `csv_filename` Location of input CSV file.
+
 `active` Name of a column containing the active indicator.
+
 `caseID`Name of column containing the unique caseID.
+
 `time` Name of column containing the time period.
+
 `churn_period_days` Time to allow for administrative churn when defining a spell (in days). Breaks in service less than or equal to this value will be considered one spell.
 
 
