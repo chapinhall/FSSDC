@@ -3,6 +3,14 @@ We have created a Python script to create general spells files that can work wit
 
 Running the file requires python to be installed and knowledge of how to use a terminal. Please see the [tutorial section](../tutorials/README.md) of this site if you are not familiar with these concepts.
 
+# Dependancies
+Running this code requires the following libraries:
+
+`pandas`
+`pytest`
+
+If you have installed the Anaconda distribution of Python as described in the [tutorials](../tutorials/README.md) section these libraries will be installed.
+
 ## Running the Python Code
 `spells.py` takes the following arguments:
 
@@ -21,4 +29,11 @@ Example: `python spells.py CaseMonths.csv active_ind caseid month 31 spells.csv`
 
 
 ## Testing The Python Script
-A file to test the Python code against a few simple use cases is available in *test_spells.py*. This file uses the [pytest](https://docs.pytest.org/en/latest/) library. Test data is provided in  [test_data](https://github.com/chapinhall/FSSDC/tree/master/create_spells/test_data). If you make changes to the Python file to add a new feature you may wish to run some tests to ensure they work correctly. Update the new expected output based on your additions inside the *test_spells.py* file and rerun the tests. You can run the test file by typing `py.test test_spells.py` in your terminal.
+A file to test the Python code against a few simple use cases is available in *test_spells.py*. Test data is provided in  [test_data](https://github.com/chapinhall/FSSDC/tree/master/create_spells/test_data). If you make changes to the Python file to add a new feature you may wish to run some tests to ensure they work correctly. Update the new expected output based on your additions inside the *test_spells.py* file and rerun the tests. You can run the test file by typing `py.test test_spells.py` in your terminal.
+
+If the tests run successfully several lines of text will print out to the terminal ending with:
+
+```
+========================== 4 passed in 1.37 seconds ===========================
+```
+

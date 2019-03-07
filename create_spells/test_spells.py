@@ -21,21 +21,21 @@ expected_2par_2spell = [['caseID', 'startDate', 'endDate'],
 
 ### Spells Creation Tests ###
 def test_1par_1spell():
-    actual_spells = create_spells("test_data/par1.csv", "active",
+    actual_spells = create_spells("python_test_data/par1.csv", "active",
      "caseID", "month", "62")
     assert actual_spells == expected_1par_1spell
 
 def test_1par_2spell():
-    actual_spells = create_spells("test_data/par1.csv", "active",
+    actual_spells = create_spells("python_test_data/par1.csv", "active",
      "caseID", "month", "31")
     assert actual_spells == expected_1par_2spell
 
 def test_2par_1spell():
-    actual_spells = create_spells("test_data/par2.csv", "active",
+    actual_spells = create_spells("python_test_data/par2.csv", "active",
     "caseID", "month", "62")
     assert actual_spells == expected_2par_1spell
 
 def test_2par_2spell():
-    actual_spells = create_spells("test_data/par2.csv", "active",
+    actual_spells = create_spells("python_test_data/par2.csv", "active",
     "caseID", "month", "31")
     assert actual_spells == expected_2par_2spell
