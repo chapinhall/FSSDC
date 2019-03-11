@@ -26,11 +26,12 @@ packages <- c('dplyr',
               'tidyr',
               'gridExtra',
               'yaml',
-              'plyr')
+              'plyr',
+              'devtools')
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages()))) 
 }
-
+install_github("smtennekes/tabplot")
 # This line will return any packages not successfully installed. 
 # A return of "character(0)" indicates that all packages were installed successfully.
 setdiff(packages, rownames(installed.packages()))
