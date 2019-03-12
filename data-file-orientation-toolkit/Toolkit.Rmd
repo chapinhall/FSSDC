@@ -17,7 +17,6 @@ if(length(new.packages)) print(paste0("The following packages need to be install
 library(plyr)
 library(dplyr)
 library(data.table)
-library(tabplot)
 library(readxl)
 library(bit64)
 library(descr)
@@ -38,6 +37,7 @@ library(lvplot)
 library(tidyr)
 library(gridExtra)
 library(yaml)
+library(tabplot)
 
 knitr::opts_chunk$set(echo = TRUE)
 ```

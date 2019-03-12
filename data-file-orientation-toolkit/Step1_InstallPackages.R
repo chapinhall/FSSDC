@@ -3,9 +3,9 @@
 
 # Just click the "Run" button in RStudio.
 
-packages <- c('dplyr',
+packages <- c('plyr',
+              'dplyr',
               'data.table',
-              'tabplot',
               'readxl',
               'bit64',
               'descr',
@@ -26,15 +26,19 @@ packages <- c('dplyr',
               'tidyr',
               'gridExtra',
               'yaml',
-              'plyr',
               'devtools')
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages()))) 
 }
-install_github("smtennekes/tabplot")
+
 # This line will return any packages not successfully installed. 
 # A return of "character(0)" indicates that all packages were installed successfully.
 setdiff(packages, rownames(installed.packages()))
+
+# One package "tabplot" needs to be installed from GitHub instead of CRAN
+devtools::install_github("mtennekes/tabplot")
+
+
 
 
 

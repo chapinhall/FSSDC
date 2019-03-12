@@ -15,11 +15,10 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 
 2. Install RStudio: RStudio is a development environment that makes using R easier. It is also free to download. You can download RStudio from the RStudio website (https://www.rstudio.com/products/rstudio/download/). Select the RStudio Desktop Open Source option.
 
-3. Use the R script Step1_InstallPackages.R to install a set of additional R packages with functionalities needed for the toolkit: 
-
+3. Use the R script Step1_InstallPackages.R to install a set of additional R packages from the Comprehensive R Achive Network (CRAN) with functionalities needed for the toolkit: 
+- "plyr",
 - "dplyr",
 - "data.table",
-- "tabplot",
 - "readxl",
 - "bit64",
 - "descr",
@@ -39,7 +38,10 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 - "lvplot",
 - "tidyr",
 - "gridExtra", 
-- "yaml". 
+- "yaml",
+- "devtools". 
+
+In addition, one package "tabplot" needs to be installed from GitHub.
 
 To install these packages, open RStudio once you have installed it (and R). Within R Studio, open the script Step1_InstallPackages.R. Run this script by clicking the run button. The script includes check to verify that the packages were installed successfully.  
 
@@ -50,7 +52,7 @@ For more information on R packages, see this DataCamp tutorial (https://www.data
 Next, using RStudio, navigate to the data-quality-toolkit folder and open the master "Toolkit.Rmd". You may also open the setup file setup.yml file in the same folder.
 
 ## Example Data File and Report for Testing
-We include in this repository an example data file which can be used to test and explore the toolkit: test_data_file.csv. The file represents a longitudinal dataset of benefit recipients, tracking cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file "Codebook for test_data_file.txt."
+We include in this repository an example data file we simulated which can be used to test and explore the toolkit: test_data_file.csv. The file represents a longitudinal dataset of benefit recipients, tracking cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file "Codebook for test_data_file.txt."
 
 The master R script Toolkit.Rmd and set up file setup.yml are prepared with convenient defaults to analyze this data file. An example output report from the toolkit based on this data file is also provided in Toolkit_Output_Example.html.
 
