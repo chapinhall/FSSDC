@@ -26,7 +26,12 @@ packages <- c('plyr',
               'tidyr',
               'gridExtra',
               'yaml',
-              'devtools')
+              'devtools',
+              'glue',
+              'lazyeval',
+              'caTools',
+              'bitops',
+              'rmarkdown')
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages()))) 
 }
@@ -36,9 +41,16 @@ if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
 setdiff(packages, rownames(installed.packages()))
 
 # One package "tabplot" needs to be installed from GitHub instead of CRAN
-devtools::install_github("mtennekes/tabplot")
+# While the installation of the package produces warning messages,
+# This code will still successfully install the package, if not already installed
+if (!('tabplot' %in% installed.packages())) {
+  devtools::install_github("mtennekes/tabplot")
+}
 
+# This line will return 'TRUE' if tabplot has been installed
+'tabplot' %in% installed.packages()
 
-
+# Remove the packages object from the R environment
+rm(packages)
 
 

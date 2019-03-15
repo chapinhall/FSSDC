@@ -39,11 +39,16 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 - "tidyr",
 - "gridExtra", 
 - "yaml",
-- "devtools". 
+- "devtools",
+- "glue",
+- "lazyeval",
+- "caTools",
+- "bitops",
+- "rmarkdown".
 
 In addition, one package "tabplot" needs to be installed from GitHub.
 
-To install these packages, open RStudio once you have installed it (and R). Within R Studio, open the script Step1_InstallPackages.R. Run this script by clicking the run button. The script includes check to verify that the packages were installed successfully.  
+To install these packages, open RStudio once you have installed it (and R). Within R Studio, open the script Step1_InstallPackages.R. Run this script by clicking the run button. The script includes check to verify that the packages were installed successfully. Note that the installation of "tabplot" will produce warning messages but should still install successfully.
 
 For more information on R packages, see this DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
 
