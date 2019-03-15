@@ -50,7 +50,3 @@ if (!('tabplot' %in% installed.packages())) {
 # This line will return 'TRUE' if tabplot has been installed
 'tabplot' %in% installed.packages()
 
-# Remove the packages object from the R environment
-rm(packages)
-
-
