@@ -1,9 +1,12 @@
 ---
 title: 'Toolkit Results: Analysis of Your Data File'
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
   html_document:
     number_sections: yes
-    toc: true
+    toc: yes
     toc_depth: 3
   word_document: default
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
@@ -50,7 +53,7 @@ The toolkit begins by guiding qualitative assessment of the dataset's **relevanc
 
 The findings of this report will help the user understand the strengths and weaknesses of their data file for conducting research. We include a series of analyses with discussion of how to interpret each and what further steps may be taken when a possible issue is detected. Results may inform decisions regarding how to use the data file for research as well as any caveats to draw from research findings. Further, findings may inform feedback for future maintenance of the data file.  
 
-This report is particularly geared toward state and local administrative datasets and includes guidance for the issues common to these datasets. While the design of thsi report is tailored to such datasets, other data files with similar formats may also benefit from the use of the toolkit.  
+This report is particularly geared toward state and local administrative datasets and includes guidance for the issues common to these datasets. While the design of this report is tailored to such datasets, other data files with similar formats may also benefit from the use of the toolkit.  
 
 When a strange result or pattern is detected in these analyses, it is often difficult to know whether the pattern reflects an issue with the data or just a notable pattern, for example changes in benefit amounts due to legal changes. While the toolkit will often not be able to distinguish between data issues and other notable patterns, observing these patterns can be highly informative for understanding your data and guiding interpretations of research findings. Further, understanding the program details affecting the dataset analyzed can greatly assist with interpretation of findings in this report.  
 
@@ -94,20 +97,20 @@ In the analyses that follow, the toolkit begins by guiding a qualitative assessm
 In the context of this report, *accuracy* entails the data file's conformity to expectations of values. Each column should have a standard set or range of values that each entry can follow. However, inaccurate data might contain values that break this expected conformity. For example, in a column that has entries for zip codes, inaccuracies may take the form of non-valid zip codes or invalid data formats.  
 
 ## Completeness
-*Completeness* examines such questions as whether data cover the population of interest, include correct records, and do not contain duplicate or out-of-scope records. Additionally, completeness includes whether cases have information filled in for all appropriate fields without missing data.  
+*Completeness* examines such questions as whether data cover the population of interest, include correct records, and do not contain duplicate or out-of-scope records. (A check for duplicates is planned for a later version of the toolkit.) Additionally, completeness includes whether cases have information filled in for all appropriate fields without missing data.  
 
 Note that accuracy and completeness analyses are included in the same section of this report, as some analyses address both dimensions.  
 
 ## Comparability
 *Comparability* is the extent to which differences among statistics reflect real phenomena rather than methodological differences. Types of comparability include over time, across geographies, and among domains.  
 
-Different analyses may be more or less important based on the user's research questions. For example, if the user is particular interested in making comparisons in outcomes among groups, the comparability dimension may be particularly important.  
+Different analyses may be more or less important based on the user's research questions. For example, if the user is particularly interested in making comparisons in outcomes among groups, the comparability dimension may be particularly important.  
 
 #Relevance
 
 An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data for specific questions. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before continuing into the other steps, to avoid spending time and resources toward examining other data quality aspects for a data source that is not relevant.  
 
-In addition to reviewing metadata and documentation, it is also important to understand how legal changes and changes in eligibility for program receipt make affect the suitability of the data source for research. We recommend the user gather available information on the legal and programmatic requirements that may affect the data source.  
+In addition to reviewing metadata and documentation, it is also important to understand how legal changes and changes in eligibility for program receipt may affect the suitability of the data source for research. We recommend the user gather available information on the legal and programmatic requirements that may affect the data source.  
 
 The following list of questions can guide you in the assessment of the relevance of the data file as well as the identification of limitations that will affect the interpretations of the results of the analysis.  
 
@@ -130,7 +133,7 @@ The previous table was adapted from Laitila et al. (2011).
 
 Once the dataset is judged to be relevant for the analysis, it might require some processing before continuing to the next steps. In case the unit of analysis is not the same as the record of the data, the dataset will need to be converted to the appropriate level of analysis. Additionally, the following steps will guide you to define the relevant parameters of the toolkit.  
 
-The initially provided code is based on the example data file included on the GitHub repo 'test_data_file.csv', representing longitudinal benefits data for a state pgoram. A user may input a flat file in a similar format for analysis with the toolkit, with requirements described the repo's README. 
+The initially provided code is based on the example data file included on the GitHub repo 'test_data_file.csv', representing longitudinal benefits data for a state program. A user may input a flat file in a similar format for analysis with the toolkit, with requirements described the repo's README. 
 
 *Defining file name*
 ```{r user_definitions, echo=TRUE}
@@ -204,7 +207,7 @@ str(analysis_file)
 
 *Defining subsetting parameters*
 
-In this section, the user should specify the parameters to subset the data file, if needed.    
+In this section, the user should specify the parameters to subset the data file, if needed, using a [regular expression](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) in quotation marks (""). The default applies no subsetting, which is indicated by two quotation marks with no characters in between.   
 
 ```{r subset_data, results='hide'}
 ##### SELECT SUBSETTING PARAMETERS ##### 

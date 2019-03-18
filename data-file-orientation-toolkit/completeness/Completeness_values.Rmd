@@ -8,7 +8,7 @@
   
 ### Examining proportions of missing values
 
-We plot two graphs in this analysis. The first one shows the proportion of missing values for each variable. The second one shows the number of times (y-axis) that different combinations of variables (x-axis) are missing, where the color red indicates the variables in a specific combination.
+We plot two graphs in this analysis. The first one shows the proportion of missing values for each variable. The second one shows the number of times (y-axis) that different combinations of variables (x-axis) are missing, where the color red indicates the variables missing for that specific combination.
 
 **Bar plots and missing value pattern matrix:**
 ```{r prop_miss_values_2}
@@ -17,7 +17,7 @@ subsetted_aggr = aggr(subset(subsetted,select=c(key_vars, domain_vars, id_vars, 
 ```
 
 **Interpretation**: The graph on the left shows the proportion of missing values for each variable.  Check if the missing values are concentrated in some variables and if these are key or domain variables.  
-In some cases, it is possible that certain variables are missing together. For example, cases where a subsidy receipt indicator is missing may also have a missing value in the amount received. The graph on the right shows help to assess if missing values are concentrated in one variable or in certain combinations of variables.  
+In some cases, it is possible that certain variables are missing together. For example, cases where a subsidy receipt indicator is missing may also have a missing value in the amount received. The graph on the right shows whether missing values are concentrated in one variable or in certain combinations of variables.  
 
 
 

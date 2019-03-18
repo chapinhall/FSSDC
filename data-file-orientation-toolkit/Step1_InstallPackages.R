@@ -1,6 +1,9 @@
 # This program can be run before using the Data File Orientation Toolkit to install all
 # needed packages and verify installation.
 
+# PLEASE MAKE SURE YOU ARE USING THE LATEST VERSION OF R FOR THE INSTALLATION OF "tabplot."
+# AS OF MARCH 18, 2019, THE LATEST VERSION IS R 3.5.3.
+
 # Just click the "Run" button in RStudio.
 
 packages <- c('plyr',
@@ -47,6 +50,6 @@ if (!('tabplot' %in% installed.packages())) {
   devtools::install_github("mtennekes/tabplot")
 }
 
-# This line will return 'TRUE' if tabplot has been installed
+# This line will return 'TRUE' if tabplot has been installed successfully
 'tabplot' %in% installed.packages()
 

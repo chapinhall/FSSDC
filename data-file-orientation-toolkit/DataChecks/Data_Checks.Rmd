@@ -26,10 +26,10 @@ selected_var <- c(key_vars,domain_vars,id_vars,time_vars,location_vars)
 
 
 v <- validator(
-  c_month = as.numeric(month) >= 200101 & as.numeric(rptmn) <=201805 & as.numeric(rptmn) %% 1 ==0 & as.numeric(substr(as.character(200101),5,6)) %in% c(1:12) ,
+  c_month = as.numeric(month) >= 200101 & as.numeric(month) <=201805 & as.numeric(month) %% 1 ==0 & as.numeric(substr(as.character(200101),5,6)) %in% c(1:12) ,
   c_hh_id = nchar(trim(hh_id)) >= 1,
 #  c_zip = zip_detect=="Plausible",
-  c_source = source%in% c("FundSource1","FundSource2"),
+  c_source = source %in% c("FundSource1","FundSource2"),
   c_other_benef = other_benef %in% c("Yes", "No"),
   c_amount = amount>=0,
   c_type_case = type_case %in% c(0:2),
@@ -41,7 +41,7 @@ v <- validator(
 cf <- confront(analysis_file[,c(selected_var)],v)
 summcf <- summary(cf)
 
-summcf$fail_perc <- with(summcf,fails/(items-nNA))
+summcf$fail_perc <- with(summcf,100*fails/(items-nNA))
 
 # THIS CODE ASSUMES THAT THE NAMES USED IN THE VALIDATOR RULES PREFIX EACH VARIABLE NAME WITH 2 CHARACTERS (E.G. "c_")
 summcf$variable <- substring(summcf$name,3,str_length(summcf$name))
@@ -70,7 +70,7 @@ The summcf object includes metrics regarding the quality of each variable in the
  
  "Expression" is the rule/expression that was evaluated
  
- "Fail_perc" is the proportion of non-null values that adhere to codebook rules
+ "Fail_perc" is the percentage of non-null values that do not adhere to the codebook rules
  
   **What to look for**:  
   
@@ -132,7 +132,7 @@ fails <- sum(summcf$fails)
 nNA <- sum(summcf$nNA)
 
 # OVERALL FAIL METRICS ACROSS ALL VARIABLES
-overall_fail_perc <- fails/(items-nNA)
+overall_fail_perc <- 100*fails/(items-nNA)
 fail_perc_min <- min(summcf$fail_perc,na.rm=TRUE)
 fail_perc_max <- max(summcf$fail_perc,na.rm=TRUE)
 fail_perc_med <- median(summcf$fail_perc,na.rm=TRUE)
