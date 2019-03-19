@@ -2,11 +2,16 @@
 
 **Reference Script**: comparability\\Comparability_Relationship_among_variables.Rmd
 
-**Description**: Variables which have a predictable relationship with each other are examined to determine whether that relationship is apparent in the data or not. For example, in some welfare programs, the cash assistance received by the family is expected to be directly proportional to the number of beneficiaries in the household. Additionally, the relationships of other variables are assessed to detect unexpected patterns.  
+**Description**: Variables which have a predictable relationship with each other are examined to determine whether that relationship is apparent in the data or not. For example, in some benefit programs, the cash assistance received by the family is expected to be directly proportional to the number of beneficiaries in the household. Additionally, the relationships of other variables are assessed to detect unexpected patterns.  
 
-We use tableplots (Tennekes et al., 2011) to help assess if the relationship between two or more variables exists. A tableplot can aid in the exploration of large data files by summarizing it over a set of variables. Each variable is represented in a column, where each row is an aggregate of a given number of units. For continuous variables, the length of the light blue bar represents the mean, and the dark blue bars represent the standard deviation. For discrete variables, different colors indicate the frequency of each category. The data is sorted by a relevant variable, helping to assess the relationship with other variables.  
+We  use tableplots (Tennekes et al., 2011) to help assess if the relationship between two or more variables exists. A tableplot can aid in the exploration of large data files by summarizing it over a set of variables. Each variable is represented in a column, where each row is an aggregate of a given number of units. 
 
-We recommend using at least one key variable as the sort variable that the user can specify. By default, this program will choose all numeric key variables and will generate a tableplot sorted by each variable. Additionally, the user can specify subsetting parameters for the data file, such as specific time ranges.  
+For each column, all records are sorted by values of a variable in the table. The variable should be chosen for its helpfulness in assessing the relationship with other variables. The default method partitions the sort variable into percentiles and graphs its approximate distribution by percentile. Thus the y axis presents percentiles of the sort variable.
+
+
+For continuous variables, the length of the light blue bar represents the mean, and the dark blue bars represent the standard deviation. For discrete variables, different colors indicate the frequency of each category. 
+
+We recommend using at least one key variable as the sort variable that the user can specify. By default, this program will choose all numeric key variables and will generate a tableplot sorted by each variable. Additionally, the user can specify subsetting parameters for the data file (in Toolkit.Rmd), such as specific time ranges.  
   
   
 ### Relationships among key variables
@@ -53,8 +58,8 @@ if (!is.null(sort_var)) {
 ```
 
 **What to look for in tableplots**:  
-- *Relations between variables*: Use the graph to check relationships between variables that are expected to happen. Also check if there are relationships that are apparent from the graph but that were not expected.  
-- *Discontinuities in sorted variables*: Among sorted variables, look for jumps in the distribution of continuous  variables. Note that discrete variables may exhibit discrete jumps which are perfectly fine, such as increasing or decreasing the number of household members by one or more.  
+- *Relations between variables*: Use the graph to check relationships between variables there are any unexpected trends that warrant further inquiry. 
+- *Discontinuities in sorted variables*: Among sorted variables, look for jumps in the distribution of continuous variables. Note that discrete variables may exhibit discrete jumps which are perfectly fine, such as increasing or decreasing the number of household members by one or more.  
 - *Discontinuities in unsorted variables*: Among unsorted variables, look for discontinuities in continuous and categorical variables, and note the direction of the jump. Some jumps are fine, such as jumps in the cash received by the household when the number of recipients increased.
 - *Range of values*: Look at the range of values of each variable to detect variables with particularly high or low range that may cast doubt about the validity of the values.  
 - *High standard deviation or discrete jumps in the standard deviation*: Look for high standard deviations, which may indicate problems in the validity of the values. For example, in some cases missing values are codified with values such as 999999 or 0 which will increase the variability of the data. Also, look for drastic changes in the standard deviation.  
@@ -81,12 +86,12 @@ if (!is.null(sort_var)) {
 }
 ```
 
-**Interpretation**: In addition to the guidance provided in the previous subsection, check if there are subgroups of units that would be relevant to analyze separately. For an example with administrative data for cash assistance, units with only one recipient may exhibit a different behavior than units with more than one recipient, such as higher average amount received.  
+**Interpretation**: In addition to the guidance provided in the previous subsection, check if there are subgroups of units that would be relevant to analyze separately. For example, with administrative data for cash assistance, units with only one recipient may exhibit a different behavior than units with more than one recipient, such as higher average amount received.  
   
   
 ### Relationships among key and domain variables by subgroup
 
-In some cases, it is relevant to analyze the relationship between variables for different categories of units. This is the case when we expect that data will exhibit different patterns in each subgroup. For example, in the case of welfare receipt, units that only have children as recipients show certain characteristics that make them different from other units, such as the exemption from federal time limits. In time-series or longitudinal analysis, it is possible to assess the relationship between variables for different time intervals.
+In some cases, it is relevant to analyze the relationship among variables for different categories of units. This is the case when we expect that data will exhibit different patterns in each subgroup. For example, in the case of benefit receipt, cases that only have children as recipients show certain characteristics that make them different from other cases, such as the exemption from federal time limits. In time-series or longitudinal analysis, it is possible to assess the relationship between variables for different time intervals.
 
 The user should select one categorical variable that identifies the different groups that want to be analyzed. The analysis works best when the variable has less than five categories. By default, the system will use the first domain variable. Tableplots will be sorted by one variable that can be defined by the user. In case it is not specified, it will be the first continuous key variable.
 
@@ -131,7 +136,7 @@ if (!is.null(subgroup) & !is.null(sort_var)) {
 }
 ```
 
-**Interpretation**: In addition to the guidance provided in the previous subsection, check if there is any difference in the relationship patterns between variables across the different subgroups. Also check if data quality issues are concentrated in certain subgroups.    
+**Interpretation**: Check whether there is any difference in the relationship patterns between variables across the different subgroups. Also check whether data quality issues are concentrated in certain subgroups.    
 
 
 

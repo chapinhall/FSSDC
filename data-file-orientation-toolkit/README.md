@@ -1,10 +1,12 @@
 # Data File Orientation Toolkit
 
-This Data File Orientation Toolkit enables automated assessment of the quality of administrative data files to provide guidance as to the strengths and weaknesses of the file for conducting policy research. After going through a few set up steps, this toolkit will produce a report producing valuable data quality insights regarding your data file. The content is guided by best practices for data quality assessment.
+This Data File Orientation Toolkit is an open source toolkit for policy researchers and analysts interested in assessing the quality of their administrative data files and understanding the strengths and weaknesses of the file for conducting policy research. After going through a few set up steps, this toolkit will produce a report producing data quality insights regarding your data file. The content is guided by best practices for data quality assessment.
 
-It is particularly suited for data from state and local agencies that the Family Self-Sufficiency Data Center supports, although it can run on any file that meets the format requirements. Each analysis presented includes guidance on how to interpret the results and take further steps to understand the quality of your data file. The toolkit focuses on checks on data accuracy, the completeness of records, and the comparability of the data over time and among subgroups of interest. It incorporates exploratory data analysis and data visualization to draw attention to sets of records or variables that contain outliers or for which data quality may be a concern. 
+The toolkit is particularly suited for data from state and local agencies that the [Family Self-Sufficiency Data Center](https://harris.uchicago.edu/research-impact/centers/family-self-sufficiency-data-center) supports, although it can run on any file that meets the format requirements. Each analysis presented includes guidance on how to interpret the results and take further steps to understand the quality of your data file before conducting analysis. 
 
-This toolkit is written using the R programming language and utilizes RMarkdown for reporting.
+The toolkit checks the data accuracy, the completeness of records, and the comparability of the data over time and among subgroups of interest. It incorporates exploratory data analysis and data visualization to draw attention to sets of records or variables that contain outliers or for which data quality may be a concern. 
+
+This toolkit is written using the R programming language and utilizes RMarkdown for reporting. The toolkit is oriented for a user new to R to follow our instructions and produce a report for their data file in a few steps. For a user who wants to customize analyses in the toolkit, it is helpful to be familiar with R.
 
 To learn more about this effort, see our [slide deck](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1029&context=admindata_conferences_presentations_2018) from the 2018 ADRF Network Research Conference and [article](https://ijpds.org/article/view/937/1031) in the International Journal of Population Data Science.
 
@@ -17,15 +19,17 @@ The work is supported by the Family Self-Sufficiency Research Consortium, Grant 
 ## How to utilize this toolkit
 In order to use this toolkit, you must install R and RStudio on your computer. You may need to work with your IT team to have these programs installed in a place that can access the data file you wish to analyze. The following steps are needed to install this software.
 
-1. Install R: R is a free, open source, programming language often used for data manipulation, analysis, and visualization. The key code for the toolkit is written in R. The R software is available from the CRAN website (https://cran.r-project.org/). Click the download button for your operating system (Linux, Mac, or Windows). 
+# Install R (latest version 3.5.3 as of March 2019) and RStudio
+1. Install R (Latest version, currently 3.5.3): R is a free, open source, programming language often used for data manipulation, analysis, and visualization. The key code for the toolkit is written in R. The R software is available from the CRAN website (https://cran.r-project.org/). Click the download button for your operating system (Linux, Mac, or Windows). 
 
-**NOTE:** Please make sure you have the latest version of R installed your computer. Otherwise, the installation of the "tabplot" package in step 3 below may produce errors. As of March 18, 2019, the latest version of R is 3.5.3. 
+If you already have R installed on your computer, please update R to the latest version. A description of how to do this is described at (https://www.r-bloggers.com/upgrade-r-on-windows-with-the-installr-package/).
 
 2. Install RStudio: RStudio is a development environment that makes using R easier. It is also free to download. You can download RStudio from the RStudio website (https://www.rstudio.com/products/rstudio/download/). Select the RStudio Desktop Open Source option.
 
-3. After installing these programs, clone this repository to use it on your computer. Within the GitHub site, you can click on "Clone or Download" to save the files to a convenient location on your computer.
+# Set Up R Scripts and Packages
+3. After installing these programs, clone this repository to use the R scripts on your computer. Within the GitHub site, you can click on "Clone or Download" to save the files to a convenient location on your computer.
 
-4. Now, please use RStudio to run the R script Step1_InstallPackages.R and install a set of additional R packages from the Comprehensive R Achive Network (CRAN) with functionalities needed for the toolkit: 
+4. You will need to install the R packages needed or the toolkit. To do so, open in RStudio the script “Step1_InstallPackages.R” included in the ‘data-quality-toolkit’ folder. Run this script by clicking the "Run" button. The script includes checks to verify that the packages we list below are installed successfully: 
 - "plyr",
 - "dplyr",
 - "data.table",
@@ -49,9 +53,7 @@ In order to use this toolkit, you must install R and RStudio on your computer. Y
 - "tidyr",
 - "gridExtra", 
 - "yaml",
-- "devtools".
-
-Five additional packages should be installed to run the RMarkdown-based toolkit but do not need to be directly called in the scripts supporting the toolkit:
+- "devtools",
 - "glue",
 - "lazyeval",
 - "caTools",
@@ -60,13 +62,12 @@ Five additional packages should be installed to run the RMarkdown-based toolkit 
 
 In addition, one package "tabplot" needs to be installed from GitHub.
 
-To install these packages, open RStudio once you have installed it (and R). Within R Studio, open the script Step1_InstallPackages.R in the data-quality-toolkit folder. Run this script by clicking the run button. The script includes checks to verify that the packages are installed successfully. 
-
-PLEASE MAKE SURE YOU ARE USING THE LATEST VERSION OF R (R 3.5.3 AS OF MARCH 18, 2019) TO INSTALL "tabplot". Note that the installation of "tabplot" may produce warning messages, but as long as you use the latest version of R, the installation should proceed successfully. 
+PLEASE MAKE SURE YOU ARE USING THE LATEST VERSION OF R (R 3.5.3 AS OF MARCH 2019) TO INSTALL "tabplot". Note that the installation of "tabplot" may produce warning messages, but as long as you use the latest version of R, the installation should proceed successfully. 
 
 For more information on R packages, see the following DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
 
-5. Next, using RStudio, navigate to the data-quality-toolkit folder and open the master "Toolkit.Rmd". You may also open the setup file setup.yml file in the same folder. With some steps to customize the input and R code to your data file, running "Toolkit.Rmd" will produce a report with data quality analysis for your data file.
+# Open "Toolkit.Rmd" and “setup.yml” files to generate report
+5. Next, using RStudio, navigate to the 'data-quality-toolkit' folder and open the master "Toolkit.Rmd". You may also open the setup file 'setup.yml' in the same folder. With some steps to customize the input and R code to your data file described below, running "Toolkit.Rmd" will produce a report with data quality analysis for your data file.
 
 ## Example Data File and Report for Testing
 We include in this repository an example data file we simulated which can be used to test and explore the toolkit: test_data_file.csv. The file represents a longitudinal dataset of benefit recipients, tracking cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file "Codebook for test_data_file.txt."

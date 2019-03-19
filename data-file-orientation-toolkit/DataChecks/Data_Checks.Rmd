@@ -3,13 +3,13 @@
 
 **Reference Script**: DataChecks\\Data_Checks.Rmd
 
-**Description**: To perform data analysis it is important to understand the quality of the inputs to the analysis. This understanding can be gained by comparing the variables of interest to their respective formatting rules. If, for example, a variable called "county" based on FIPS codes may only assume integer values between 1 and 999 then any value above or below these thresholds or any non-integer value would denote an entry of dubious quality. A record which does not conform to this rule could imply that the variable for that specific record is inaccurate or in extreme cases that the entire record is of suspect quality. Ideally, the review of any deviations from expected formats should be performed by an analyst with a solid understanding of the nature of the data and what the deviations may mean for analysis that will use the offending records. Here we use various visualizations to explore the quality and amount of format deviations for each variable of interest, as well as the dataset overall, and finally at the record-level.
+**Description**: To perform data analysis it is important to understand the quality of the inputs to the analysis. This section compares the variables of interest to their respective formatting rules. If, for example, a variable called "county" based on FIPS codes may only assume integer values between 1 and 999 then any value above or below these thresholds or any non-integer value would be indicated as of dubious quality. A record which does not conform to this rule could imply that the variable for that specific record is inaccurate or in extreme cases that the entire record is of suspect quality. Ideally, the review of any deviations from expected formats should be performed by an analyst with a solid understanding of the nature of the data and what the deviations may mean for analysis that will use the indicated records. Here we use various visualizations to explore the quality and amount of format deviations for each variable of interest, as well as the dataset overall, and finally at the record-level.
 
 ### Checks for variable rules and value ranges (based on codebook)
 
-In this section begin by defining any variables that will be useful for determining codebook adherence of  the dataset. For example, a [regular expression](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) and evaluation of that expression for each value in the data can be used to create a binary "pass/fail" variable to use in the codebook validation.  
+In this section begin by defining any variables that will be useful for determining codebook adherence of  the dataset. If a codebook is not available, this section can be used to check rules that the variables would be expected to adhere to. For example, a [regular expression](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) and evaluation of that expression for each value in the data can be used to create a binary "pass/fail" variable to use in the codebook validation.  
 
-**Notes  for Setup:** In the below code, all expressions for  rules to check are placed within the validator function. Each argument to the validator function has three components: (1) a new variable which has the same name as the variable of interest concatenated with the suffix "c_", (2) the variable of interest, and (3) the rule that the variable of interest should follow (e.g. a range of values, certain length of characters). Care should be taken to ensure that the rule matches the codebook specifications and that the rule will be specified appropriately given the variable's class.
+**Notes  for Setup:** In the below code, all expressions for  rules to check are placed within the validator function. Each argument to the validator function has three components: (1) a new variable which has the same name as the variable of interest concatenated with the suffix "c_", (2) the variable of interest, and (3) the rule that the variable of interest should follow (e.g. a range of values, certain length of characters). Care should be taken to ensure that the rule matches the intended specifications and that the rule will be specified appropriately given the variable's class.
 
 
 ```{r data_check_by_variable}
@@ -109,8 +109,8 @@ plot1 <-  barplot(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1)),
           ylim=c(0,(3*nrow(summcf_incna))),
           horiz=T,
           main=paste("Distribution of codebook conformity by variable")) 
-  text(0,plot1,signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],3),col="white",cex=.8,pos=4)
-  text(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],plot1,signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[2,],3),col="white",cex=.8)
+  text(0,plot1,sprintf(".%2f",signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],3)),col="white",cex=.8,pos=4)
+  text(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],plot1,sprintf(".%2f",signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[2,],3)),col="white",cex=.8)
 cat("All other fields comply with codebook and do not have missing values.")
 }
 
@@ -142,7 +142,7 @@ any_fail <- gsub(pattern="c\\(",replacement="", x=any_fail)
 any_fail <- gsub(pattern="\\)",replacement="", x=any_fail)
 any_fail <- gsub(pattern="\"",replacement="", x=any_fail)
 
-# BECAUSE R WILL DEFAULT TO STORING MANY SIGNIFCANT DIGITS FOR THE PERCENTAGES AND BECAUSE IT MAY OR MAY NOTS STORE THEM IN SCIENTIFIC NOTATION FORMAT IT IS NECESSARY TO FORCE THE FORMATTING TO BE IN SCIENTIFIC NOTATION TO MAKE AUTOMATED CODING POSSIBLE. THE FOLLOWING CODE ENSURES THAT ALL VALUES ARE CONSISTENTLY STORED IN SCIENTIFIC NOTATION.
+# BECAUSE R WILL DEFAULT TO STORING MANY SIGNIFiCANT DIGITS FOR THE PERCENTAGES AND BECAUSE IT MAY OR MAY NOT STORE THEM IN SCIENTIFIC NOTATION FORMAT, IT IS NECESSARY TO FORCE THE FORMATTING TO BE IN SCIENTIFIC NOTATION TO MAKE AUTOMATED CODING POSSIBLE. THE FOLLOWING CODE ENSURES THAT ALL VALUES ARE CONSISTENTLY STORED IN SCIENTIFIC NOTATION.
 
 fail_perc_max <- format(fail_perc_max, scientific=T)
 scaleplot <- as.numeric(substring(fail_perc_max,regexpr("e",fail_perc_max)[1]+2,str_length(fail_perc_max)))

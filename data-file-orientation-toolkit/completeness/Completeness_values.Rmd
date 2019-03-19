@@ -3,12 +3,14 @@
 
 **Reference Script**: completeness\\Completeness_values.Rmd
 
-**Description**: This question looks at the absence of values for the variables that are part of the analysis. It is relevant to describe the dataset both in terms of the missingness of each variable and also in terms of units with at least one missing value in any key variable. In the case of longitudinal analysis units with missing values during the period of reference are also identified. It is also important to characterize units with missing data in terms of characteristics that are available to all units to assess possible biases.   
+**Description**: These analyses examine the absence of values within the records included in the data file. This section describes the dataset both in terms of the missingness within each variable and also in terms of units with at least one missing value for any analyzed variable. For longitudinal analysis, units with missing values during the analyzed time period are also identified. 
+
+A future analysis planned for the toolkit will analyze the characteristics of records with missing data. If certain types of records are more likely to have missing values, analyses may lead to incorrect inferences.   
   
   
 ### Examining proportions of missing values
 
-We plot two graphs in this analysis. The first one shows the proportion of missing values for each variable. The second one shows the number of times (y-axis) that different combinations of variables (x-axis) are missing, where the color red indicates the variables missing for that specific combination.
+We plot two graphs in this analysis. The first one shows the proportion of missing values for each variable. The second one shows the number of times (y-axis) that different combinations of variables (x-axis) are missing. The cells shaded in red indicate the variables missing for that specific combination.
 
 **Bar plots and missing value pattern matrix:**
 ```{r prop_miss_values_2}
@@ -17,7 +19,8 @@ subsetted_aggr = aggr(subset(subsetted,select=c(key_vars, domain_vars, id_vars, 
 ```
 
 **Interpretation**: The graph on the left shows the proportion of missing values for each variable.  Check if the missing values are concentrated in some variables and if these are key or domain variables.  
-In some cases, it is possible that certain variables are missing together. For example, cases where a subsidy receipt indicator is missing may also have a missing value in the amount received. The graph on the right shows whether missing values are concentrated in one variable or in certain combinations of variables.  
+
+In some cases, it is possible that certain variables are missing together. For example, cases which have the funding source missing may also have a missing value for the amount received. The graph on the right shows whether missing values are concentrated in one variable or in certain combinations of variables. Understanding this missing data structure will inform how analyses may be impacted. Further resources on analyzing data with missing values and addressing missing data using imputation approaches are available from Schafer (1997) and van Buuren (2018).
 
 
 
@@ -56,4 +59,4 @@ if (time_units >= 15) {
 
 ```
 
-**Interpretation**: Check if units with missing values concentrated in certain months/years. When doing certain analysis, such as regression models, all units with at least one missing value would be excluded. In that case, what proportion of units would be excluded from the analysis? How is a longitudinal analysis affected by the missing value problem?  
+**Interpretation**: Check if units/records with missing values are concentrated in certain months/years. Certain analyses, such as regression models, will typically exclude all records with at least one missing value. Again, imputation is option for addressing missing values, and we refer readers to Schafer (1997) and van Buuren (2018) as resources on imputation.

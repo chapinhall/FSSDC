@@ -1,11 +1,11 @@
-# This set up directs you to set the specifications of the variables needed for the toolkit 
+# This set up file directs you to set the specifications of the variables needed for the toolkit 
 # analyses, including which variables are for identification, time periods, key for analysis,
 # domains or groups to compare, and location-related variables. These variables provide 
 # inputs for analyses in the toolkit to assess the accuracy and completeness of key variables 
 # as well as the comparability over time and among groups. 
 # 
 # Longitudinal data files should be set up so that the id and time variables uniquely identify 
-# records. That is, there should be no more than one records for each unit/household/family,
+# records. That is, there should be no more than one record for each unit/household/family,
 # at each time period.
 #
 # Below, input your dataset description using the following format
@@ -25,9 +25,9 @@
 # domain: Specify different groups of interest for comparison for the research
 # location: Location variable describing area of case (zip codes or other geographic indicators)
 
-# Please identify at least for each of id variables, time variables, key variables, 
+# Please identify at least one variable for each of id variables, time variables, key variables, 
 # and domain variables. Location variables are optional. For a dataset that is 
-# cross-sectional, or does not involve a time component, a filler variable can be added taking the 
+# cross-sectional, or does not involve a time component, a time variable can be added taking the 
 # same value for all records. For example, a user may create a variable titled "time" with the value 
 # '1' for all rows.
 

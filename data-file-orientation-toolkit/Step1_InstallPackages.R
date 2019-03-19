@@ -2,9 +2,9 @@
 # needed packages and verify installation.
 
 # PLEASE MAKE SURE YOU ARE USING THE LATEST VERSION OF R FOR THE INSTALLATION OF "tabplot."
-# AS OF MARCH 18, 2019, THE LATEST VERSION IS R 3.5.3.
+# AS OF MARCH 2019, THE LATEST VERSION IS R 3.5.3.
 
-# Just click the "Run" button in RStudio.
+# Click the "Run" button in RStudio to run this script.
 
 packages <- c('plyr',
               'dplyr',

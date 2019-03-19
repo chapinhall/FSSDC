@@ -1,7 +1,7 @@
 
 ## How are the data distributed?  Are there any values which seem atypical or implausible when compared to the overall distribution of the data?
 
-**Reference Script**: outliers\\outliers.rmd
+**Reference Script**: distribution_analysis\\outliers.rmd
 
 **Description**: It is always advisable to understand the distributional characteristics of the data that one is working with prior to investigating associative relationships and conducting other types of analysis.  Understanding which variables are qualitative, categorical, ordinal, and continuous, for example, allows the user to create appropriate specifications in models.  Additionally, knowing how the data are distributed gives the user a sense of the range of values that are likely for a given variable.  Sometimes this will suggest the application of some form of scaling to make the data more suitable for analysis.  It may also help uncover the presence of outliers which will require special handling.  Furthermore, sometimes variables are of limited interest when they only assume 1 or a few values since the lack of variation does not differentiate the records in meaningful ways.  The user is encouraged to discover other reasons for why the distributional characteristics of the data are important for their specific use case.
 
@@ -13,25 +13,25 @@
 ##### EDIT THIS SECTION TO DEFINE THE LOCATION TO STORE THE DESCRIPTIVE STATISTICS AND TO SELECT THE APPROPRIATE DATA FOR ANALYSIS#####
 
 ##### SELECT VARIABLES FOR DESCRIPTIVE STATISTICS OUTPUT#####
-selected_var <- c(key_vars, domain_vars,id_vars,time_vars,location_vars)
+selected_var <- c(key_vars, domain_vars)
 ############################
 ########################################################
 
 # BASIC DATA QUALITY
 num.file <- "dq_num.csv"
 cat.file <- "dq_cat.csv"
-checkDataQuality(data= analysis_file[,c(key_vars, domain_vars,id_vars,time_vars,location_vars)], out.file.num= num.file, out.file.cat= cat.file)
+checkDataQuality(data= analysis_file[,selected_var], out.file.num= num.file, out.file.cat= cat.file)
 
 ### Numeric Variables: Data Quality Check
 
 numfile <- read.csv("dq_num.csv")
-kable(numfile,caption="Numeric Variables descriptives")
+kable(numfile,caption="Numeric Variable Descriptive Statistics")
 
 ```
 
 `r cat("/n")`
 
-**Interpretation**: Evaluate the descriptives statistics for each numeric variable and determine if the values and ranges are reasonable. Explore anomalous results in more detail.
+**Interpretation**: Evaluate the descriptive statistics for each numeric variable and determine if the values and ranges are reasonable. Explore anomalous results in more detail.
 
 ### Descriptive Statistics for Character Variables
 
@@ -46,21 +46,22 @@ kable(charfile,caption="Character variables descriptives")
 ```
 
  
-**Interpretation**: Evaluate the descriptives statistics for each character variable and determine if the unique values and frequency for each are appropriate. Explore anomalous results in more detail.
+**Interpretation**: Evaluate the descriptive statistics for each character variable and determine if the unique values and frequency for each are appropriate. Explore anomalous results in more detail.
 
 `r cat("/n")`
 `r cat("/n")`
 
 ### Distributions, Extreme Values, and Outliers
 
-For variables that are continuous it is appropriate and important to explore the distributional quality of the data.  The identification of skewness, deviation from normality, and outliers can be included in the list of important steps in the data evaluation process.  Traditional boxplots which use 4 quantiles (i.e. quartiles) can be helpful in understanding basic distributional characteristics (e.g. median, inter-quartile range) from certain types of data.  However, they are limited in their ability to differentiate between extreme values and outliers, and do not provide as granular distribution information as other methods especially in the tail of the distribution where it is often desirable to understand more.  
+For variables that are continuous, it is appropriate and important to explore the distributional quality of the data.  The identification of skewness, deviation from normality, and outliers can be included in the list of important steps in the data evaluation process.  Traditional boxplots which use 4 quantiles (i.e. quartiles) can be helpful in understanding basic distributional characteristics (e.g. median, inter-quartile range) from certain types of data.  However, they are limited in their ability to differentiate between extreme values and outliers, and do not provide as granular distribution information as other methods especially in the tail of the distribution where it is often desirable to understand more.  
+
 One method that satisfies these needs and can supplement the boxplot is the letter value plot.  The letter value plot dynamically determines the appropriate number of quantiles to use to best fit the data.  Use multiple analytical methods including boxplots, letter value plots, outlier detection and descriptive statistics to gain a more complete picture of the data and to inform the interpretation of analysis.
 
 **Interpretation of Boxplots and Letter Value Plots**
 
-Boxplots divide the ordered data into 4 groups such that the 25% of the data representing the lowest values are grouped into the first quartile.  The second quartile is composed of the next 25% lowest values and so on.  From this grouping the distribution is realized with the median represented by the middle bar that divides the two boxes.  The whiskers represent the range of the more extreme values of the data.  And the dots, if there are any, represent data that may be outliers.  Outliers are determined according to the method of "fences" as outlined by Tukey (1977).  In this method the inter-quartile range is multiplied by either 1.5 or 3 and the result is added or subtracted from the appropriate quartile.  Points that fall beyond these thresholds are identified as potential outliers.
+Boxplots divide the ordered data into four groups such that the 25% of the data representing the lowest values are grouped into the first quartile.  The second quartile is composed of the next 25% lowest values and so on.  From this grouping the distribution is realized with the median represented by the middle bar that divides the two boxes.  The whiskers represent the range of the more extreme values of the data.  And the dots, if there are any, represent data that may be outliers.  Outliers are determined according to the method of "fences" as outlined by Tukey (1977).  In this method the interquartile range is multiplied by either 1.5 or 3 and the result is added or subtracted from the appropriate quartile.  Points that fall beyond these thresholds are identified as potential outliers.
 
-The letter value plot approach divides the data into a determined number of quantiles as opposed to the automatic 4 in the boxplot.  The exact number of quantiles (boxes) that are created depends on the number of records, the distributional quality of the data, and the level of uncertainty in the quantiles' upper and lower bounds.  Similarly, the identification of outliers (dots) is performed in an adaptive way, flagging records that fall outside of the most extreme quantiles. For more details on letter value plots and the determination of outliers see Hofmann, Wickham, and Kafadar (2017).
+The letter value plot approach divides the data into a determined number of quantiles as opposed to the automatic four in the boxplot.  The exact number of quantiles (boxes) that are created depends on the number of records, the distributional quality of the data, and the level of uncertainty in the quantiles' upper and lower bounds.  Similarly, the identification of outliers (dots) is performed in an adaptive way, flagging records that fall outside of the most extreme quantiles. For more details on letter value plots and the determination of outliers see Hofmann, Wickham, and Kafadar (2017).
 
 
 ```{r uni_outliers}

@@ -1,9 +1,9 @@
 
 ## How do variable distributions compare to expected distributions?
 
-**Reference Script**: comparability\\Comparability_Distribution.Rmd
+**Reference Script**: distribution_analysis\\examine_var_distributions.Rmd
 
-**Description**: This question looks into the distribution of key and domain variables to look for incongruences with expected distributions. In many cases, judgment will be needed to determine if there is a problem in the distribution, although some guidance can be provided to look for particular features of relevance. For example, in the case of a variable measuring income, it is expected that the distribution will be skewed to the right, with few observations with very high values.    
+**Description**: Beyond outlier detection, this set of analyses examines the distribution of key and domain variables regarding incongruences with expected distributions. In many cases, judgment will be needed to determine if there is a problem in the distribution, although some guidance can be provided to look for particular features of relevance. For example, in the case of a variable measuring income, it is expected that the distribution will be skewed to the right, with few observations with very high values.    
 
 We use histograms to assess the distribution of continuous variables and frequency bar plots for categorical or factor variables.  
   
@@ -12,7 +12,7 @@ We use histograms to assess the distribution of continuous variables and frequen
 
 We graph the distribution of the key and domain variables. In the case of histograms, a line is also graphed that indicates the median value of the distribution.
 
-**Histograms and frequency bar plots:** For each key and domain variable, we provide either a histogram or a frequency bar plot to assess their distribution.
+**Histograms and frequency bar plots:** For each key and domain variable, we provide either a histogram or a frequency bar plot to assess the distribution.
 ```{r distrib_vars2}
 
 # Remove the use of scientific notation

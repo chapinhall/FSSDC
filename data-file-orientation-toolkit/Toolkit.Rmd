@@ -1,13 +1,13 @@
 ---
 title: 'Toolkit Results: Analysis of Your Data File'
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
   html_document:
     number_sections: yes
     toc: yes
     toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
   word_document: default
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 ---
@@ -75,7 +75,7 @@ In the analyses that follow, you will see results from different analyses regard
     ii) Describes the analyses (graphs, tables, other) that will be applied to help answer the question(s).
   
 2. **Code and Output**
-    i) i.	A "code chunk" is provided that demonstrates the R code used to run the analysis on the dataset. While the code includes convenient defaults for analyses of the example file provided, guidance is also provided for how a user may adapt aspects of the analysis to better fit their needs.
+    i) A "code chunk" is provided that demonstrates the R code used to run the analysis on the dataset. While the code includes convenient defaults for analyses of the example file provided, guidance is also provided for how a user may adapt aspects of the analysis to better fit their needs.
     ii) Usually a table or figure is provided as output from the analysis.
     iii) A description of how to read the table or figure is provided.
 
@@ -104,21 +104,21 @@ Note that accuracy and completeness analyses are included in the same section of
 ## Comparability
 *Comparability* is the extent to which differences among statistics reflect real phenomena rather than methodological differences. Types of comparability include over time, across geographies, and among domains.  
 
-Different analyses may be more or less important based on the user's research questions. For example, if the user is particularly interested in making comparisons in outcomes among groups, the comparability dimension may be particularly important.  
+Different analyses in this (or other) section may be more or less important based on the user's research questions. For example, if the user is particularly interested in making comparisons in outcomes among groups, comparability analyses among groups may be particularly important.  
 
 #Relevance
 
-An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data for specific questions. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before continuing into the other steps, to avoid spending time and resources toward examining other data quality aspects for a data source that is not relevant.  
+An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data for specific questions. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before proceeding with the other steps, to avoid spending time and resources on examining other data quality aspects for a data source that is not relevant.  
 
 In addition to reviewing metadata and documentation, it is also important to understand how legal changes and changes in eligibility for program receipt may affect the suitability of the data source for research. We recommend the user gather available information on the legal and programmatic requirements that may affect the data source.  
 
-The following list of questions can guide you in the assessment of the relevance of the data file as well as the identification of limitations that will affect the interpretations of the results of the analysis.  
+The following list of questions can guide you in the assessment of the relevance of the data file as well as the identification of limitations that will affect the interpretations of the results of the analysis. It is adapted from Laitila et al. (2011).
 
 |Category|Question        |Description/Example         |
 |--------|----------------|----------------------------|
 | 1. Units | 1.1. What unit is represented at the record level of the data file? | For example, persons, households, transactions.
 | | 1.2. Do grouped units represent another aggregate unit? | For example, households as a group of persons
-| | 1.3. Are the units included in the data file relevant to the study? | In many cases, the unit of the administrative data is different from the relevant unit of analysis. Usually, administrative data is at the event level (for example, payment to a benefit recipient). A dataset that only includes information at the recipient level may not be relevant for such an analysis.
+| | 1.3. Are the units included in the data file relevant to the study? | In many cases, the unit of the administrative data is different from the relevant unit of analysis. Often, administrative data is at the event level (for example, payment to a benefit recipient). A dataset that only includes information at the recipient level may not be relevant for such an analysis.
 | 2. Population | 2.1. Is the population of units in the data file what is needed for the study? | Administrative data stores detailed information of a particular group that is of interest for the administration of the activity or program. However, this group may or may not be the relevant population for analysis.
 | 3. Variables | 3.1. What variables in the data capture conceptually what is of interest for the research? | For example, whether an income variable in the dataset captures the correct income concept of interest for research.
 | 4. Time | 4.1. Is the time reference of the data set what is needed for the analysis? | For example, to study the effect of a new policy, data will need to be available from after the policy was implemented.
@@ -127,19 +127,21 @@ The following list of questions can guide you in the assessment of the relevance
 | | 5.2. What variables can help to identify these relevant groups? | Are there variables to distinguish different groups of interest for comparison? These are also called domain variables.
 |  6. Policy changes | 6.1 What changes in policy and in law occurred during the reference time period? 6.2 Do any of these changes impact your analysis? | For example, when there are changes to the tax code, the data collected on tax forms may also change and may impact time series   estimates constructed from income tax records.  
 
-The previous table was adapted from Laitila et al. (2011).  
+# Data File Input
 
-# Data File Input 
+**Reference Script**: Toolkit.Rmd
 
-Once the dataset is judged to be relevant for the analysis, it might require some processing before continuing to the next steps. In case the unit of analysis is not the same as the record of the data, the dataset will need to be converted to the appropriate level of analysis. Additionally, the following steps will guide you to define the relevant parameters of the toolkit.  
+NOTE: Any edits to the code in this section can me made to Toolkit.Rmd. For subsequent sections, the reference script to edit is indicated.
 
-The initially provided code is based on the example data file included on the GitHub repo 'test_data_file.csv', representing longitudinal benefits data for a state program. A user may input a flat file in a similar format for analysis with the toolkit, with requirements described the repo's README. 
+Once the dataset is judged to be relevant for the analysis, it might require some processing before continuing to the next steps. The following steps will guide you to define the relevant parameters of the toolkit.  
+
+The initially provided code is based on the example data file included on the GitHub repo 'test_data_file.csv', representing longitudinal benefits data for a benefits program. A user may input a flat file in a similar format for analysis with the toolkit, with requirements described the README on the GitHub site. 
 
 *Defining file name*
 ```{r user_definitions, echo=TRUE}
 ##### EDIT THIS SECTION TO DEFINE FILE NAME ##### 
 
-### Read case-level file for a particular state
+### Read in data file for toolkit analyses
 analysis_file <- fread("test_data_file.csv")
 
 
@@ -150,7 +152,7 @@ analysis_file <- fread("test_data_file.csv")
 This section reads in parameters needed for the different variables to be analyzed from the setup file setup.yml. Please refer to the README and setup file for instructions for setup.yml.
 
 ```{r create_vars, results='hide'}
-# THIS SECTION OS READING FROM THE FILE SETUP.YAML WHICH INCLUDES ALL THE VARIABLE DESCRIPTIONS
+# THIS SECTION READS FROM THE FILE SETUP.YML WHICH INCLUDES ALL THE VARIABLE DESCRIPTIONS
 input_yaml<-read_yaml("setup.yml")
 all_variables <- names(input_yaml$variables)
 variables_dataframe <- lapply(input_yaml$variables, data.frame)
@@ -162,13 +164,15 @@ variables_dataframe_filled['name'] <- all_variables
 
 *Defining relevant variables*
 
-In this section, the user should define the relevant variables for the analysis. At least one ID, time, key, and domain variable are required, which should be indicated in the id_vars, time_vars, key_vars, and domain_vars sets below. If there are no time variables, then using a filler variable with the same value for all records, for example '1' can be used. The user can optionally specify location variables in location_vars.
+In this section, the user should define the relevant variables for the analysis. 
+
+NOTE: All inputs here are set up automatically for users who use the setup.yml input file.
+
+At least one ID, time, key, and domain variable are required, which should be indicated in the id_vars, time_vars, key_vars, and domain_vars sets below. If there are no time variables, then using a filler variable with the same value for all records, for example '1' can be used. The user can optionally specify location variables in location_vars.
 
 Then, the user should identify all the character variables in charvars set below, which are all variables who are neither numeric nor dates, including IDs. It is important to make sure that only variables that were identified in the previous step are included here. Finally, the character variables are converted into factors and the user should indicate the labels of these variables where appropriate. 
 
-All inputs here are set up automatically for users who use the setup.yml input file.
-
-NOTE: There is a section below where the user may apply labels for any categorical variables in the dataset. Some examples are provided for the 'source' and 'other_benef' variables in the example file.
+NOTE: There is a section below indicated "EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES" where the user may apply labels for any categorical variables in the dataset. Some examples are provided for two variables from the example data file.
 
 ```{r define_vars, results='hide'}
 
@@ -238,7 +242,10 @@ analysis_file <- subsetted
 ```{r data_checks, child='DataChecks/Data_Checks.rmd', echo=TRUE}
 ```
 
-```{r outliers, child='outliers/outliers.rmd', echo=TRUE}
+```{r outliers, child='distribution_analysis/outliers.rmd', echo=TRUE}
+```
+
+```{r comparability_distribution, child = 'distribution_analysis/examine_var_distributions.Rmd', echo=TRUE}
 ```
 
 ```{r completeness_unit, child = 'completeness/Completeness_unit.Rmd', echo=TRUE}
@@ -249,13 +256,10 @@ analysis_file <- subsetted
 
 # Comparability
 
-```{r comparability_distribution, child = 'comparability/Comparability_Distribution.Rmd', echo=TRUE}
+```{r comparability_relationship, child = 'comparability/Comparability_Relationship_among_variables.rmd', echo=TRUE}
 ```
 
 ```{r comparability_patterns, child = 'comparability/Comparability_Patterns_over_time.Rmd', echo=TRUE}
-```
-
-```{r comparability_relationship, child = 'comparability/Comparability_Relationship_among_variables.rmd', echo=TRUE}
 ```
 
 
