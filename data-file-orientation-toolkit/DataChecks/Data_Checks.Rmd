@@ -109,8 +109,7 @@ plot1 <-  barplot(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1)),
           ylim=c(0,(3*nrow(summcf_incna))),
           horiz=T,
           main=paste("Distribution of codebook conformity by variable")) 
-  text(0,plot1,sprintf(".%2f",signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],3)),col="white",cex=.8,pos=4)
-  text(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],plot1,sprintf(".%2f",signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[2,],3)),col="white",cex=.8)
+  text(0,plot1,sprintf("%2.1f",signif(100*t(prop.table(as.matrix(summcf_incna[,3:5]),1))[1,],3)),col="white",cex=.8,pos=4)
 cat("All other fields comply with codebook and do not have missing values.")
 }
 

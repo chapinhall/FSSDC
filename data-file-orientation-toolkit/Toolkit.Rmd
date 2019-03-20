@@ -13,10 +13,9 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 ---
 ```{r packages, echo=FALSE, message=FALSE, include=FALSE}
 # Check all relevant packages are installed
-list.of.packages <- c("tinytex", "data.table","tabplot","readxl","bit64","descr","dplyr","stringr","gdata","knitr","ggplot2","ggthemes","dataQualityR","lvplot","fda","tables","RDIDQ","validate","VIM","lvplot","tidyr","gridExtra", "yaml")
+list.of.packages <- c('plyr','dplyr','data.table','readxl','bit64','descr','tinytex','stringr','gdata','knitr','ggplot2','ggthemes','dataQualityR','lvplot','fda','tables','RDIDQ','validate','VIM','lvplot','tidyr','gridExtra','yaml','devtools','glue','lazyeval','caTools','bitops','rmarkdown','tabplot')
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) print(paste0("The following packages need to be installed: ",new.packages))
-
 library(plyr)
 library(dplyr)
 library(data.table)
@@ -131,7 +130,7 @@ The following list of questions can guide you in the assessment of the relevance
 
 **Reference Script**: Toolkit.Rmd
 
-NOTE: Any edits to the code in this section can me made to Toolkit.Rmd. For subsequent sections, the reference script to edit is indicated.
+**NOTE**: Any edits to the code in this section can be made to Toolkit.Rmd. For subsequent sections, the reference script to edit is indicated.
 
 Once the dataset is judged to be relevant for the analysis, it might require some processing before continuing to the next steps. The following steps will guide you to define the relevant parameters of the toolkit.  
 
@@ -245,7 +244,7 @@ analysis_file <- subsetted
 ```{r outliers, child='distribution_analysis/outliers.rmd', echo=TRUE}
 ```
 
-```{r comparability_distribution, child = 'distribution_analysis/examine_var_distributions.Rmd', echo=TRUE}
+```{r examine_var_distributions, child = 'distribution_analysis/examine_var_distributions.Rmd', echo=TRUE}
 ```
 
 ```{r completeness_unit, child = 'completeness/Completeness_unit.Rmd', echo=TRUE}
