@@ -264,17 +264,17 @@ analysis_file <- subsetted
 
 # References
 
-Hofmann, H., Wickham, H., & Kafadar, K. Letter-Value Plots: Boxplots for Large Data, Journal of Computational and Graphical Statistics, 2017, 26:3, 469-477, DOI: 10.1080/10618600.2017.1305277.  
+Hofmann, H., Wickham, H., & Kafadar, K. (2017). Value Plots: Boxplots for Large Data. Journal of Computational and Graphical Statistics, 26(3), 469-477.
 
 Laitila, T., Wallgren, A., & Wallgren, B. (2011). Quality Assessment of Administrative Data, Research and Development. Methodology Report from Statistics Sweden 2011:2.  
 
-Schafer, Joseph L. Analysis of incomplete multivariate data. Chapman and Hall/CRC, 1997.  
+Schafer, J. L. (1997). Analysis of incomplete multivariate data. Chapman and Hall/CRC.
 
-Tennekes, M., de Jonge, E., & Daas, P. Visual Profiling of Large Statistical Datasets, Proceedings of the 2011 European New Techniques and Technology for Statistics Conference, Brussels, Belgium, 2011.  
+Tennekes, M., de Jonge, E., & Daas, P. J. H. (2011, February). Visual profiling of large statistical datasets. In New Techniques and Technologies for Statistics Conference, Brussels, Belgium.
 
-Tukey, John W. Exploratory Data Analysis. Addison-Wesley, 1977.  
+Tukey, J. W. (1977). Exploratory data analysis. Reading, MA: Addison-Wesley Pub. Co.  
 
-Van Buuren, Stef. Flexible imputation of missing data. Chapman and Hall/CRC, 2018.  
+Van Buuren, S. (2018). Flexible imputation of missing data. Chapman and Hall/CRC.
 
 
 
