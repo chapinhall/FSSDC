@@ -39,6 +39,7 @@ v <- validator(
 ##############################################################################
 
 cf <- confront(analysis_file[,c(selected_var)],v)
+#cf <- confront(analysis_file[,c(selected_var,"zip_detect")],v)
 summcf <- summary(cf)
 
 summcf$fail_perc <- with(summcf,100*fails/(items-nNA))
