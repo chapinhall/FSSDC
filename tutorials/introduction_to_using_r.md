@@ -20,13 +20,13 @@ You can also run R commands that are stored in a file by opening the file (File 
 
 ## Installing additional packages
 
-You may want to intall aditional packages that can do a variety of tasks beyond what is available in base R. Packages for R are made available through [CRAN](https://cran.r-project.org/). The R code in this repository includes instructions for installing the required packages. You can also browse available packages [here](https://cran.r-project.org/web/packages/).  To install a package use the command `install.packages`. For example, to install [dpylr](https://dplyr.tidyverse.org/), a popular package of data manipulation tools, type `install.packages("dplyr)`.
+You may want to install aditional packages that can do a variety of tasks beyond what is available in base R. Packages for R are made available through [CRAN](https://cran.r-project.org/). The R code in this repository includes instructions for installing the required packages. You can also browse available packages [here](https://cran.r-project.org/web/packages/).  To install a package use the command `install.packages`. For example, to install [dpylr](https://dplyr.tidyverse.org/), a popular package of data manipulation tools, type `install.packages("dplyr)`.
 
 ## Further information
 
-The instructions above are designed to help you run the code available in this repository. There are a many tutorials and guides available for R. We recommend the following:
+The instructions above are designed to help you run the code available in this repository. There are  many tutorials and guides available for R. We recommend the following:
 
-- [An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf) Free, online guide written by the makers of R
+- [An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf) Free, online guide written by the makers of R.
 
 - [Data Camp Introduction to R Course](https://www.datacamp.com/courses/free-introduction-to-r) An online course in R for data analysis. The first sessions are free.
 

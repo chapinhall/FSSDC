@@ -31,6 +31,6 @@ If you have an idea for an improvement, but do not have the time to implement th
 
 [Git Basics](https://git-scm.com/book/en/v1/Getting-Started-Git-Basics) Introduction to Git written by the maintainers of Git.
 
-[Flight Rules for Git](https://github.com/k88hudson/git-flight-rules) Troubline shooting guide. Look here to fix Git mistakes.
+[Flight Rules for Git](https://github.com/k88hudson/git-flight-rules) Troubleshooting guide. Look here to fix Git mistakes.
 
 [Resources to Learn Git](https://try.github.io/) Interactive tutorials for Git.
