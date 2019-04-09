@@ -34,26 +34,26 @@ called “input.csv” (in the r_test_data directory). It has the following
 basic format which should match the format of the file you are preparing 
 for analysis:
 
-  **caseid**   | **year**   | **month**   | **tanf**
-  ------------ | ---------- | ----------- | ----------
-  1            | 2016       | 01          |  1
-  1            | 2016       | 02          |  1
-  1            | 2016       | 03          |  1
-  1            | 2016       | 04          |  1
-  1            | 2016       | 05          |  1
-  1            | 2016       | 06          |  1
-  1            | 2016       | 07          |  0
-  1            | 2016       | 08          |  0
-  1            | 2016       | 09          |  0
-  1            | 2016       | 10          |  0
-  1            | 2016       | 11          |  0
-  1            | 2016       | 12          |  0
+  **caseid**   | **data**       | **benefits**
+  ------------ | ---------------| ---------- 
+  1            | 1/1/2016       |    1
+  1            | 2/1/2016       |    1
+  1            | 3/1/2016       |    1 
+  1            | 4/1/2016       |    1
+  1            | 5/1/2016       |    1
+  1            | 6/1/2016       |    1
+  1            | 7/1/2016       |    0
+  1            | 8/1/2016       |    0
+  1            | 9/1/2016       |    0
+  1            | 10/1/2016      |    0 
+  1            | 11/1/2016      |    0
+  1            | 12/1/2016      |    0
 
-Fields include unique case id, the four digit calendar year of the
-extract time period, the two digit month of the extract time period, and
-a flag indicating if the case was receiving TANF for that time period (1
+Fields include unique case id, the date of the
+extract time period,  and
+a flag indicating if the case was receiving benefits for that time period (1
 for receiving or 0 for not receiving). These fields should be labeled:
-"caseid,"year","month",and "tanf" respectively. The field names are not
+"caseid,"date",and "benefits" respectively. The field names are not
 case sensitive, so they may be capitalized or lower case. All fields can
 be either numeric or character. Explicitly recording inactive cases in
 the monthly extract input file is optional, as missing months will be
@@ -68,10 +68,10 @@ are added to the CASE_FIELDS code parameter. For details on the
 CASE_FIELDS code parameter, see the “Customizing the Code for Your
 Data” section of this guide. The output file will have this structure:
 
-  **caseid**   | **tanf**   | **startMonth**   | **endMonth**   | **spellLength**
-  ------------ | ---------- | ---------------- | -------------- | -----------------
-  1            | 1          | 01/2016          | 06/2016        | 6
-  1            | 0          | 07/2016          | 12/2016        | 6
+  **caseid**   | **benefits**   | **startMonth**   | **endMonth**   | **spellLength**
+  ------------ | ---------------| ---------------- | -------------- | -----------------
+  1            | 1              | 01/2016          | 06/2016        | 6
+  1            | 0              | 07/2016          | 12/2016        | 6
 
 The spells above refers to the monthly records in the input file above.
 
@@ -130,11 +130,11 @@ depending on your needs:
     or shorter when creating spells, etc.
 
 2.  CASE_FIELDS (character vector): The CASE_FIELDS code parameter
-    allows states to add additional fields other than TANF status to
+    allows states to add additional fields other than benefits status to
     detect changes in when defining spells. States may wish for spells
     to be based on other case characteristics in addition to whether the
-    case is receiving TANF. For example, an agency may wish to create
-    spells if a case stops receiving TANF, if the case changes case
+    case is receiving benefits. For example, an agency may wish to create
+    spells if a case stops receiving benefits, if the case changes case
     type, or if the number of adults in the household changes. Add the
     field names representing these fields in your input file to the
     CASE_FIELDS code parameter. For example, the CASE_FIELDS code
@@ -172,29 +172,29 @@ CASE_FIELDS code parameter.
     Code &gt; Run Region &gt; Run All.
 
 2.  Examine the output file. The code ran with the default values for
-    the code parameters CHURN and CASE_FIELDS. Any gap in TANF receipt
+    the code parameters CHURN and CASE_FIELDS. Any gap in benefits receipt
     will be considered a new spell, and the code will only look at the
-    “tanf” column when doing change detection for spells. Your output
+    “benefits” column when doing change detection for spells. Your output
     file should match below. Caseid 1 has 12 spells. If you look at the
     input.csv file for caseid 1, you will notice that it starts active
     and changes status every 2 months for 2 years.
 
-  | **caseid**   | **tanf**   | **startMonth**   | **endMonth**   | **spellLength**
-  |------------  | ---------- | ---------------- | -------------- | -----------------
-  | 1            | 1          | 01/2016          | 02/2016        | 2
-  | 1            | 0          | 03/2016          | 04/2016        | 2
-  | 1            | 1          | 05/2016          | 06/2016        | 2
-  | 1            | 0          | 07/2016          | 08/2016        | 2
-  | 1            | 1          | 09/2016          | 10/2016        | 2
-  | 1            | 0          | 11/2016          | 12/2016        | 2
-  | 1            | 1          | 01/2017          | 02/2017        | 2
-  | 1            | 0          | 03/2017          | 04/2017        | 2
-  | 1            | 1          | 05/2017          | 06/2017        | 2
-  | 1            | 0          | 07/2017          | 08/2017        | 2
-  | 1            | 1          | 09/2017          | 10/2017        | 2
-  | 1            | 0          | 11/2017          | 12/2017        | 2
-  | 2            | 1          | 01/2016          | 12/2017        | 24
-  | 3            | 1          | 01/2016          | 12/2017        | 24
+  | **caseid**   | **benefits**   | **startMonth**   | **endMonth**   | **spellLength**
+  |------------  | -------------- | ---------------- | -------------- | -----------------
+  | 1            | 1              | 01/2016          | 02/2016        | 2
+  | 1            | 0              | 03/2016          | 04/2016        | 2
+  | 1            | 1              | 05/2016          | 06/2016        | 2
+  | 1            | 0              | 07/2016          | 08/2016        | 2
+  | 1            | 1              | 09/2016          | 10/2016        | 2
+  | 1            | 0              | 11/2016          | 12/2016        | 2
+  | 1            | 1              | 01/2017          | 02/2017        | 2
+  | 1            | 0              | 03/2017          | 04/2017        | 2
+  | 1            | 1              | 05/2017          | 06/2017        | 2
+  | 1            | 0              | 07/2017          | 08/2017        | 2
+  | 1            | 1              | 09/2017          | 10/2017        | 2
+  | 1            | 0              | 11/2017          | 12/2017        | 2
+  | 2            | 1              | 01/2016          | 12/2017        | 24
+  | 3            | 1              | 01/2016          | 12/2017        | 24
 
 5.  Examine the summary file. It should say there are 8 active spells
     and 6 inactive spells as well as some other descriptive statistics
@@ -221,12 +221,12 @@ CASE_FIELDS code parameter.
     the case will remain inactive beyond the study period, and therefore
     the inactive spell remains.
 
-  **caseid**   | **tanf**   | **startMonth**   | **endMonth**   | **spellLength**
-  ------------ | ---------- | ---------------- | -------------- | -----------------
-  1            | 1          | 01/2016          | 10/2017        | 22
-  1            | 0          | 11/2017          | 12/2017        | 2
-  2            | 1          | 01/2016          | 12/2017        | 24
-  3            | 1          | 01/2016          | 12/2017        | 24
+  **caseid**   | **benefits**   | **startMonth**   | **endMonth**   | **spellLength**
+  ------------ | ---------------| ---------------- | -------------- | -----------------
+  1            | 1              | 01/2016          | 10/2017        | 22
+  1            | 0              | 11/2017          | 12/2017        | 2
+  2            | 1              | 01/2016          | 12/2017        | 24
+  3            | 1              | 01/2016          | 12/2017        | 24
 
 4.  Examine the summary file. It should say there are 3 active spells
     and 1 inactive spells as well as some other descriptive statistics
@@ -249,20 +249,20 @@ CASE_FIELDS code parameter.
     total of 12 spells for caseid 2 which previously only had 1 spell.
     The output for caseid 2 should now look like this:
 
-  **caseid**   | **tanf**   | **case_type**   | **startMonth**   | **endMonth**   | **spellLength**
-  ------------ | ---------- | ---------------- | ---------------- | -------------- | -----------------
-  2            | 1          | child only       | 01/2016          | 02/2016        | 2
-  2            | 1          | family           | 03/2016          | 04/2016        | 2
-  2            | 1          | child only       | 05/2016          | 06/2016        | 2
-  2            | 1          | family           | 07/2016          | 08/2016        | 2
-  2            | 1          | child only       | 09/2016          | 10/2016        | 2
-  2            | 1          | family           | 11/2016          | 12/2016        | 2
-  2            | 1          | child only       | 01/2017          | 02/2017        | 2
-  2            | 1          | family           | 03/2017          | 04/2017        | 2
-  2            | 1          | child only       | 05/2017          | 06/2017        | 2
-  2            | 1          | family           | 07/2017          | 08/2017        | 2
-  2            | 1          | child only       | 09/2017          | 10/2017        | 2
-  2            | 1          | family           | 11/2017          | 12/2017        | 2
+  **caseid**   | **benefits**   | **case_type**    | **startMonth**   | **endMonth**   | **spellLength**
+  ------------ | -------------- | ---------------- | ---------------- | -------------- | -----------------
+  2            | 1              | child only       | 01/2016          | 02/2016        | 2
+  2            | 1              | family           | 03/2016          | 04/2016        | 2
+  2            | 1              | child only       | 05/2016          | 06/2016        | 2
+  2            | 1              | family           | 07/2016          | 08/2016        | 2
+  2            | 1              | child only       | 09/2016          | 10/2016        | 2
+  2            | 1              | family           | 11/2016          | 12/2016        | 2
+  2            | 1              | child only       | 01/2017          | 02/2017        | 2
+  2            | 1              | family           | 03/2017          | 04/2017        | 2
+  2            | 1              | child only       | 05/2017          | 06/2017        | 2
+  2            | 1              | family           | 07/2017          | 08/2017        | 2
+  2            | 1              | child only       | 09/2017          | 10/2017        | 2
+  2            | 1              | family           | 11/2017          | 12/2017        | 2
 
 1.  Examine the summary file. Its results will be different than before.
     Its exact results will vary depending on how you have the CHURN code
@@ -284,7 +284,7 @@ CASE_FIELDS code parameter.
     `num_adults` every 2 months creating 12 total spells. The output
     for caseid 3 should now look like this:
 
-  **caseid**   | **tanf**   | **case_type**    | **num_adults**    | **startMonth**   |**endMonth**   | **spellLength**
+  **caseid**   | **benefits**   | **case_type**    | **num_adults**    | **startMonth**   |**endMonth**   | **spellLength**
   ------------ | ---------- | ---------------- | ----------------- | ---------------- | --------------| -----------------
   3            | 1          | family           | 1                 | 01/2016          | 02/2016       | 2
   3            | 1          | family           | 2                 | 03/2016          | 04/2016       | 2

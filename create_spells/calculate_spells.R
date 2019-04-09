@@ -16,7 +16,6 @@ SUMMARY_FILE <- ""
 # Optional variables to modify -------------------------------------------------
 CHURN <- 0
 CASE_FIELDS <- c()
-WAGES_FILE <- ""
 DATE_FORMAT <- '%m/%d/%Y' # see https://www.statmethods.net/input/dates.html for info on R date formatting
 MULTI_CORE <- FALSE # Set to True to run on multiple cores. This may make large jobs run faster.
 
@@ -75,8 +74,8 @@ ValidateInputs <- function(cases, active_status, inactive_status, case_fields,
          that do not exist in the input file.")
   }
 
-  if (!all(c("caseid","tanf") %in% colnames(cases))){
-    stop("Check the input file. It must contain the columns: caseid, date, tanf.
+  if (!all(c("caseid","benefits") %in% colnames(cases))){
+    stop("Check the input file. It must contain the columns: caseid, date, benefits.
          Column headers are case insensitive.")
   }
 
@@ -84,14 +83,14 @@ ValidateInputs <- function(cases, active_status, inactive_status, case_fields,
     stop("Check the input file. It must contain a date field or a month and year field.")
   }
 
-  if (length(unique(cases$tanf)) > 2){
-    stop("More than two values were found in the tanf column. Check the data.
+  if (length(unique(cases$benefits)) > 2){
+    stop("More than two values were found in the benefits column. Check the data.
          This field should indicate either active or inactive.")
   }
-  if (!active_status %in% unique(cases$tanf)){
+  if (!active_status %in% unique(cases$benefits)){
     stop("No active cases found in the data.")
   }
-  if (!inactive_status %in% unique(cases$tanf)){
+  if (!inactive_status %in% unique(cases$benefits)){
     message("No inactive cases found in the data. Inactive cases will
             be inferred.")
     inactive_flag <- FALSE
@@ -107,7 +106,7 @@ CreateInactiveRows <- function(caseid,startMonth,endMonth,inactive_status){
   dates <- seq(from=startMonth, to=endMonth,by='month')
   missingRows <- data.frame(date=dates[1:length(dates)-1],
                             caseid=caseid,
-                            tanf=inactive_status,
+                            benefits=inactive_status,
                             stringsAsFactors = FALSE)
   return(missingRows)
 }
@@ -120,9 +119,9 @@ FillMissingCasesAll <- function(cases, active_status, inactive_status, inactive_
     max_date <- max(cases[,'date'])
     # Fill in new rows
     out <- setDT(cases)[, list(date=seq(min(date), max_date, by = 'month')), caseid]
-    # Join with cases to get tanf
+    # Join with cases to get benefits
     out <- cases[out, on = c('caseid', 'date')]
-    out[is.na(get('tanf')), ('tanf'):='0']
+    out[is.na(get('benefits')), ('benefits'):='0']
     return(as.data.frame(out))
   }
 }
@@ -139,7 +138,7 @@ CalculateSpells <- function(processed_cases,case_fields){
   spellStart <- processed_cases[processed_cases$spellField !=
                                   processed_cases$lag,] %>%
     ungroup() %>%
-    select(one_of(c(case_fields,"caseid","date","tanf"))) %>%
+    select(one_of(c(case_fields,"caseid","date","benefits"))) %>%
     mutate(startMonth = as.integer(format(date,"%m")),
            startYear = as.integer(format(date, "%Y"))) %>%
     rename(startDate=date)
@@ -154,7 +153,7 @@ CalculateSpells <- function(processed_cases,case_fields){
 
   spells <- cbind(spellStart,spellEnd) %>%
     arrange(caseid,startDate) %>%
-    select(one_of("caseid","tanf",case_fields,"startDate","startMonth",
+    select(one_of("caseid","benefits",case_fields,"startDate","startMonth",
                   "startYear","endDate","endMonth","endYear"))
   return(spells)
 }
@@ -185,17 +184,17 @@ SummarizeSpells <- function(spells,summary_file){
 
   # Active Summaries
   activeSpells <- paste("Number of Active Spells:",
-                        nrow(spells[spells$tanf=="1",]))
-  activeMaxSpellsCase <- paste("Max Number of Active Spells in a Case:", max(table(spells[spells$tanf=="1",]$caseid)))
-  activeAvgSpellLength <- paste("Average Length of Active Spell (in months):", round(mean(spells[spells$tanf=="1",]$spellLength),2))
+                        nrow(spells[spells$benefits=="1",]))
+  activeMaxSpellsCase <- paste("Max Number of Active Spells in a Case:", max(table(spells[spells$benefits=="1",]$caseid)))
+  activeAvgSpellLength <- paste("Average Length of Active Spell (in months):", round(mean(spells[spells$benefits=="1",]$spellLength),2))
 
   # Inactive Summaries
   inactiveSpells <- paste("Number of Inactive Spells:",
-                          nrow(spells[spells$tanf=="0",]))
+                          nrow(spells[spells$benefits=="0",]))
 
-  if (nrow(spells[spells$tanf=="0",]) > 0) { # special case for no inactive spells
-    inactiveMaxSpellsCase <- paste("Max Number of Inactive Spells in a Case:", max(table(spells[spells$tanf=="0",]$caseid)))
-    inactiveAvgSpellLength <- paste("Average Length of Inactive Spell (in months):", round(mean(spells[spells$tanf=="0",]$spellLength),2))
+  if (nrow(spells[spells$benefits=="0",]) > 0) { # special case for no inactive spells
+    inactiveMaxSpellsCase <- paste("Max Number of Inactive Spells in a Case:", max(table(spells[spells$benefits=="0",]$caseid)))
+    inactiveAvgSpellLength <- paste("Average Length of Inactive Spell (in months):", round(mean(spells[spells$benefits=="0",]$spellLength),2))
   }
   else{
     inactiveMaxSpellsCase <- "Max Number of Inactive Spells in a Case: 0"
@@ -238,18 +237,18 @@ ChangeStatusCase <- function(cases,caseid,active_status,inactive_status, churn){
   case <- cases[cases$caseid==caseid,]
   sequential_inactive <- 0
   for (i in 1:nrow(case)){
-    if(case[i,'tanf']==inactive_status){
+    if(case[i,'benefits']==inactive_status){
       sequential_inactive <- sequential_inactive + 1
     }
-    else if(case[i,'tanf']==active_status){
+    else if(case[i,'benefits']==active_status){
       if(sequential_inactive >= 1 & sequential_inactive <= churn){
         for(j in 1:sequential_inactive){
-          case[i-j,'tanf'] <- active_status
+          case[i-j,'benefits'] <- active_status
           case[i-j,'churn'] <- TRUE
         }
       }
       else if(sequential_inactive==1 & churn > 0){
-        case[i-1,'tanf'] <- active_status
+        case[i-1,'benefits'] <- active_status
         case[i-j,'churn'] <- TRUE
       }
       sequential_inactive <- 0
@@ -264,7 +263,7 @@ ChangeStatusAll <- function(cases,active_status,inactive_status,case_fields,
 
   if (churn == 0){ # Exit if chuen is 0.
     # Concat fields that define spells
-    cases$spellField <- do.call(paste0,cases[c("tanf",case_fields)])
+    cases$spellField <- do.call(paste0,cases[c("benefits",case_fields)])
     return(cases)
   }
 
@@ -283,7 +282,7 @@ ChangeStatusAll <- function(cases,active_status,inactive_status,case_fields,
     processed_cases <- bind_rows(processed_cases)
     # concat fields that define spells
     processed_cases$spellField <- do.call(paste0,
-                                          processed_cases[c("tanf",case_fields)])
+                                          processed_cases[c("benefits",case_fields)])
     #resort
     processed_cases <- processed_cases %>%
       arrange(caseid,date)
@@ -309,7 +308,7 @@ ChangeStatusAll <- function(cases,active_status,inactive_status,case_fields,
     }
     # concat fields that define spells
     processed_cases$spellField <- do.call(paste0,
-                                          processed_cases[c("tanf",case_fields)])
+                                          processed_cases[c("benefits",case_fields)])
     #resort
     processed_cases <- processed_cases %>%
       arrange(caseid,date)
@@ -327,24 +326,6 @@ ChangeStatusAll <- function(cases,active_status,inactive_status,case_fields,
   return(processed_cases)
 }
 
-ReadWages <- function(wages_file){
-  wages <- tryCatch(
-    {
-      read.csv(file = wages_file, sep = ",", header = TRUE,
-               colClasses = "character")
-    },
-    error=function(cond){
-      stop("Failed to read wages file. Check the file path. If you do not have a
-            wages file to merge, set the WAGES_FILE parameter to be an empty string.")
-
-    }
-  )
-  colnames(wages) <- tolower(colnames(wages))
-  wages <- wages %>% mutate(quarter = as.integer(quarter),
-                            year = as.integer(year),
-                            earnings = as.integer(earnings))
-  return(wages)
-}
 
 # Add Quarter info to Spells
 quarterLookup <- function(month){
@@ -354,67 +335,7 @@ quarterLookup <- function(month){
                                   ifelse(month %in% c(10,11,12),4,NA))))
 }
 
-MergeWages <- function(wages_file,spells,case_fields){
-  # remove unused fields from output
-  spells <- spells %>% select(-startDate,-endDate)
-
-  # If wages_file is an empty string do not perform a merge
-  if (wages_file != ''){
-    wages <- ReadWages(wages_file)
-    spells <- spells %>%
-      mutate_at(vars(contains("month")),.funs = funs(quarter = quarterLookup(.))) %>%
-      mutate(endYearPlus1 = endYear + 1,
-             endMonth_quarterPlus1 = endMonth_quarter + 1) %>% # add startWage
-      left_join(wages, by = c("startMonth_quarter" = "quarter",
-                              "startYear" = "year",
-                              "caseid" = "caseid"))%>%
-      rename(startWage = earnings) %>%                         # add endWage
-      left_join(wages,
-                by = c("endMonth_quarter" = "quarter",
-                       "endYear" = "year",
-                       "caseid" = "caseid")) %>%
-      rename(endWage = earnings)
-
-    # add nextWage (wage in quarter after endMonth_quarter)
-    # this is done in two parts - quarters 1 - 3 and quarters 4 done seperately
-    spells_q1_q3 <- spells %>%
-      filter(endMonth_quarter != 4) %>%
-      left_join(wages,
-                by = c("endMonth_quarterPlus1" = "quarter",
-                       "endYear" = "year",
-                       "caseid" = "caseid")) %>%
-      rename(nextWage = earnings) %>%
-      select(one_of("caseid", "tanf",case_fields, "startMonth","startYear",
-                    "endMonth", "endYear", "spellLength","startWage","endWage",
-                    "nextWage"))
-
-    spells_q4 <- spells %>%
-      filter(endMonth_quarter == 4) %>%
-      left_join(wages %>% filter(quarter == 1),
-                by = c("endYearPlus1" = "year",
-                       "caseid" = "caseid")) %>%
-      rename(nextWage = earnings) %>%
-      select(one_of("caseid", "tanf",case_fields, "startMonth","startYear",
-                    "endMonth", "endYear", "spellLength","startWage","endWage",
-                    "nextWage"))
-
-    # combine nextWage for merges in q1-q3 and in q4
-    spells_merged <- bind_rows(spells_q1_q3,spells_q4)
-
-    # resort after combining
-    spells <- spells_merged %>% arrange(caseid,startYear,startMonth)
-  }
-
-  #convert date fields to string type
-  spells <- spells %>% mutate(startMonth = as.character(startMonth),
-                                     startYear = as.character(startYear),
-                                     endMonth = as.character(endMonth),
-                                     endYear = as.character(endYear))
-  return(spells)
-}
-
 CallFunctions <- function(primary_file, output_file, summary_file,
-                          wages_file = "",
                           active_status = "1", inactive_status = "0",
                           case_fields = NULL, churn = 0,
                           date_format = '', multi_flag=FALSE){
@@ -446,7 +367,6 @@ CallFunctions <- function(primary_file, output_file, summary_file,
                             case_fields=case_fields)
   spells <- CalculateSpellLength(spells)
   SummarizeSpells(spells,summary_file)
-  spells <- MergeWages(wages_file = wages_file,spells = spells,case_fields = case_fields)
   WriteSpells(spells = spells, output_file= output_file)
 }
 
@@ -454,6 +374,6 @@ CallFunctions <- function(primary_file, output_file, summary_file,
 # Run Script -------------------------------------------------------------------
 
 CallFunctions(primary_file = PRIMARY_FILE, output_file = OUTPUT_FILE,
-              summary_file = SUMMARY_FILE, wages_file = WAGES_FILE,
-              case_fields = CASE_FIELDS, churn = CHURN,
-              multi_flag = MULTI_CORE, date_format = DATE_FORMAT)
+              summary_file = SUMMARY_FILE, case_fields = CASE_FIELDS, 
+              churn = CHURN, multi_flag = MULTI_CORE,
+              date_format = DATE_FORMAT)
