@@ -326,15 +326,6 @@ ChangeStatusAll <- function(cases,active_status,inactive_status,case_fields,
   return(processed_cases)
 }
 
-
-# Add Quarter info to Spells
-quarterLookup <- function(month){
-  quarter <- ifelse(month %in% c(1,2,3),1,
-                    ifelse(month %in% c(4,5,6),2,
-                           ifelse(month %in% c(7,8,9),3,
-                                  ifelse(month %in% c(10,11,12),4,NA))))
-}
-
 CallFunctions <- function(primary_file, output_file, summary_file,
                           active_status = "1", inactive_status = "0",
                           case_fields = NULL, churn = 0,
