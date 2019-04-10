@@ -34,34 +34,36 @@ called “input.csv” (in the r_test_data directory). It has the following
 basic format which should match the format of the file you are preparing 
 for analysis:
 
-  **caseid**   | **date**       | **benefits** | **case_type**
-  ------------ | ---------------| -------------|---------------
-  1            | 1/1/2016       |    1         |  child only
-  1            | 2/1/2016       |    1         |  child only
-  1            | 3/1/2016       |    1         |  child only
-  1            | 4/1/2016       |    1         |  one parent
-  1            | 5/1/2016       |    1         |  one parent
-  1            | 6/1/2016       |    1         |  one parent
-  1            | 7/1/2016       |    0         |  one parent
-  1            | 8/1/2016       |    0         |  one parent
-  1            | 9/1/2016       |    0         |  one parent
-  1            | 10/1/2016      |    0         |  one parent
-  1            | 11/1/2016      |    0         |  one parent
-  1            | 12/1/2016      |    0         |  one parent
+
+  **caseid**   | **date**       | **benefits** | **case_type** | **num_adults
+  ------------ | ---------------| -------------|---------------|--------------
+  1            | 1/1/2016       |    1         |  child only   |      1
+  1            | 2/1/2016       |    1         |  child only   |      1
+  1            | 3/1/2016       |    1         |  child only   |      1
+  1            | 4/1/2016       |    1         |  one parent   |      1 
+  1            | 5/1/2016       |    1         |  one parent   |      1
+  1            | 6/1/2016       |    1         |  one parent   |      1
+  1            | 7/1/2016       |    0         |  one parent   |      1
+  1            | 8/1/2016       |    0         |  one parent   |      1
+  1            | 9/1/2016       |    0         |  one parent   |      1
+  1            | 10/1/2016      |    0         |  one parent   |      1
+  1            | 11/1/2016      |    0         |  one parent   |      1
+  1            | 12/1/2016      |    0         |  one parent   |      1
 
 Fields include unique case id, the date of the extract time period (usually
 one record per month), and a flag indicating if the case was receiving
 benefits for that time period (1 for receiving or 0 for not receiving). These
-fields should be labeled: "caseid,"date", and "benefits" respectively.
+fields should be labeled: "caseid, "date", and "benefits" respectively.
 Optionally, there can be additional fields that are used to define spells. The
-example above, and the sample input file, are examples of tanf data so the
-additional field, case_type, defines the type of the tanf case, child only or
-adult. The section on customizing code below explains how to work with
-additional fields for defining spells.  The field names are not case
-sensitive, so they may be capitalized or lower case. All fields can be either
-numeric or character. Explicitly recording inactive cases in the monthly
-extract input file is optional, as missing months will be inferred as inactive
-and used to calculate spells accordingly.
+example above, and the sample input file, are examples of TANF data with two
+additional fields, case_type and num_adults.  The first additional field,
+case_type, defines the type of the TANF case, child only or adult. The second
+additonal field, num_adults, is the number of adults on a case. The section on
+customizing code below explains how to work with additional fields for
+defining spells.  The field names are not case sensitive, so they may be
+capitalized or lower case. All fields can be either numeric or character. 
+Explicitly recording inactive cases in the monthly extract input file is
+optional, as missing months will be inferred as inactive and used to calculate
 
 
 ***The Output File***
