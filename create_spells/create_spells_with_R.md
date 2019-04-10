@@ -35,7 +35,7 @@ basic format which should match the format of the file you are preparing
 for analysis:
 
 
-  **caseid**   | **date**       | **benefits** | **case_type** | **num_adults
+  **caseid**   | **date**       | **benefits** | **case_type** | **num_adults**
   ------------ | ---------------| -------------|---------------|--------------
   1            | 1/1/2016       |    1         |  child only   |      1
   1            | 2/1/2016       |    1         |  child only   |      1
