@@ -166,19 +166,18 @@ CASE_FIELDS code parameter.
     SUMMARY\_FILE code parameter to the filepath where you want the
     summary file to be saved. Your code may look like this:
 
-> ![num_adults](num_adults.jpg)
->
-> Notice how the folders are separated by two backslashes instead of one
-> backslash. That is how R reads Window's filepaths. If you are working
-> on a Mac or Linux operating system you need to use a forward slash
-> instead of the double backslashes. For more information on R filepaths
-> see this explanation from Indiana University
-> (<https://kb.iu.edu/d/azzp>).
+![file_paths](file_paths.jpg)
 
-1.  Run the code in RStudio. From the top navigation bar select
+Notice how the folders are separated by two backslashes instead of one
+backslash. That is how R reads Window's filepaths. If you are working on a Mac
+or Linux operating system you need to use a forward slash instead of the
+double backslashes. For more information on R filepaths see this explanation
+from Indiana University (<https://kb.iu.edu/d/azzp>).
+
+3.  Run the code in RStudio. From the top navigation bar select
     Code &gt; Run Region &gt; Run All.
 
-2.  Examine the output file. The code ran with the default values for
+4.  Examine the output file. The code ran with the default values for
     the code parameters CHURN and CASE_FIELDS. Any gap in benefits receipt
     will be considered a new spell, and the code will only look at the
     “benefits” column when doing change detection for spells. Your output
