@@ -54,8 +54,8 @@ indicating if the case was receiving benefits for that time period (1 for
 receiving or 0 for not receiving). These fields should be labeled:
 "caseid,"date", and "benefits" respectively. Optionally, there can be
 additional fields that are used to define spells. The example above, and the
-sample input file, are examples of tanf data so the additional field, case_type,
-defines the type of the tanf case, child only or adult. The section on
+sample input file, are examples of TANF data so the additional field, case_type,
+defines the type of the TANF case, child only or adult. The section on
 customizing code below explains how to work with additional fields for
 defining spells.  The field names are not case sensitive, so they may be
 capitalized or lower case. All fields can be either numeric or character.
