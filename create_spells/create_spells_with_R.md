@@ -30,16 +30,16 @@ changes case type or the size of the household changes.
 ***The Input File***
 
 For the demonstration, we provide an input file of mock monthly extracts
-called “input.csv” (in the r_test_data directory). It has the following 
+called [input.csv](/r_test_data/input.csv) (in the [r_test_data directory](/r_test_data)). It has the following 
 basic format which should match the format of the file you are preparing 
 for analysis:
 
 
   **caseid**   | **date**       | **benefits** | **case_type** | **num_adults**
   ------------ | ---------------| -------------|---------------|--------------
-  1            | 1/1/2016       |    1         |  child only   |      1
-  1            | 2/1/2016       |    1         |  child only   |      1
-  1            | 3/1/2016       |    1         |  child only   |      1
+  1            | 1/1/2016       |    1         |  child only   |      0
+  1            | 2/1/2016       |    1         |  child only   |      0
+  1            | 3/1/2016       |    1         |  child only   |      0
   1            | 4/1/2016       |    1         |  one parent   |      1 
   1            | 5/1/2016       |    1         |  one parent   |      1
   1            | 6/1/2016       |    1         |  one parent   |      1
@@ -57,13 +57,14 @@ fields should be labeled: "caseid, "date", and "benefits" respectively.
 Optionally, there can be additional fields that are used to define spells. The
 example above, and the sample input file, are examples of TANF data with two
 additional fields, case_type and num_adults.  The first additional field,
-case_type, defines the type of the TANF case, child only or adult. The second
-additonal field, num_adults, is the number of adults on a case. The section on
-customizing code below explains how to work with additional fields for
-defining spells.  The field names are not case sensitive, so they may be
-capitalized or lower case. All fields can be either numeric or character. 
-Explicitly recording inactive cases in the monthly extract input file is
-optional, as missing months will be inferred as inactive and used to calculate
+case_type, defines the type of the TANF case, child only, one parent or two
+parent. The second additonal field, num_adults, is the number of adults on a
+case. The section on customizing code below explains how to work with
+additional fields for defining spells.  The field names are not case
+sensitive, so they may be capitalized or lower case. All fields can be either
+numeric or character.  Explicitly recording inactive cases in the monthly
+extract input file is optional, as missing months will be inferred as inactive
+and used to calculate
 
 
 ***The Output File***
