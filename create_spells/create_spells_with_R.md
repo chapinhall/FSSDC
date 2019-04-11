@@ -31,7 +31,7 @@ changes case type or the size of the household changes.
 
 For the demonstration, we provide an input file of mock monthly extracts
 called [input.csv](r_test_data/input.csv) (in the r_test_data
-directory) It has the following  basic format which should
+directory). It has the following  basic format which should
 match the format of the file you are preparing  for analysis:
 
 
