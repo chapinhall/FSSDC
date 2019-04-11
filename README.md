@@ -9,21 +9,30 @@ This work is supported by the Family Self-Sufficiency Research Consortium, Grant
 
 Learn more about the FSSDC [here](http://harris.uchicago.edu/centers/fssdc).
 
-## Available Resources
-Current resources on this repository include:
-- Samples of a basic TANF data model and an R script to explore and present that data;
-- Resources and sample scripts describing the creation of spells files from point-in-time data.
+## Resources
+
+### [Tutorials](/tutorials/README.md)
+
+- [Introduction to Python](/tutorials/introduction_to_using_python.md)
+
+- [Introduction to R](/tutorials/introduction_to_using_r.md)
+
+- [Using Basic GitHub Online](/tutorials/using_github_online.md)
+
+### [Creating spells](/create_spells/README.md)
+
+- [Creating spells in Python](/create_spells/create_spells_with_python.md)
+
+- [Creating spells in R](/create_spells/create_spells_with_R.md)
+
+### [Sample TANF Data](/sample_TANF_data/README.md)
+
 
 ## To Use and Contribute to this Repository
 This repository is publically accessible. All code is provided under the [MIT license](https://www.github.com/chapinhall/fssdc/blob/master/LICENSE.md).
 
 ### Reading the Files
 The simplest way for administrators and researchers to use these resources is to browse this website and download files of interest. Reading sample code and looking at examples of what data may look like can provide new ideas and guide discussion.
-
-### Running the Files
-The script files can also be run on your own data if the general format of your data matches the fake data provided or you can modify the code to be more applicable to your own data. We have provided sample code files in several languages. You can tell a file is a code file and what language it is in by looking at its extension. For example, SAS files end in .sas and Python files end in .py.
-
-To run the code you will need the relevant programming languages installed and knowledge of how to use them. Many of these programs are open source and do not require funding to install. Others require a license that your organization may already have. For a quick course in how to use these programs please see the [tutorial](https://github.com/chapinhall/FSSDC/tree/master/tutorials) section.
 
 ### Changing the Files on This Website
 We also welcome contributions. You can use this website to make your contributions. A guide to getting started with GitHub and Git can be found in the tutorial section. If you are interested in contributing but are struggling to get started, please contact us. Knowing your questions will help us understand what specific barriers to address.
