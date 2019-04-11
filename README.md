@@ -13,21 +13,19 @@ Learn more about the FSSDC [here](http://harris.uchicago.edu/centers/fssdc).
 
 ### [Tutorials](/tutorials/README.md)
 
-[Introduction to Python](/tutorials/introduction_to_using_python.md)
+- [Introduction to Python](/tutorials/introduction_to_using_python.md)
 
-[Introduction to R](/turtorials/introduction_to_using_R.md)
+- [Introduction to R](/tutorials/introduction_to_using_r.md)
 
-[Using Basic GitHub Online](/tutorials/using_github_online.md)
+- [Using Basic GitHub Online](/tutorials/using_github_online.md)
 
-### Creating spells
+### [Creating spells](/create_spells/README.md)
 
-[Creating spells in Python](create_spells_with_python.md)
+- [Creating spells in Python](/create_spells/create_spells_with_python.md)
 
-[Creating spells in R](create_spells_with_R.md)
+- [Creating spells in R](/create_spells/create_spells_with_R.md)
 
-### Sample TANF Data
-
-[Introduction to TANF Data Samples](sample_TANF_data.README.md)
+### [Sample TANF Data](/sample_TANF_data/README.md)
 
 ## To Use and Contribute to this Repository
 This repository is publically accessible. All code is provided under the [MIT license](https://www.github.com/chapinhall/fssdc/blob/master/LICENSE.md).
