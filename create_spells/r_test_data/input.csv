@@ -1,0 +1,73 @@
+caseid,date,benefits,case_type,number_adults
+1,1/1/2016,1,child only,0
+1,2/1/2016,1,child only,0
+1,3/1/2016,0,child only,0
+1,4/1/2016,0,child only,0
+1,5/1/2016,1,child only,0
+1,6/1/2016,1,child only,0
+1,7/1/2016,0,child only,0
+1,8/1/2016,0,child only,0
+1,9/1/2016,1,child only,0
+1,10/1/2016,1,child only,0
+1,11/1/2016,0,child only,0
+1,12/1/2016,0,child only,0
+1,1/1/2017,1,child only,0
+1,2/1/2017,1,child only,0
+1,3/1/2017,0,child only,0
+1,4/1/2017,0,child only,0
+1,5/1/2017,1,child only,0
+1,6/1/2017,1,child only,0
+1,7/1/2017,0,child only,0
+1,8/1/2017,0,child only,0
+1,9/1/2017,1,child only,0
+1,10/1/2017,1,child only,0
+1,11/1/2017,0,child only,0
+1,12/1/2017,0,child only,0
+2,1/1/2016,1,one parent,1
+2,2/1/2016,1,one parent,1
+2,3/1/2016,1,child only ,1
+2,4/1/2016,1,child only ,1
+2,5/1/2016,1,one parent,1
+2,6/1/2016,1,one parent,1
+2,7/1/2016,1,child only ,0
+2,8/1/2016,1,child only ,0
+2,9/1/2016,1,one parent,1
+2,10/1/2016,1,one parent,1
+2,11/1/2016,1,child only ,0
+2,12/1/2016,1,child only ,0
+2,1/1/2017,1,one parent,1
+2,2/1/2017,1,one parent,1
+2,3/1/2017,1,child only ,0
+2,4/1/2017,1,child only ,0
+2,5/1/2017,1,one parent,1
+2,6/1/2017,1,one parent,1
+2,7/1/2017,1,child only ,0
+2,8/1/2017,1,child only ,0
+2,9/1/2017,1,one parent,1
+2,10/1/2017,1,one parent,1
+2,11/1/2017,1,child only ,0
+2,12/1/2017,1,child only ,0
+3,1/1/2016,1,one parent,1
+3,2/1/2016,1,one parent,1
+3,3/1/2016,1,two parent,2
+3,4/1/2016,1,two parent,2
+3,5/1/2016,1,one parent,1
+3,6/1/2016,1,one parent,1
+3,7/1/2016,1,two parent,2
+3,8/1/2016,1,two parent,2
+3,9/1/2016,1,one parent,1
+3,10/1/2016,1,one parent,1
+3,11/1/2016,1,two parent,2
+3,12/1/2016,1,two parent,2
+3,1/1/2017,1,one parent,1
+3,2/1/2017,1,one parent,1
+3,3/1/2017,1,two parent,2
+3,4/1/2017,1,two parent,2
+3,5/1/2017,1,one parent,1
+3,6/1/2017,1,one parent,1
+3,7/1/2017,1,two parent,2
+3,8/1/2017,1,two parent,2
+3,9/1/2017,1,one parent,1
+3,10/1/2017,1,one parent,1
+3,11/1/2017,1,two parent,2
+3,12/1/2017,1,two parent,2
