@@ -1,0 +1,62 @@
+ 
+## Item nonresponse: Examining missing data for variables within records 
+
+**Reference Script**: completeness\\Completeness_values.Rmd
+
+**Description**: These analyses examine the absence of values within the records included in the data file. This section describes the dataset both in terms of the missingness within each variable and also in terms of units with at least one missing value for any analyzed variable. For longitudinal analysis, units with missing values during the analyzed time period are also identified. 
+
+A future analysis planned for the toolkit will analyze the characteristics of records with missing data. If certain types of records are more likely to have missing values, analyses may lead to incorrect inferences.   
+  
+  
+### Examining proportions of missing values
+
+We plot two graphs in this analysis. The first one shows the proportion of missing values for each variable. The second one shows the number of times (y-axis) that different combinations of variables (x-axis) are missing. The cells shaded in red indicate the variables missing for that specific combination.
+
+**Bar plots and missing value pattern matrix:**
+```{r prop_miss_values_2}
+# Bar plots and missing value pattern matrix:
+subsetted_aggr = aggr(subset(subsetted,select=c(key_vars, domain_vars, id_vars, time_vars, location_vars)), numbers=TRUE, prop=c(TRUE,FALSE), cex.axis=.7, gap=3, ylab=c("Proportion of missingness","Missingness Pattern"))
+```
+
+**Interpretation**: The graph on the left shows the proportion of missing values for each variable.  Check if the missing values are concentrated in some variables and if these are key or domain variables.  
+
+In some cases, it is possible that certain variables are missing together. For example, cases which have the funding source missing may also have a missing value for the amount received. The graph on the right shows whether missing values are concentrated in one variable or in certain combinations of variables. Understanding this missing data structure will inform how analyses may be impacted. Further resources on analyzing data with missing values and addressing missing data using imputation approaches are available from Schafer (1997) and van Buuren (2018).
+
+
+
+### Units with at least one missing value
+
+Here we graph the proportion of units with at least one missing value over time.
+
+```{r units_miss_1}
+
+subsetted$nmiss <- rowSums(is.na(subsetted)) #>=1
+subsetted$nmiss[subsetted$nmiss>=1] <- 1
+subsetted$nmiss <- as.factor(subsetted$nmiss)
+
+# Frequency bar plots
+time_units <- nlevels(as.factor(subsetted[[time_vars[1]]]))
+
+if (time_units >= 15) {
+    print(ggplot(data=subsetted, aes_string(x = as.factor(subsetted[[time_vars[1]]]), fill=subsetted$nmiss )) + 
+            geom_bar(position="fill") + 
+            theme_economist() + 
+            scale_y_continuous(labels = scales::percent_format()) + 
+            theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+            scale_x_discrete( breaks=function(x) x[seq(1, length(x), by=5)] ) +
+            labs(x = "Time", y = "Proportion of units", fill="Missing") + 
+            ggtitle(paste0("Prop. units with at least one missing value", ""), subtitle = paste0("Subset: ",subset_text )) ) 
+} else {
+      print(ggplot(data=subsetted, aes_string(x = as.factor(subsetted[[time_vars[1]]]), fill=subsetted$nmiss  )) +             
+            geom_bar(position="fill") + 
+            theme_economist() + 
+            scale_y_continuous(labels = scales::percent_format()) +
+            theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+            labs(x = "Time", y = "Proportion of units", fill="Missing") + 
+            ggtitle(paste0("Prop. units with at least one missing value",""), subtitle = paste0("Subset: ",subset_text )) ) 
+}
+
+
+```
+
+**Interpretation**: Check if units/records with missing values are concentrated in certain months/years. Certain analyses, such as regression models, will typically exclude all records with at least one missing value. Again, imputation is option for addressing missing values, and we refer readers to Schafer (1997) and van Buuren (2018) as resources on imputation.

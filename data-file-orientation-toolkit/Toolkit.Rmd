@@ -1,0 +1,282 @@
+---
+title: 'Toolkit Results: Analysis of Your Data File'
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document: default
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+---
+```{r packages, echo=FALSE, message=FALSE, include=FALSE}
+# Check all relevant packages are installed
+list.of.packages <- c('plyr','dplyr','data.table','readxl','bit64','descr','tinytex','stringr','gdata','knitr','ggplot2','ggthemes','dataQualityR','lvplot','fda','tables','RDIDQ','validate','VIM','lvplot','tidyr','gridExtra','yaml','devtools','glue','lazyeval','caTools','bitops','rmarkdown','tabplot')
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) print(paste0("The following packages need to be installed: ",new.packages))
+library(plyr)
+library(dplyr)
+library(data.table)
+library(readxl)
+library(bit64)
+library(descr)
+library(tinytex)
+library(stringr)
+library(gdata)
+library(knitr)
+library(ggplot2)
+library(ggthemes)
+library(dataQualityR)
+library(lvplot)
+library(fda)
+library(tables)
+library(RDIDQ)
+library(validate)
+library(VIM)
+library(lvplot)
+library(tidyr)
+library(gridExtra)
+library(yaml)
+library(tabplot)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+This report presents results from application of the Data File Orientation Toolkit to your data file. It includes a number of insights about your data file that provide valuable information for using your data for research.  
+
+The toolkit begins by guiding qualitative assessment of the dataset's **relevance**. This is a static part of the report that is important for assessing the data file's usefulness for research. The main sections focus on three sets of quantitative analyses for your data file: (1) **accuracy** of the data values, (2) **completeness** of the records in the dataset, and (3) **comparability** of the data values among groups and over time. Analyses in this report are informed by recommended practices from the data quality literature and are selected for their importance for common kinds of research questions.  
+
+The findings of this report will help the user understand the strengths and weaknesses of their data file for conducting research. We include a series of analyses with discussion of how to interpret each and what further steps may be taken when a possible issue is detected. Results may inform decisions regarding how to use the data file for research as well as any caveats to draw from research findings. Further, findings may inform feedback for future maintenance of the data file.  
+
+This report is particularly geared toward state and local administrative datasets and includes guidance for the issues common to these datasets. While the design of this report is tailored to such datasets, other data files with similar formats may also benefit from the use of the toolkit.  
+
+When a strange result or pattern is detected in these analyses, it is often difficult to know whether the pattern reflects an issue with the data or just a notable pattern, for example changes in benefit amounts due to legal changes. While the toolkit will often not be able to distinguish between data issues and other notable patterns, observing these patterns can be highly informative for understanding your data and guiding interpretations of research findings. Further, understanding the program details affecting the dataset analyzed can greatly assist with interpretation of findings in this report.  
+
+Among the many analyses available in this report, the user may navigate to the sections of most interest using the links available in the Table of Contents above.  
+
+This report is generated using R Markdown, available with R and RStudio. The sections of this report include R code chunks that refer to different code needed to implement analyses. Convenient defaults are included for this code for the example data file 'test_data_file.csv' provided. We encourage the user to modify the script to the specific needs of their analyses. For each section, the R script to refer to for making changes is designated by the "**Reference Script**."  
+
+Places where we recommend the user consider modifying the code are designated in the report below and in the README file on our GitHub repo. We also have set up the R code to read inputs from modifying "setup.yml." Thus, a user can make modifications to this input file for key inputs for the toolkit in place of modifying the R code.  
+
+For troubleshooting relating to output for this report, please see the instructions in the README on our GitHub page and refer to R documentation for more specific issues.  
+  
+
+# Format of Analyses for the Report
+
+In the analyses that follow, you will see results from different analyses regarding your data. Each set of analyses is organized as follows:  
+
+1. **Description** 
+    i) Describes the question(s) the analysis seeks to answer about the file.
+    ii) Describes the analyses (graphs, tables, other) that will be applied to help answer the question(s).
+  
+2. **Code and Output**
+    i) A "code chunk" is provided that demonstrates the R code used to run the analysis on the dataset. While the code includes convenient defaults for analyses of the example file provided, guidance is also provided for how a user may adapt aspects of the analysis to better fit their needs.
+    ii) Usually a table or figure is provided as output from the analysis.
+    iii) A description of how to read the table or figure is provided.
+
+3.	**Interpretation**
+    i) Discusses what kinds of patterns a user should look for in the data and the possible meaning of different patterns.
+    ii) Relates the output to the initial questions for the analysis. Suggests next steps for further investigation.  
+
+
+These analyses are meant to provide a better understanding of your data, its strengths and weaknesses, and any areas of caution needing further attention or care when conducting research.  
+
+#Analysis Preview
+
+In the analyses that follow, the toolkit begins by guiding a qualitative assessment of **Relevance**. Then, the main sections of the toolkit cover three primary components to understand your data file - **Accuracy**, **Completeness**, and **Comparability**.  
+
+## Relevance
+*Relevance* of the data derives from an analysis of metadata and documentation and is a crucial first step of data quality analysis. Some factors include indicators such as the suitability of the source in terms of the statistical population, units, variables, reference time, and domain variables.  
+
+## Accuracy
+In the context of this report, *accuracy* entails the data file's conformity to expectations of values. Each column should have a standard set or range of values that each entry can follow. However, inaccurate data might contain values that break this expected conformity. For example, in a column that has entries for zip codes, inaccuracies may take the form of non-valid zip codes or invalid data formats.  
+
+## Completeness
+*Completeness* examines such questions as whether data cover the population of interest, include correct records, and do not contain duplicate or out-of-scope records. (A check for duplicates is planned for a later version of the toolkit.) Additionally, completeness includes whether cases have information filled in for all appropriate fields without missing data.  
+
+Note that accuracy and completeness analyses are included in the same section of this report, as some analyses address both dimensions.  
+
+## Comparability
+*Comparability* is the extent to which differences among statistics reflect real phenomena rather than methodological differences. Types of comparability include over time, across geographies, and among domains.  
+
+Different analyses in this (or other) section may be more or less important based on the user's research questions. For example, if the user is particularly interested in making comparisons in outcomes among groups, comparability analyses among groups may be particularly important.  
+
+#Relevance
+
+An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data for specific questions. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before proceeding with the other steps, to avoid spending time and resources on examining other data quality aspects for a data source that is not relevant.  
+
+In addition to reviewing metadata and documentation, it is also important to understand how legal changes and changes in eligibility for program receipt may affect the suitability of the data source for research. We recommend the user gather available information on the legal and programmatic requirements that may affect the data source.  
+
+The following list of questions can guide you in the assessment of the relevance of the data file as well as the identification of limitations that will affect the interpretations of the results of the analysis. It is adapted from Laitila et al. (2011).
+
+|Category|Question        |Description/Example         |
+|--------|----------------|----------------------------|
+| 1. Units | 1.1. What unit is represented at the record level of the data file? | For example, persons, households, transactions.
+| | 1.2. Do grouped units represent another aggregate unit? | For example, households as a group of persons
+| | 1.3. Are the units included in the data file relevant to the study? | In many cases, the unit of the administrative data is different from the relevant unit of analysis. Often, administrative data is at the event level (for example, payment to a benefit recipient). A dataset that only includes information at the recipient level may not be relevant for such an analysis.
+| 2. Population | 2.1. Is the population of units in the data file what is needed for the study? | Administrative data stores detailed information of a particular group that is of interest for the administration of the activity or program. However, this group may or may not be the relevant population for analysis.
+| 3. Variables | 3.1. What variables in the data capture conceptually what is of interest for the research? | For example, whether an income variable in the dataset captures the correct income concept of interest for research.
+| 4. Time | 4.1. Is the time reference of the data set what is needed for the analysis? | For example, to study the effect of a new policy, data will need to be available from after the policy was implemented.
+| | 4.2. Is there administrative delay in the data? | In some cases data are recorded sometime after an event occurs. For example, the employment status of a benefit recipient could change in practice, but this might not be reflected until the next time a benefit program's data file is updated with information from the employment records system.
+| 5. Groups | 5.1. What groups of interest are needed in the analysis? | E.g. race, poverty, location.
+| | 5.2. What variables can help to identify these relevant groups? | Are there variables to distinguish different groups of interest for comparison? These are also called domain variables.
+|  6. Policy changes | 6.1 What changes in policy and in law occurred during the reference time period? 6.2 Do any of these changes impact your analysis? | For example, when there are changes to the tax code, the data collected on tax forms may also change and may impact time series   estimates constructed from income tax records.  
+
+# Data File Input
+
+**Reference Script**: Toolkit.Rmd
+
+**NOTE**: Any edits to the code in this section can be made to Toolkit.Rmd. For subsequent sections, the reference script to edit is indicated.
+
+Once the dataset is judged to be relevant for the analysis, it might require some processing before continuing to the next steps. The following steps will guide you to define the relevant parameters of the toolkit.  
+
+The initially provided code is based on the example data file included on the GitHub repo 'test_data_file.csv', representing longitudinal benefits data for a benefits program. A user may input a flat file in a similar format for analysis with the toolkit, with requirements described the README on the GitHub site. 
+
+*Defining file name*
+```{r user_definitions, echo=TRUE}
+##### EDIT THIS SECTION TO DEFINE FILE NAME ##### 
+
+### Read in data file for toolkit analyses
+analysis_file <- fread("test_data_file.csv")
+
+
+```
+
+*Creating variables*
+
+This section reads in parameters needed for the different variables to be analyzed from the setup file setup.yml. Please refer to the README and setup file for instructions for setup.yml.
+
+```{r create_vars, results='hide'}
+# THIS SECTION READS FROM THE FILE SETUP.YML WHICH INCLUDES ALL THE VARIABLE DESCRIPTIONS
+input_yaml<-read_yaml("setup.yml")
+all_variables <- names(input_yaml$variables)
+variables_dataframe <- lapply(input_yaml$variables, data.frame)
+variables_dataframe_filled <- rbind.fill(variables_dataframe)
+variables_dataframe_filled['name'] <- all_variables
+
+#####################################################
+```
+
+*Defining relevant variables*
+
+In this section, the user should define the relevant variables for the analysis. 
+
+NOTE: All inputs here are set up automatically for users who use the setup.yml input file.
+
+At least one ID, time, key, and domain variable are required, which should be indicated in the id_vars, time_vars, key_vars, and domain_vars sets below. If there are no time variables, then using a filler variable with the same value for all records, for example '1' can be used. The user can optionally specify location variables in location_vars.
+
+Then, the user should identify all the character variables in charvars set below, which are all variables who are neither numeric nor dates, including IDs. It is important to make sure that only variables that were identified in the previous step are included here. Finally, the character variables are converted into factors and the user should indicate the labels of these variables where appropriate. 
+
+NOTE: There is a section below indicated "EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES" where the user may apply labels for any categorical variables in the dataset. Some examples are provided for two variables from the example data file.
+
+```{r define_vars, results='hide'}
+
+# Setting relevant variables as defined by yaml. At least one variable for each of the following 4 groups should be included.
+id_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='id', 'name']
+time_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='time', 'name']
+key_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='key', 'name']
+domain_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='domain', 'name']
+
+# Location variables can optionally be specified
+location_vars <- variables_dataframe_filled[variables_dataframe_filled$classification=='location', 'name']
+
+# We only keep variables selected by the user
+analysis_file <- select(analysis_file,c(id_vars, time_vars, location_vars, key_vars, domain_vars))
+
+# Modifying categorical variables to be strings and factors
+to_categories <- variables_dataframe_filled[variables_dataframe_filled$type=='categorical', 'name']
+analysis_file <- analysis_file[, (to_categories):=lapply(.SD, as.factor), .SDcols = to_categories]
+analysis_file <- analysis_file[, (to_categories):=lapply(.SD, as.character), .SDcols = to_categories]
+
+##### EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES  #####
+analysis_file$source <- factor(analysis_file$source, levels=c(1,2) , labels = c("FundSource1","FundSource2"))
+analysis_file$other_benef <- factor(analysis_file$other_benef, levels=c(1,2) ,  labels = c("Yes", "No"))
+
+
+######################################################################
+
+# The rest of the variables will be defined as numeric and data is converted to data frame
+charvars <- variables_dataframe_filled[variables_dataframe_filled$type=='character', 'name']
+numvars <- variables_dataframe_filled[variables_dataframe_filled$type=='numeric', 'name']
+analysis_file <- as.data.frame(analysis_file)
+analysis_file[,numvars] <- sapply(analysis_file[,numvars],as.numeric)
+str(analysis_file)
+
+```
+
+*Defining subsetting parameters*
+
+In this section, the user should specify the parameters to subset the data file, if needed, using a [regular expression](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) in quotation marks (""). The default applies no subsetting, which is indicated by two quotation marks with no characters in between.   
+
+```{r subset_data, results='hide'}
+##### SELECT SUBSETTING PARAMETERS ##### 
+subset_param <- ""
+########################################
+
+# Subsetting dataset
+subset_text <- subset_param
+if (subset_param =="" | is.null(subset_param)) {
+  subset_param <- TRUE
+  subset_text <- "All"
+}
+
+# If error in subsetting parameters, we use all the data
+subsetted <- try( subset(analysis_file,eval(parse(text = paste0(subset_param)))), silent=TRUE)
+if (class(subsetted) == "try-error") {
+  print("Subsetting parameters are not correct. Using all the data.")
+  subset_text <- "All"
+  subsetted <- analysis_file
+}
+
+analysis_file <- subsetted
+
+```
+
+# Accuracy and Completeness
+
+```{r data_checks, child='DataChecks/Data_Checks.rmd', echo=TRUE}
+```
+
+```{r outliers, child='distribution_analysis/outliers.rmd', echo=TRUE}
+```
+
+```{r examine_var_distributions, child = 'distribution_analysis/examine_var_distributions.Rmd', echo=TRUE}
+```
+
+```{r completeness_unit, child = 'completeness/Completeness_unit.Rmd', echo=TRUE}
+```
+
+```{r completeness_values, child = 'completeness/Completeness_values.Rmd', echo=TRUE}
+```
+
+# Comparability
+
+```{r comparability_relationship, child = 'comparability/Comparability_Relationship_among_variables.rmd', echo=TRUE}
+```
+
+```{r comparability_patterns, child = 'comparability/Comparability_Patterns_over_time.Rmd', echo=TRUE}
+```
+
+
+# References
+
+Hofmann, H., Wickham, H., & Kafadar, K. (2017). Value Plots: Boxplots for Large Data. Journal of Computational and Graphical Statistics, 26(3), 469-477.
+
+Laitila, T., Wallgren, A., & Wallgren, B. (2011). Quality Assessment of Administrative Data, Research and Development. Methodology Report from Statistics Sweden 2011:2.  
+
+Schafer, J. L. (1997). Analysis of incomplete multivariate data. Chapman and Hall/CRC.
+
+Tennekes, M., de Jonge, E., & Daas, P. J. H. (2011, February). Visual profiling of large statistical datasets. In New Techniques and Technologies for Statistics Conference, Brussels, Belgium.
+
+Tukey, J. W. (1977). Exploratory data analysis. Reading, MA: Addison-Wesley Pub. Co.  
+
+Van Buuren, S. (2018). Flexible imputation of missing data. Chapman and Hall/CRC.
+
+
+
+
+

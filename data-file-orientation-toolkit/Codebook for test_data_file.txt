@@ -1,0 +1,24 @@
+test_data_file.csv is a simulated dataset generated at NORC at the University of Chicago as 
+an example for users to demonstrate and test the Data File Orientation Toolkit. 
+It is a simulated longitudinal dataset tracking the receipt of a benefit by households for a 
+benefits program.
+
+The data file includes 852,023 household/month records tracking 67,654 hypothetical households. 
+
+The variables included are as follows:
+
+hh_id - Unique identifier for household
+
+month - Month reported in YYYMM format
+
+amount - Amount of benefit received in $
+
+source - Indicator for funding source for benefit with 2 sources (indicated 1 and 2)
+
+other_benef - Indicator for whether other benefits received by households that month
+	1 = Yes
+	2 = No
+
+type_case - Indicator for type of household with three types (indicated 1, 2, and 3)
+
+num_recip - Number of recipients for household

@@ -1,0 +1,103 @@
+## Are there unexpected patterns within the same variable over time?
+
+**Reference Script**: comparability\\Comparability_Patterns_over_time.Rmd
+
+**Description**: This analysis is relevant for longitudinal and time-series analysis. In this case, the plausibility of a value in a certain time is examined in terms of the history of values for each variable or construct. Trends are evaluated in order to determine whether the values are extreme in comparison to values in other points in time. A discontinuity in the trend does not necessarily mean an error in the data, but it's useful to keep in mind its effects when conducting the analysis. Additionally, discrete jumps may also help to detect changes in the labels of categorical values. As a hypothetical example, in one year males were categorized using the value of 0 but in another a new value of 1 is used.   
+
+We again use tableplots (Tennekes et al., 2011) as a multivariate visualization tool to help assess relationships among variables, now using time as the sort variable to understand multivariate trends over time. Some of the advantages of using tableplots here over simple two-way graphs is that it is possible to see if the discontinuity in one variable is associated with an event in other variables, and it's also possible to analyze changes in the standard deviation of the variables.  
+  
+### Patterns over time
+
+By default, all key and domain variables will be included in the graph, unless the user specifies a different set of variables.
+
+**Select variables:**
+```{r patterns_over_time1}
+##### SELECT VARIABLES #####
+selected_var <- c(key_vars, domain_vars)
+############################
+
+# Check that selected variables are part of the key/domain/location/time variables. 
+# If not, we select all key and domain variables
+if (is.null(selected_var) | !all(is.element(selected_var, c(key_vars, domain_vars, location_vars, time_vars))) )  {
+  selected_var <- c(key_vars, domain_vars)
+}
+```
+
+**Tableplots:**
+```{r patterns_over_time3}
+# Select the first time variable 
+time_var <- time_vars[1]
+
+# Tableplot 
+if (!is.null(time_var)) {
+  
+  #Convert to factor
+  subsetted$time_factor <- factor(subsetted[[time_var]])
+  time_var <- c("time_factor")
+  
+  options(ffmaxbytes = min(getOption("ffmaxbytes"),.Machine$integer.max * 12))
+  
+  selected_var2 <- c(selected_var, time_var)
+  tableplot(subsetted, 
+          select_string = selected_var2, 
+          sortCol = time_var, scale = "lin", title = paste0("Tableplot sorted by: Time \nSubset: ",subset_text))
+} else {
+  print("No valid time variable")
+}
+```
+
+
+**What to look for in tableplots**:  
+We reiterate here what a user to focus on when examining tableplots.
+- *Relation between variables*: Use the graph to examine relationships between variables and whether there are any unexpected deviations over time warranting further inquiry.
+- *Discontinuities in unsorted variables*: Among unsorted variables, look for discontinuities in continuous and categorical variables, and note the direction of the jump.
+- *Range of values*: Examine the range of values of each variable to detect variables with particularly high or low range that may cast doubt about the validity of the values.  
+- *High standard deviation or discrete jumps in the standard deviation*: Look for high standard deviations, which may indicate problems in the validity of the values. For example, in some cases missing values are codified with values such as 999999 or 0 which will increase the variability of the data. Also, look for drastic changes in the standard deviation.  
+- *Highest and lowest values*: Check the highest and lowest values of the sorted variable and how they relate to the other variables.  
+  
+  
+### Patterns over time by subgroup
+
+Similar to discussion in the previous section, it may be relevant to analyze patterns in the data over time by different subgroups. 
+
+The user should select a categorical variable that identifies the different groups to be analyzed. By default, the toolkit will use the first domain variable.  
+
+**Select subgroup variable:**
+```{r patterns_over_time_bysubgroup1}
+##### SELECT SUBGROUP VARIABLE #####
+subgroup = domain_vars[1]
+####################################
+
+# If no subgroup variable is specified or if subgroup variable is not a key,
+# domain, time, or location variable, or if there is more than one subgroup 
+# variable, we skip this section.
+if (is.null(subgroup) | 
+    !all(is.element(subgroup, c(key_vars, domain_vars, location_vars, time_vars))) | 
+    !(length(subgroup)==1) )  {
+  print("Subgroup variable is not a key, domain, time, or location variable, or there is more than one subgroup variable")
+  subgroup <- NULL
+} else if (nlevels(as.factor(subsetted[[subgroup]])) >= 15) {
+  print("Too many levels in the subgroup variable")
+  subgroup <- NULL
+}
+```
+
+**Tableplots:**
+```{r patterns_over_time_bysubgroup2}
+
+if (!is.null(subgroup) & !is.null(time_var)) {
+  for ( i in levels(subsetted[[subgroup]]) ) {
+    data5 <- subset(subsetted,subsetted[[subgroup]] == i)
+    if (nrow(data5) > 0) {
+      tableplot(data5, 
+                select_string = selected_var2, 
+                sortCol = time_var, scale = "lin", title = paste0("Tableplot sorted by: Time. Where ",subgroup, "= ", i,"\nSubset: ",subset_text))
+    }
+  }
+} else {
+  print("No valid subgroup or time variable")
+}
+```
+
+**Interpretation**: Check whether there is any difference in the relationship patterns between variables over time across the different subgroups. Also, check whether data quality issues are concentrated in certain subgroups.  
+
