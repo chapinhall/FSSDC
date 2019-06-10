@@ -38,4 +38,4 @@ We also welcome contributions. You can use this website to make your contributio
 
 **Questions? Comments? Contact us at <fssdc@chapinhall.org>.**
 
-![fssdc logo](https://github.com/chapinhall/fssdc/blob/master/logo.png)
+![FSSDC logo](logo.png)

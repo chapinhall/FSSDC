@@ -5,11 +5,11 @@ The R script `calculate_spells.R` converts point in time data to spells.
 ## Dependancies
 Running this code requiers the following libraries:
 
-`dplyr`
+- `dplyr`
 
-`data.table`
+- `data.table`
 
-`doParallel`
+- `doParallel`
 
 Follow the instructions in the [tutorials](../tutorials/introduction_to_using_r.md) 
 section to install these libraries.

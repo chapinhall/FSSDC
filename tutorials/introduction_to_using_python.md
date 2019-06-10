@@ -6,7 +6,7 @@ There are a lot of installation options for Python. One good option is to instal
 
 You can choose to either install Miniconda or Anaconda. Miniconda only contains Python and the conda package management environment. You can add just the specific Python packages you want installed by manually installing them with the conda package environment after you have installed Miniconda. You should take this approach if you are concerned about how much space to allocate to Python on your computer. Anaconda comes with many packages preinstalled for you, but it will take up more space.
 
-You also need to decide which version of Python you will initially download with Anaconda or Miniconda. You can use the conda package management environment to download other versions of Python if needed once you have done your initial download. The example script in the create_spells directory was written in Python3, but could easily be modified to work in Python2 if necessary. An overview of the differences between Python2 and Python3 can be found [here](https://www.digitalocean.com/community/tutorials/python-2-vs-python-3-practical-considerations-2), but unless you have preexisting support for Python2 at your organization, you may want to consider Python3 as it is the more recent version.
+You also need to decide which version of Python you will initially download with Anaconda or Miniconda. You can use the conda package management environment to download other versions of Python if needed once you have done your initial download. The example script in the create_spells directory was written in Python3, but could easily be modified to work in Python2 if necessary. An overview of the differences between Python2 and Python3 can be found [here](https://www.digitalocean.com/community/tutorials/python-2-vs-python-3-practical-considerations-2), but unless you have preexisting support for Python2 at your organization, you may want to consider Python3 since Python2 will [no longer be supported](https://www.anaconda.com/end-of-life-eol-for-python-2-7-is-coming-are-you-ready/) as of  January 1, 2020.
 
 Instructions for downloading Anaconda can be found [here](https://www.continuum.io/downloads). Select the type of computer you have and the version of Python you wish to install to begin. This is the list of [packages](https://docs.continuum.io/anaconda/packages/pkg-docs) that come with Anaconda. You can skip downloading packages you may not use by downloading Miniconda and specifically downloading the packages you want.
 
@@ -24,7 +24,9 @@ Some other commands such as the command to list the contents of your current dir
 If you have properly installed Python your terminal should recognize the keyword *Python*. If you have installed Python, but your terminal does not recognize the word *Python*, you may need to change your settings so that your terminal knows where to find your Python installation. If you are using the *Anaconda Prompt* it should recognize *Python* as a keyword.
 
 When you type *Python* into the *Anaconda prompt* it will launch a Python shell and you can type Python directly into your terminal to see results.  
-    >>> 1 + 1 = 2
+```python
+>>> 1 + 1 = 2
+```
 
 However, you will usually want to launch programs that you have written into a Python file such as our example script spells.py. Type `quit()` into your terminal to exit the Python shell and return to your terminal.
 
@@ -33,10 +35,10 @@ However, you will usually want to launch programs that you have written into a P
 You can launch commands by typing Python *name-of-your-script* and additional command line arguments the program may require.
 
  A command line argument takes user input from the terminal and passes it to the Python program. For example, the Python program hello.py printed below:
- ```
+ ```python
  import sys
  name = sys.argv[1]
- print("Hello, {}".(name))
+ print("Hello, {}".format(name))
  ```
 Will print "Hello, Alex" if you type:
 `python hello.py Alex`

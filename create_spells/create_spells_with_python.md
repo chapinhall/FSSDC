@@ -6,26 +6,27 @@ Running the file requires python to be installed and knowledge of how to use a t
 # Dependancies
 Running this code requires the following libraries:
 
-`pandas`
-`pytest`
+- `pandas`<br>
+- `pytest`
 
 If you have installed the Anaconda distribution of Python as described in the [tutorials](../tutorials/README.md) section these libraries will be installed.
 
 ## Running the Python Code
-`spells.py` takes the following arguments:
+- `spells.py`: takes the following arguments:
 
-`csv_filename` Location of input CSV file.
+- `csv_filename`: Location of input CSV file.
 
-`active` Name of a column containing the active indicator.
+- `active`: Name of a column containing the active indicator.
 
-`caseID`Name of column containing the unique caseID.
+- `caseID`: Name of column containing the unique caseID.
 
-`time` Name of column containing the time period.
+- `time`: Name of column containing the time period.
 
-`churn_period_days` Time to allow for administrative churn when defining a spell (in days). Breaks in service less than or equal to this value will be considered one spell.
+- `churn_period_days`: Time to allow for administrative churn when defining a spell (in days). Breaks in service less than or equal to this value will be considered one spell.
 
 
-Example: `python spells.py CaseMonths.csv active_ind caseid month 31 spells.csv`
+Example:<br>
+`python spells.py CaseMonths.csv active_ind caseid month 31 spells.csv`
 
 
 ## Testing The Python Script
@@ -34,6 +35,6 @@ A file to test the Python code against a few simple use cases is available in *t
 If the tests run successfully several lines of text will print out to the terminal ending with:
 
 ```
-========================== 4 passed in 1.37 seconds ===========================
+======================= 4 passed in 1.37 seconds ========================
 ```
 
