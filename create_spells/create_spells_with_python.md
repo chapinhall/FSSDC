@@ -30,7 +30,7 @@ Example:<br>
 
 
 ## Testing The Python Script
-A file to test the Python code against a few simple use cases is available in *test_spells.py*. Test data is provided in  [test_data](https://github.com/chapinhall/FSSDC/tree/master/create_spells/test_data). If you make changes to the Python file to add a new feature you may wish to run some tests to ensure they work correctly. Update the new expected output based on your additions inside the *test_spells.py* file and rerun the tests. You can run the test file by typing `py.test test_spells.py` in your terminal.
+A file to test the Python code against a few simple use cases is available in *test_spells.py*. Test data is provided in  [test_data](https://github.com/chapinhall/FSSDC/tree/master/create_spells/python_test_data). If you make changes to the Python file to add a new feature you may wish to run some tests to ensure they work correctly. Update the new expected output based on your additions inside the *test_spells.py* file and rerun the tests. You can run the test file by typing `py.test test_spells.py` in your terminal.
 
 If the tests run successfully several lines of text will print out to the terminal ending with:
 

@@ -30,7 +30,7 @@ changes case type or the size of the household changes.
 ***The Input File***
 
 For the demonstration, we provide an input file of mock monthly extracts
-called [input.csv](r_test_data/input.csv) (in the r_test_data
+called [input.csv](https://github.com/chapinhall/FSSDC/tree/master/create_spells/r_test_data) (in the r_test_data
 directory). It has the following  basic format which should
 match the format of the file you are preparing  for analysis:
 
