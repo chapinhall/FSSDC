@@ -1,6 +1,6 @@
 # Spells Creation Demonstration Guide
 
-The R script `calculate_spells.R` converts point in time data to spells.
+The R script [calculate_spells.R](https://github.com/chapinhall/FSSDC/blob/master/create_spells/calculate_spells.R) converts point in time data to spells.
 
 ## Dependancies
 Running this code requiers the following libraries:
@@ -17,7 +17,7 @@ section to install these libraries.
 
 ## Description of Files
 
-***The R File***
+#### The R File
 
 The `calculate_spells.R` file is the code file written in R to
 transform monthly extracts of case information into a spells format more
@@ -27,7 +27,7 @@ spell can be defined as the period for when a case is active, but other
 case characteristics may be optionally considered, such as if a case
 changes case type or the size of the household changes.
 
-***The Input File***
+#### Input File
 
 For the demonstration, we provide an input file of mock monthly extracts
 called [input.csv](https://github.com/chapinhall/FSSDC/tree/master/create_spells/r_test_data) (in the r_test_data
@@ -35,25 +35,25 @@ directory). It has the following  basic format which should
 match the format of the file you are preparing  for analysis:
 
 
-  **caseid**   | **date**       | **benefits** | **case_type** | **num_adults**
-  ------------ | ---------------| -------------|---------------|--------------
-  1            | 1/1/2016       |    1         |  child only   |      0
-  1            | 2/1/2016       |    1         |  child only   |      0
-  1            | 3/1/2016       |    1         |  child only   |      0
-  1            | 4/1/2016       |    1         |  one parent   |      1 
-  1            | 5/1/2016       |    1         |  one parent   |      1
-  1            | 6/1/2016       |    1         |  one parent   |      1
-  1            | 7/1/2016       |    0         |  one parent   |      1
-  1            | 8/1/2016       |    0         |  one parent   |      1
-  1            | 9/1/2016       |    0         |  one parent   |      1
-  1            | 10/1/2016      |    0         |  one parent   |      1
-  1            | 11/1/2016      |    0         |  one parent   |      1
-  1            | 12/1/2016      |    0         |  one parent   |      1
+  |**caseid** |  **date**  | **benefits** | **case_type** | **num_adults** |
+  |-----------| -----------| -------------|---------------|----------------|
+  |1          | 1/1/2016   |    1         |  child only   |      0         |
+  |1          | 2/1/2016   |    1         |  child only   |      0         |
+  |1          | 3/1/2016   |    1         |  child only   |      0         |
+  |1          | 4/1/2016   |    1         |  one parent   |      1         | 
+  |1          | 5/1/2016   |    1         |  one parent   |      1         |
+  |1          | 6/1/2016   |    1         |  one parent   |      1         |
+  |1          | 7/1/2016   |    0         |  one parent   |      1         |
+  |1          | 8/1/2016   |    0         |  one parent   |      1         |
+  |1          | 9/1/2016   |    0         |  one parent   |      1         |
+  |1          | 10/1/2016  |    0         |  one parent   |      1         |
+  |1          | 11/1/2016  |    0         |  one parent   |      1         |
+  |1          | 12/1/2016  |    0         |  one parent   |      1         |
 
 Fields include unique case id, the date of the extract time period (usually
 one record per month), and a flag indicating if the case was receiving
 benefits for that time period (1 for receiving or 0 for not receiving). These
-fields should be labeled: "caseid, "date", and "benefits" respectively.
+fields should be labeled: *"caseid"*, *"date"*, and *"benefits"* respectively.
 Optionally, there can be additional fields that are used to define spells. The
 example above, and the sample input file, are examples of TANF data with two
 additional fields, case_type and num_adults.  The first additional field,
@@ -67,23 +67,23 @@ extract input file is optional, as missing months will be inferred as inactive
 and used to calculate
 
 
-***The Output File***
+#### Output File
 
 The output file is created once the R file is run with the input file.
 It contains the spells created by the code. Additional fields such as
-"case_type" or "num_adults" will be added to the output file if they
+*"case_type"* or *"num_adults"* will be added to the output file if they
 are added to the CASE_FIELDS code parameter. For details on the
-CASE_FIELDS code parameter, see the “Customizing the Code for Your
-Data” section of this guide. The output file will have this structure:
+CASE_FIELDS code parameter, see the Customizing the Code for Your
+Data section of this guide. The output file will have this structure:
 
-  **caseid**   | **benefits**   | **startMonth**   | **endMonth**   | **spellLength**
-  ------------ | ---------------| ---------------- | -------------- | -----------------
-  1            | 1              | 01/2016          | 06/2016        | 6
-  1            | 0              | 07/2016          | 12/2016        | 6
+  |**caseid** | **benefits** | **startMonth** | **endMonth** | **spellLength** |
+  |-----------| -------------| ---------------| -------------| ----------------|
+  |1          | 1            | 01/2016        | 06/2016      | 6               |
+  |1          | 0            | 07/2016        | 12/2016      | 6               |
 
 The spells above refers to the monthly records in the input file above.
 
-***The Summary File***
+#### Summary File
 
 The summary file is created once the R file is run with the input file.
 It contains summary information on the spells such as the number of
@@ -109,17 +109,17 @@ before the code can run.
     where you want the summary file to be saved once statistics on the
     spells are available. It must be a .txt file type.
 
-**For Windows users, you will need to format your filepaths differently
-in R than you do in Windows.** A Windows filepath looks like
-"C:/Folder1/Subfolder/MyFile.csv". In R, the filepath would need to look
-like "C://Folder1//Subfolder//MyFile.csv".
+  **NOTE**: Windows users will need to format your filepaths differently
+  in R. A Windows filepath looks like
+  *"C:/Folder1/Subfolder/MyFile.csv"*. In R, the filepath would need to look
+  like *"C://Folder1//Subfolder//MyFile.csv"*.
 
 Changing those 3 code parameters, is enough to run the code with its
 default code parameters for CHURN and CASE\_FIELDS. However, you may
 wish to change these two code parameters depending on your specific
 data. This is described in the next section.
 
-## Customizing the Code for Your Data
+## Customizing the Code for Your Data 
 
 
 There are two optional code parameters you can change in the code
@@ -167,13 +167,7 @@ CASE_FIELDS code parameter.
     SUMMARY\_FILE code parameter to the filepath where you want the
     summary file to be saved. Your code may look like this:
 
-![file_paths](file_paths.jpg)
-
-Notice how the folders are separated by two backslashes instead of one
-backslash. That is how R reads Window's filepaths. If you are working on a Mac
-or Linux operating system you need to use a forward slash instead of the
-double backslashes. For more information on R filepaths see this explanation
-from Indiana University (<https://kb.iu.edu/d/azzp>).
+    ![file_paths](file_paths.jpg)<br>*Notice how the folders are separated by two backslashes instead of one backslash. That is how R reads Window's filepaths. If you are working on a Mac or Linux operating system you need to use a forward slash instead of the double backslashes. For more information on R filepaths see this explanation from Indiana University (<https://kb.iu.edu/d/azzp>).*
 
 3.  Run the code in RStudio. From the top navigation bar select
     Code &gt; Run Region &gt; Run All.
@@ -186,22 +180,22 @@ from Indiana University (<https://kb.iu.edu/d/azzp>).
     input.csv file for caseid 1, you will notice that it starts active
     and changes status every 2 months for 2 years.
 
-  | **caseid**   | **benefits**   | **startMonth**   | **endMonth**   | **spellLength**
-  |------------  | -------------- | ---------------- | -------------- | -----------------
-  | 1            | 1              | 01/2016          | 02/2016        | 2
-  | 1            | 0              | 03/2016          | 04/2016        | 2
-  | 1            | 1              | 05/2016          | 06/2016        | 2
-  | 1            | 0              | 07/2016          | 08/2016        | 2
-  | 1            | 1              | 09/2016          | 10/2016        | 2
-  | 1            | 0              | 11/2016          | 12/2016        | 2
-  | 1            | 1              | 01/2017          | 02/2017        | 2
-  | 1            | 0              | 03/2017          | 04/2017        | 2
-  | 1            | 1              | 05/2017          | 06/2017        | 2
-  | 1            | 0              | 07/2017          | 08/2017        | 2
-  | 1            | 1              | 09/2017          | 10/2017        | 2
-  | 1            | 0              | 11/2017          | 12/2017        | 2
-  | 2            | 1              | 01/2016          | 12/2017        | 24
-  | 3            | 1              | 01/2016          | 12/2017        | 24
+    | **caseid** | **benefits** | **startMonth** | **endMonth** | **spellLength**|
+    |------------|--------------|----------------|--------------| ---------------|
+    | 1          | 1            | 01/2016        | 02/2016      | 2              |
+    | 1          | 0            | 03/2016        | 04/2016      | 2              |
+    | 1          | 1            | 05/2016        | 06/2016      | 2              |
+    | 1          | 0            | 07/2016        | 08/2016      | 2              |
+    | 1          | 1            | 09/2016        | 10/2016      | 2              |
+    | 1          | 0            | 11/2016        | 12/2016      | 2              |
+    | 1          | 1            | 01/2017        | 02/2017      | 2              |
+    | 1          | 0            | 03/2017        | 04/2017      | 2              |
+    | 1          | 1            | 05/2017        | 06/2017      | 2              |
+    | 1          | 0            | 07/2017        | 08/2017      | 2              |
+    | 1          | 1            | 09/2017        | 10/2017      | 2              |
+    | 1          | 0            | 11/2017        | 12/2017      | 2              |
+    | 2          | 1            | 01/2016        | 12/2017      | 24             |
+    | 3          | 1            | 01/2016        | 12/2017      | 24             |
 
 5.  Examine the summary file. It should say there are 8 active spells
     and 6 inactive spells as well as some other descriptive statistics
@@ -228,12 +222,12 @@ from Indiana University (<https://kb.iu.edu/d/azzp>).
     the case will remain inactive beyond the study period, and therefore
     the inactive spell remains.
 
-  **caseid**   | **benefits**   | **startMonth**   | **endMonth**   | **spellLength**
-  ------------ | ---------------| ---------------- | -------------- | -----------------
-  1            | 1              | 01/2016          | 10/2017        | 22
-  1            | 0              | 11/2017          | 12/2017        | 2
-  2            | 1              | 01/2016          | 12/2017        | 24
-  3            | 1              | 01/2016          | 12/2017        | 24
+    |**caseid** | **benefits** | **startMonth** | **endMonth** | **spellLength** |
+    |-----------| -------------| ---------------| -------------| ----------------|
+    |1          | 1            | 01/2016        | 10/2017      | 22              |
+    |1          | 0            | 11/2017        | 12/2017      | 2               |
+    |2          | 1            | 01/2016        | 12/2017      | 24              |
+    |3          | 1            | 01/2016        | 12/2017      | 24              |
 
 4.  Examine the summary file. It should say there are 3 active spells
     and 1 inactive spells as well as some other descriptive statistics
@@ -256,20 +250,20 @@ from Indiana University (<https://kb.iu.edu/d/azzp>).
     total of 12 spells for caseid 2 which previously only had 1 spell.
     The output for caseid 2 should now look like this:
 
-  **caseid**   | **benefits**   | **case_type** | **startMonth**   | **endMonth**   | **spellLength**
-  ------------ | -------------- | --------------| ---------------- | -------------- | -----------------
-  2            | 1              | child only    | 01/2016          | 02/2016        | 2
-  2            | 1              | one parent    | 03/2016          | 04/2016        | 2
-  2            | 1              | child only    | 05/2016          | 06/2016        | 2
-  2            | 1              | one parent    | 07/2016          | 08/2016        | 2
-  2            | 1              | child only    | 09/2016          | 10/2016        | 2
-  2            | 1              | one parent    | 11/2016          | 12/2016        | 2
-  2            | 1              | child only    | 01/2017          | 02/2017        | 2
-  2            | 1              | one parent    | 03/2017          | 04/2017        | 2
-  2            | 1              | child only    | 05/2017          | 06/2017        | 2
-  2            | 1              | one parent    | 07/2017          | 08/2017        | 2
-  2            | 1              | child only    | 09/2017          | 10/2017        | 2
-  2            | 1              | one parent    | 11/2017          | 12/2017        | 2
+    |**caseid** | **benefits** | **case_type** | **startMonth** | **endMonth** | **spellLength** |
+    |-----------| -------------| --------------| ---------------| -------------| ----------------|
+    |2          | 1            | child only    | 01/2016        | 02/2016      | 2               |
+    |2          | 1            | one parent    | 03/2016        | 04/2016      | 2               |
+    |2          | 1            | child only    | 05/2016        | 06/2016      | 2               |
+    |2          | 1            | one parent    | 07/2016        | 08/2016      | 2               |
+    |2          | 1            | child only    | 09/2016        | 10/2016      | 2               |
+    |2          | 1            | one parent    | 11/2016        | 12/2016      | 2               |
+    |2          | 1            | child only    | 01/2017        | 02/2017      | 2               |
+    |2          | 1            | one parent    | 03/2017        | 04/2017      | 2               |
+    |2          | 1            | child only    | 05/2017        | 06/2017      | 2               |
+    |2          | 1            | one parent    | 07/2017        | 08/2017      | 2               |
+    |2          | 1            | child only    | 09/2017        | 10/2017      | 2               |
+    |2          | 1            | one parent    | 11/2017        | 12/2017      | 2               |
 
 1.  Examine the summary file. Its results will be different than before.
     Its exact results will vary depending on how you have the CHURN code
@@ -290,20 +284,20 @@ from Indiana University (<https://kb.iu.edu/d/azzp>).
     `num_adults` every 2 months creating 12 total spells. The output
     for caseid 3 should now look like this:
 
-  **caseid**   | **benefits** | **case_type**     | **num_adults**    | **startMonth**   |**endMonth**   | **spellLength**
-  ------------ | ------------ | ----------------- | ----------------- | ---------------- | --------------| -----------------
-  3            | 1            | one parent        | 1                 | 01/2016          | 02/2016       | 2
-  3            | 1            | two parent        | 2                 | 03/2016          | 04/2016       | 2
-  3            | 1            | one parent        | 1                 | 05/2016          | 06/2016       | 2
-  3            | 1            | two parent        | 2                 | 07/2016          | 08/2016       | 2
-  3            | 1            | one parent        | 1                 | 09/2016          | 10/2016       | 2
-  3            | 1            | two parent        | 2                 | 11/2016          | 12/2016       | 2
-  3            | 1            | one parent        | 1                 | 01/2017          | 02/2017       | 2
-  3            | 1            | two parent        | 2                 | 03/2017          | 04/2017       | 2
-  3            | 1            | one parent        | 1                 | 05/2017          | 06/2017       | 2
-  3            | 1            | two parent        | 2                 | 07/2017          | 08/2017       | 2
-  3            | 1            | one parent        | 1                 | 09/2017          | 10/2017       | 2
-  3            | 1            | two parent        | 2                 | 11/2017          | 12/2017       | 2
+    |**caseid** | **benefits** | **case_type** | **num_adults** | **startMonth** |**endMonth** | **spellLength** |
+    |-----------| ------------ | --------------| ---------------| ---------------| ------------| ----------------|
+    |3          | 1            | one parent    | 1              | 01/2016        | 02/2016     | 2               |
+    |3          | 1            | two parent    | 2              | 03/2016        | 04/2016     | 2               |
+    |3          | 1            | one parent    | 1              | 05/2016        | 06/2016     | 2               |
+    |3          | 1            | two parent    | 2              | 07/2016        | 08/2016     | 2               |
+    |3          | 1            | one parent    | 1              | 09/2016        | 10/2016     | 2               |
+    |3          | 1            | two parent    | 2              | 11/2016        | 12/2016     | 2               |
+    |3          | 1            | one parent    | 1              | 01/2017        | 02/2017     | 2               |
+    |3          | 1            | two parent    | 2              | 03/2017        | 04/2017     | 2               |
+    |3          | 1            | one parent    | 1              | 05/2017        | 06/2017     | 2               |
+    |3          | 1            | two parent    | 2              | 07/2017        | 08/2017     | 2               |
+    |3          | 1            | one parent    | 1              | 09/2017        | 10/2017     | 2               |
+    |3          | 1            | two parent    | 2              | 11/2017        | 12/2017     | 2               |
 
 4.  Examine the summary file. Its results will be different than before.
     Its exact results will vary depending on how you have the CHURN code
