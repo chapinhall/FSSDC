@@ -1,7 +1,6 @@
 # TANF Data Samples
 
-This repository includes [sample synthetic data](https://github.com/chapinhall/FSSDC/tree/master/sample_TANF_data) in the initial TANF data model structure. The table below briefly describes the TANF data model components. This model is intended 
-to be flexible depending on state interests and data availability, but it is generally designed to facilitate analyses around caseload dynamics, churn, and recidivism.
+This repository includes sample synthetic data in the initial TANF data model structure. The TANF data model is comprised of two datasets, one at the [case level](https://github.com/chapinhall/FSSDC/blob/master/sample_TANF_data/CaseMonths.csv) and one at the [member level](https://github.com/chapinhall/FSSDC/blob/master/sample_TANF_data/MemberMonths.csv). The table below briefly describes the TANF data model components.  This model is intended to be flexible depending on state interests and data availability, but it is generally designed to facilitate analyses around caseload dynamics, churn, and recidivism.
 
 | **Core Data Elements**         |  **Purpose**                                                   | **Examples**                                                               |
 |--------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------|

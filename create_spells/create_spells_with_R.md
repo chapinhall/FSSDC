@@ -1,8 +1,8 @@
 # Spells Creation Demonstration Guide
 
-The R script [calculate_spells.R](https://github.com/chapinhall/FSSDC/blob/master/create_spells/calculate_spells.R) converts point in time data to spells.
+The R script [calculate_spells.R](https://github.com/chapinhall/FSSDC/blob/master/create_spells/R/calculate_spells.R) converts point in time data to spells.
 
-## Dependancies
+## Dependencies
 Running this code requiers the following libraries:
 
 - `dplyr`
@@ -30,8 +30,8 @@ changes case type or the size of the household changes.
 #### Input File
 
 For the demonstration, we provide an input file of mock monthly extracts
-called [input.csv](https://github.com/chapinhall/FSSDC/tree/master/create_spells/r_test_data) (in the r_test_data
-directory). It has the following  basic format which should
+called [input.csv](https://github.com/chapinhall/FSSDC/tree/master/create_spells/R/test_data) (in the test_data
+directory). It has the following basic format which should
 match the format of the file you are preparing  for analysis:
 
 
@@ -73,8 +73,8 @@ The output file is created once the R file is run with the input file.
 It contains the spells created by the code. Additional fields such as
 *"case_type"* or *"num_adults"* will be added to the output file if they
 are added to the CASE_FIELDS code parameter. For details on the
-CASE_FIELDS code parameter, see the Customizing the Code for Your
-Data section of this guide. The output file will have this structure:
+CASE_FIELDS code parameter, see the "Customizing the Code for Your
+Data" section of this guide. The output file will have this structure:
 
   |**caseid** | **benefits** | **startMonth** | **endMonth** | **spellLength** |
   |-----------| -------------| ---------------| -------------| ----------------|
@@ -111,8 +111,8 @@ before the code can run.
 
   **NOTE**: Windows users will need to format your filepaths differently
   in R. A Windows filepath looks like
-  *"C:/Folder1/Subfolder/MyFile.csv"*. In R, the filepath would need to look
-  like *"C://Folder1//Subfolder//MyFile.csv"*.
+  "C:/Folder1/Subfolder/MyFile.csv". In R, the filepath would need to look
+  like "C://Folder1//Subfolder//MyFile.csv".
 
 Changing those 3 code parameters, is enough to run the code with its
 default code parameters for CHURN and CASE\_FIELDS. However, you may
@@ -148,7 +148,7 @@ depending on your needs:
     CASE_FIELDS code parameter. For example, the CASE_FIELDS code
     parameter may look like this
 
-    ![case_fields](case_fields.jpg)
+    ![case_fields](./images/case_fields.jpg)
 
 ## Examples of How to Run the Code
 
@@ -167,7 +167,9 @@ CASE_FIELDS code parameter.
     SUMMARY\_FILE code parameter to the filepath where you want the
     summary file to be saved. Your code may look like this:
 
-    ![file_paths](file_paths.jpg)<br>*Notice how the folders are separated by two backslashes instead of one backslash. That is how R reads Window's filepaths. If you are working on a Mac or Linux operating system you need to use a forward slash instead of the double backslashes. For more information on R filepaths see this explanation from Indiana University (<https://kb.iu.edu/d/azzp>).*
+    ![file_paths](./images/file_paths.jpg)
+
+    *Notice how the folders are separated by two backslashes instead of one backslash. That is how R reads Window's filepaths. If you are working on a Mac or Linux operating system you need to use a forward slash instead of the double backslashes. For more information on R filepaths see [this explanation](https://kb.iu.edu/d/azzp) from Indiana University.*
 
 3.  Run the code in RStudio. From the top navigation bar select
     Code &gt; Run Region &gt; Run All.
@@ -238,7 +240,7 @@ CASE_FIELDS code parameter.
 1.  In the R code, change the CASE_FIELDS code parameter to look
     like this.
 
-    ![case_fields](case_fields.jpg)
+    ![case_fields](./images/case_fields.jpg)
 
 2.  Save the changes to your R code (Ctrl + S or the Save button
     in RStudio). Rerun the code as we did previously.
@@ -272,7 +274,7 @@ CASE_FIELDS code parameter.
 ## Tracking Case Type and Number of Adults with the CASE_FIELDS Code Parameter
 
 1.  In the R code, change the CASE_FIELDS code parameter to look
-    like this. ![num_adults](num_adults.jpg)
+    like this. ![num_adults](./images/num_adults.jpg)
 
     Now the code looks for changes in either field when creating spells.
 
