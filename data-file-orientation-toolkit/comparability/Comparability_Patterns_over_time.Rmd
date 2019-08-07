@@ -49,10 +49,15 @@ if (!is.null(time_var)) {
 
 **What to look for in tableplots**:  
 We reiterate here what a user to focus on when examining tableplots.
-- *Relation between variables*: Use the graph to examine relationships between variables and whether there are any unexpected deviations over time warranting further inquiry.
+
+- *Relation among variables*: Use the graph to examine relationships among variables and whether there are any unexpected deviations over time warranting further inquiry.
+
 - *Discontinuities in unsorted variables*: Among unsorted variables, look for discontinuities in continuous and categorical variables, and note the direction of the jump.
+
 - *Range of values*: Examine the range of values of each variable to detect variables with particularly high or low range that may cast doubt about the validity of the values.  
-- *High standard deviation or discrete jumps in the standard deviation*: Look for high standard deviations, which may indicate problems in the validity of the values. For example, in some cases missing values are codified with values such as 999999 or 0 which will increase the variability of the data. Also, look for drastic changes in the standard deviation.  
+
+- *High standard deviation or discrete jumps in the standard deviation*: Look for high standard deviations, which may indicate problems in the validity of the values. For example, in some cases missing values are codified with values such as 999999 or 0 which will increase the variability of the data. Also, look for drastic changes in the standard deviation. 
+
 - *Highest and lowest values*: Check the highest and lowest values of the sorted variable and how they relate to the other variables.  
   
   

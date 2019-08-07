@@ -85,7 +85,7 @@ In the analyses that follow, you will see results from different analyses regard
 
 These analyses are meant to provide a better understanding of your data, its strengths and weaknesses, and any areas of caution needing further attention or care when conducting research.  
 
-#Analysis Preview
+# Analysis Preview
 
 In the analyses that follow, the toolkit begins by guiding a qualitative assessment of **Relevance**. Then, the main sections of the toolkit cover three primary components to understand your data file - **Accuracy**, **Completeness**, and **Comparability**.  
 
@@ -105,7 +105,7 @@ Note that accuracy and completeness analyses are included in the same section of
 
 Different analyses in this (or other) section may be more or less important based on the user's research questions. For example, if the user is particularly interested in making comparisons in outcomes among groups, comparability analyses among groups may be particularly important.  
 
-#Relevance
+# Relevance
 
 An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data for specific questions. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before proceeding with the other steps, to avoid spending time and resources on examining other data quality aspects for a data source that is not relevant.  
 
