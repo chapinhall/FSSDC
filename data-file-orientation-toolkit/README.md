@@ -4,7 +4,7 @@ This Data File Orientation Toolkit is an open source toolkit for researchers and
 
 The toolkit is particularly suited for data from state and local agencies that the [Family Self-Sufficiency Data Center](https://harris.uchicago.edu/research-impact/centers/family-self-sufficiency-data-center) supports, although it can run on any file that meets the format requirements. Each analysis presented includes guidance on how to interpret the results and take further steps to understand the quality of your data file before conducting analysis. 
 
-The toolkit checks the data accuracy, the completeness of records, and the comparability of the data over time and among subgroups of interest. It incorporates exploratory data analysis and data visualization to draw attention to sets of records or variables that contain outliers or for which data quality may be a concern. 
+The toolkit checks the data accuracy, the completeness of records, and the comparability of the data over time and among subgroups of interest. It incorporates exploratory data analysis and data visualization to draw attention to sets of records or variables that contain anomalies or for which data quality may be a concern. 
 
 This toolkit is written using the R programming language and utilizes RMarkdown for reporting. It is oriented for a user new to R to follow our instructions and produce a report for their data file in a few steps. For a user who wants to customize analyses in the toolkit, it is helpful to be familiar with R.
 
@@ -23,7 +23,7 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
 1. Install R (Latest version, currently 3.6.1): R is a free, open source, programming language often used for data manipulation, analysis, and visualization. The code for the toolkit is written in R. R software is available from the Comprehensive R Archive Network (CRAN) website (https://cran.r-project.org/). Click the download button for your operating system (Linux, Mac, or Windows). 
 
-If you already have R installed on your computer, please work with your IT team to update R to the latest version. A description of how to do this is on Windows is described at (https://www.r-bloggers.com/upgrade-r-on-windows-with-the-installr-package/).
+    If you already have R installed on your computer, please work with your IT team to update R to the latest version. A description of how to do this is on Windows is described at (https://www.r-bloggers.com/upgrade-r-on-windows-with-the-installr-package/).
 
 2. Install RStudio: RStudio is a development environment that makes using R easier. It is also free to download. You can download RStudio from the RStudio website (https://www.rstudio.com/products/rstudio/download/). Select the RStudio Desktop Open Source option.
 
@@ -32,54 +32,54 @@ If you already have R installed on your computer, please work with your IT team 
 3. After installing these programs, clone this repository to use the R scripts on your computer. Within the GitHub site, you can click on 'Clone or Download' to save the files to a convenient location on your computer.
 
 4. You will need to install the R packages required for the toolkit. To do so, use RStudio to open the script “Step1_InstallPackages.R” included in the 'data-file-orientation-toolkit' folder. Run this script by clicking the 'Run' button. The script includes checks to verify that the packages below from CRAN are installed successfully: 
-- 'plyr',
-- 'dplyr',
-- 'data.table',
-- 'readxl',
-- 'bit64',
-- 'descr',
-- 'tinytex', 
-- 'stringr',
-- 'gdata',
-- 'knitr',
-- 'ggplot2',
-- 'ggthemes',
-- 'dataQualityR',
-- 'lvplot',
-- 'fda',
-- 'tables',
-- 'RDIDQ',
-- 'validate',
-- 'VIM',
-- 'lvplot',
-- 'tidyr',
-- 'gridExtra', 
-- 'yaml',
-- 'devtools',
-- 'glue',
-- 'lazyeval',
-- 'caTools',
-- 'bitops',
-- 'rmarkdown'.
+    - 'plyr',
+    - 'dplyr',
+    - 'data.table',
+    - 'readxl',
+    - 'bit64',
+    - 'descr',
+    - 'tinytex', 
+    - 'stringr',
+    - 'gdata',
+    - 'knitr',
+    - 'ggplot2',
+    - 'ggthemes',
+    - 'dataQualityR',
+    - 'lvplot',
+    - 'fda',
+    - 'tables',
+    - 'RDIDQ',
+    - 'validate',
+    - 'VIM',
+    - 'lvplot',
+    - 'tidyr',
+    - 'gridExtra', 
+    - 'yaml',
+    - 'devtools',
+    - 'glue',
+    - 'lazyeval',
+    - 'caTools',
+    - 'bitops',
+    - 'rmarkdown'.
 
-In addition, one package 'tabplot' needs to be installed from GitHub.
+    In addition, one package 'tabplot' needs to be installed from GitHub.
 
-**Please make sure you are using the latest version of R (3.6.1 as of August 2019) to install 'tabplot'.** Note that the installation of 'tabplot' may produce warning messages, but as long as you use the latest version of R, the installation should proceed successfully. 
+    **Please make sure you are using the latest version of R (3.6.1 as of August 2019) to install 'tabplot'.** Note that the installation of 'tabplot' may produce warning messages, but as long as you use the latest version of R, the installation should proceed successfully. 
 
-For more information on R packages, see the following DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
+    For more information on R packages, see the following DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
 
 ### Modify '.Rmd' R Markdown files and 'setup.yml' files to generate report
 
-5. Next, using RStudio, navigate to the 'data-file-orientation-toolkit' folder and open the master 'Toolkit.Rmd' R Markdown script. You may also open the setup file 'setup.yml' in the same folder. Follow the instructions below to customize the input and R code for these files and other .Rmd R Markdown scripts in the subfolders. to your data file described below. After following these instructions, running 'Toolkit.Rmd' by clicking the 'knit' button in RStudio will produce a report with data quality analysis for your data file.
+5. Next, using RStudio, navigate to the 'data-file-orientation-toolkit' folder and open the master 'Toolkit.Rmd' R Markdown script. You may also open the setup file 'setup.yml' in the same folder. Follow the instructions below to customize the input and R code for these files and other .Rmd R Markdown scripts in the subfolders to correspond with your data file. After following these instructions, clicking the 'knit' button in RStudio to run 'Toolkit.Rmd' will produce a report with data quality analysis for your data file.
 
 ## Example Data File and Report for Testing
-In this repository, we include an example data file 'test_data_file.csv' we simulated for users to test and explore the toolkit. The file is a longitudinal dataset of benefit recipients that tracks cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file 'Codebook for test_data_file.txt.'
+In this repository, we include an example data file 'test_data_file.csv' we simulated for users to test and explore the toolkit. The file is a longitudinal dataset representing benefit recipients tracking cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file 'Codebook for test_data_file.txt.'
 
 The master R script 'Toolkit.Rmd' and set up file 'setup.yml' incorporate defaults to analyze this data file. However, you may modify the report output and functionality through changes to these scripts (see the 'Modifying the output' section below). 
 
 An example output report from the toolkit based on this data file is also provided in 'Toolkit_Output_Example.html'.
 
-**IMPORTANT NOTE:** We recommend reading through the Sections 1 to 5 of the example report Toolkit_Output_Example.html' and/or the text of 'Toolkit.Rmd' to orient yourself to the toolkit before running it to produce your report. First, the report introduces conducting data quality assessment, including assessing data relevance, which we recommend as an early step for investigation a data file. Second, reading through this text will orient the user to the content of the report and how to set it up.
+**IMPORTANT NOTE:** We recommend reading through Sections 1 to 5 of the example report Toolkit_Output_Example.html' and/or the text of 'Toolkit.Rmd' to orient yourself to the toolkit before running it to produce your report. Reading through this text will orient the user to the content of the report and how to set it up. In addition, the report introduces conducting data quality assessment, including understanding data relevance, which we recommend as an early step for investigation a data file. 
 
 ## Format of Data Files Needed for Toolkit
 'test_data_file.csv' provides an example of the data file format needed for the toolkit. The toolkit is best suited to analyze data that come in a longitudinal 'long' format, containing a column for an ID variable identifying unique entities (for example, households) and a time variable to track the entities over time. This 'rectangular' data file would have rows for the units/time periods and columns for the variables. A user should avoid duplicate records for units/time periods. (A check for duplicates is planned for a later version of the toolkit.)
@@ -88,7 +88,7 @@ As for 'test_data_file.csv', a header row in the data file should provide the va
 
 The input YAML file 'setup.yml' (described below) can be used to identify the ID variable and time variable in the dataset by designating the classifications as 'id' or 'time'. 
 
-**NOTE:** For proper sorting of time periods in the toolkit, we recommend a time variable similar to either YYYY format for year (ex: 2015) or YYYYMM format for month (ex: 201503 for March 2015).
+**NOTE:** For proper sorting of time periods in the toolkit, we recommend a time variable similar to either YYYY format for year (ex: 2015) or YYYYMM format for year-month (ex: 201503 for March 2015).
 
 While the toolkit requires a variable to be identified as a 'time' variable, the toolkit can also run on a cross-sectional data file (that does not involve different time periods) by adding a filler variable with the same value for all records. For example, a user may create a variable titled 'time' with the value '1' for all rows.
 
@@ -134,7 +134,7 @@ Components to Modify:
 - analysis_file: Enter directory and name of your data file to read in. There is no need for a directory if the data file is saved in the same location as 'Toolkit.Rmd'.
 - input_yaml: Location of the yaml to detail variables for analysis. For documentation on how to modify the YAML, refer to the existing YAML file (setup.yml).
 - Add labels for categorical variables: See the example for adding labels to categorical variables under 'EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES'
-- subset_param: Select subsetting parameters, including time period, for report output. The current example subsets the example file to months prior to July 2015. Can set to "" if the user does not need subsetting.
+- subset_param: Select subsetting parameters, including time period, for report output. For example, to subset test_data_file.csv to months prior to July 2015, the user would enter " subset_param <- 'month < 201507' ". Can set to "" if the user does not need subsetting.
 
 ## Accuracy and Completeness
 

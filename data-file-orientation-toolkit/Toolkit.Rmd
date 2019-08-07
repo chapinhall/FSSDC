@@ -215,7 +215,7 @@ In this section, the user should specify the parameters to subset the data file,
 ```{r subset_data, results='hide'}
 ##### SELECT SUBSETTING PARAMETERS ##### 
 # This example subsets file to records prior to July 2015
-subset_param <- "month < 201507"
+subset_param <- ""
 ########################################
 
 # Subsetting dataset
