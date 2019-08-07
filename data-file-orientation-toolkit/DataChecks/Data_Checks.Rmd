@@ -17,7 +17,7 @@ In this section begin by defining any variables that will be useful for determin
 ##### SELECT VARIABLES FOR DESCRIPTIVE STATISTICS OUTPUT#####
 selected_var <- c(key_vars,domain_vars,id_vars,time_vars,location_vars)
 
-##### EDIT THIS SECTION TO CREATE ADDITIONAL VARIABLES FOR QUALITY ASSESMENT AND TO DEFINE CODEBOOK RULES #####
+##### EDIT THIS SECTION TO CREATE ADDITIONAL VARIABLES FOR QUALITY ASSESSMENT AND TO DEFINE CODEBOOK RULES #####
 
 #zip_str <- "((^[0-9]{5}$)|(^[0-9]{4}$)|(^[0-9]{3}$)|(^[0-9]{5}-[0-9]{4}$)|(^[0-9]{5}-$)|(^[0-9]{4}-$)|(^[0-9]{3}-$))"
 #analysis_file$zip_detect <- str_detect(analysis_file$zip, zip_str)
@@ -29,10 +29,10 @@ v <- validator(
   c_month = as.numeric(month) >= 200101 & as.numeric(month) <=201805 & as.numeric(month) %% 1 ==0 & as.numeric(substr(as.character(200101),5,6)) %in% c(1:12) ,
   c_hh_id = nchar(trim(hh_id)) >= 1,
 #  c_zip = zip_detect=="Plausible",
-  c_source = source %in% c("FundSource1","FundSource2"),
+  c_source = source %in% c('FundSource1', 'FundSource2'),
   c_other_benef = other_benef %in% c("Yes", "No"),
   c_amount = amount>=0,
-  c_type_case = type_case %in% c(0:2),
+  c_type_case = type_case %in% c('Type1', 'Type2', 'Type3'),
   c_num_recip = num_recip %in% c(0:30)
 )
 

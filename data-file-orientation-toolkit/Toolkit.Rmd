@@ -214,7 +214,8 @@ In this section, the user should specify the parameters to subset the data file,
 
 ```{r subset_data, results='hide'}
 ##### SELECT SUBSETTING PARAMETERS ##### 
-subset_param <- ""
+# This example subsets file to records prior to July 2015
+subset_param <- "month < 201507"
 ########################################
 
 # Subsetting dataset
@@ -266,6 +267,8 @@ analysis_file <- subsetted
 
 Hofmann, H., Wickham, H., & Kafadar, K. (2017). Value Plots: Boxplots for Large Data. Journal of Computational and Graphical Statistics, 26(3), 469-477.
 
+Kumar, M., & Upadhyay, S. (2015). dataQualityR: Performs variable level data quality checks and generates summary statistics. R package version 1.0. https://cran.r-project.org/web/packages/dataQualityR/index.html 
+
 Laitila, T., Wallgren, A., & Wallgren, B. (2011). Quality Assessment of Administrative Data, Research and Development. Methodology Report from Statistics Sweden 2011:2.  
 
 Schafer, J. L. (1997). Analysis of incomplete multivariate data. Chapman and Hall/CRC.
@@ -274,7 +277,9 @@ Tennekes, M., de Jonge, E., & Daas, P. J. H. (2011, February). Visual profiling 
 
 Tukey, J. W. (1977). Exploratory data analysis. Reading, MA: Addison-Wesley Pub. Co.  
 
-Van Buuren, S. (2018). Flexible imputation of missing data. Chapman and Hall/CRC.
+van Buuren, S. (2018). Flexible imputation of missing data. Chapman and Hall/CRC.
+
+van der Loo, M., de Jonge, E., & Hsieh, P. (2018). validate: Data validation infrastructure. R package version 0.2.6. https://cran.r-project.org/web/packages/validate/index.html
 
 
 

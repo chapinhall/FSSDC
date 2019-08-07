@@ -3,7 +3,7 @@ an example for users to demonstrate and test the Data File Orientation Toolkit.
 It is a simulated longitudinal dataset tracking the receipt of a benefit by households for a 
 benefits program.
 
-The data file includes 852,023 household/month records tracking 67,654 hypothetical households. 
+The data file includes 897,717 household/month records tracking 67,557 hypothetical households. 
 
 The variables included are as follows:
 
@@ -19,6 +19,6 @@ other_benef - Indicator for whether other benefits received by households that m
 	1 = Yes
 	2 = No
 
-type_case - Indicator for type of household with three types (indicated 1, 2, and 3)
+type_case - Indicator for type of household with three types (indicated Type1, Type2, and Type3)
 
 num_recip - Number of recipients for household
