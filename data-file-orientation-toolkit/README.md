@@ -79,7 +79,7 @@ The master R script 'Toolkit.Rmd' and set up file 'setup.yml' incorporate defaul
 
 An example output report from the toolkit based on this data file is also provided in 'Toolkit_Output_Example.html'.
 
-**IMPORTANT NOTE:** We recommend reading through Sections 1 to 5 of the example report Toolkit_Output_Example.html' and/or the text of 'Toolkit.Rmd' to orient yourself to the toolkit before running it to produce your report. Reading through this text will orient the user to the content of the report and how to set it up. In addition, the report introduces conducting data quality assessment, including understanding data relevance, which we recommend as an early step for investigation a data file. 
+**IMPORTANT NOTE:** We recommend reading through Sections 1 to 5 of the example report Toolkit_Output_Example.html' and/or the text of 'Toolkit.Rmd' to orient yourself to the toolkit before running it to produce your report. Reading through this text will orient you to the content of the report and how to set it up. In addition, the report introduces the components of data quality assessment, including data relevance, which we recommend as an early step for investigating a data file. 
 
 ## Format of Data Files Needed for Toolkit
 'test_data_file.csv' provides an example of the data file format needed for the toolkit. The toolkit is best suited to analyze data that come in a longitudinal 'long' format, containing a column for an ID variable identifying unique entities (for example, households) and a time variable to track the entities over time. This 'rectangular' data file would have rows for the units/time periods and columns for the variables. A user should avoid duplicate records for units/time periods. (A check for duplicates is planned for a later version of the toolkit.)
@@ -131,16 +131,16 @@ To run the toolkit on your data file, this section describes places where we exp
 ## Toolkit (Toolkit.Rmd)
 Master script for the toolkit, including data input  
 Components to Modify:
-- analysis_file: Enter directory and name of your data file to read in. There is no need for a directory if the data file is saved in the same location as 'Toolkit.Rmd'.
+- analysis_file: Enter directory and name of your data file to read. There is no need for a directory if the data file is saved in the same location as 'Toolkit.Rmd'.
 - input_yaml: Location of the yaml to detail variables for analysis. For documentation on how to modify the YAML, refer to the existing YAML file (setup.yml).
 - Add labels for categorical variables: See the example for adding labels to categorical variables under 'EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES'
-- subset_param: Select subsetting parameters, including time period, for report output. For example, to subset test_data_file.csv to months prior to July 2015, the user would enter " subset_param <- 'month < 201507' ". Can set to "" if the user does not need subsetting.
+- subset_param: Select subsetting parameters, including time period, for report output. For example, to subset test_data_file.csv to months prior to July 2015, the user would enter " subset_param <- 'month < 201507' ". This can be set to "" if the user does not need subsetting.
 
 ## Accuracy and Completeness
 
 ### Data Checks (Data_Checks.Rmd)
 
-**NOTE:** This section is designed to be specific to the example data file. A user should either modify to match expected rules corresponding to their input data file or mark out the running of the Data_Checks.Rmd script in the master Toolkit.Rmd script, as described above under "Adding/removing components."
+**NOTE:** This section is designed to be specific to the example data file. A user should either modify this to match expected rules corresponding to their input data file or mark out the running of the Data_Checks.Rmd script in the master Toolkit.Rmd script, as described above under "Adding/removing components."
 
 Check whether the data conform to rules based on the codebook or other sources. In this section, the user should add variable rules based on the codebook and verify the extent to which any of these rules are violated. The main section for adding codebook rules is for the validation object 'v'. See examples provided in the script based on the example file.
 Variables to Modify:  
