@@ -85,7 +85,7 @@ In the analyses that follow, you will see results from different analyses regard
 
 These analyses are meant to provide a better understanding of your data, its strengths and weaknesses, and any areas of caution needing further attention or care when conducting research.  
 
-#Analysis Preview
+# Analysis Preview
 
 In the analyses that follow, the toolkit begins by guiding a qualitative assessment of **Relevance**. Then, the main sections of the toolkit cover three primary components to understand your data file - **Accuracy**, **Completeness**, and **Comparability**.  
 
@@ -105,7 +105,7 @@ Note that accuracy and completeness analyses are included in the same section of
 
 Different analyses in this (or other) section may be more or less important based on the user's research questions. For example, if the user is particularly interested in making comparisons in outcomes among groups, comparability analyses among groups may be particularly important.  
 
-#Relevance
+# Relevance
 
 An important first step for analyzing a data file's utility for a research question is to assess the dataset in terms of its relevance, or suitability in terms of such components as the population, units, and variables. In particular, a review of the metadata and documentation available is valuable for assessing the dataset's relevance, in addition to contacting the agency maintaining the data for specific questions. Complete and reliable metadata can be critical toward assessing the suitability of the dataset as well as possible limitations of the analysis. These assessments are conducted before proceeding with the other steps, to avoid spending time and resources on examining other data quality aspects for a data source that is not relevant.  
 
@@ -214,6 +214,7 @@ In this section, the user should specify the parameters to subset the data file,
 
 ```{r subset_data, results='hide'}
 ##### SELECT SUBSETTING PARAMETERS ##### 
+# This example subsets file to records prior to July 2015
 subset_param <- ""
 ########################################
 
@@ -266,6 +267,8 @@ analysis_file <- subsetted
 
 Hofmann, H., Wickham, H., & Kafadar, K. (2017). Value Plots: Boxplots for Large Data. Journal of Computational and Graphical Statistics, 26(3), 469-477.
 
+Kumar, M., & Upadhyay, S. (2015). dataQualityR: Performs variable level data quality checks and generates summary statistics. R package version 1.0. https://cran.r-project.org/web/packages/dataQualityR/index.html 
+
 Laitila, T., Wallgren, A., & Wallgren, B. (2011). Quality Assessment of Administrative Data, Research and Development. Methodology Report from Statistics Sweden 2011:2.  
 
 Schafer, J. L. (1997). Analysis of incomplete multivariate data. Chapman and Hall/CRC.
@@ -274,7 +277,9 @@ Tennekes, M., de Jonge, E., & Daas, P. J. H. (2011, February). Visual profiling 
 
 Tukey, J. W. (1977). Exploratory data analysis. Reading, MA: Addison-Wesley Pub. Co.  
 
-Van Buuren, S. (2018). Flexible imputation of missing data. Chapman and Hall/CRC.
+van Buuren, S. (2018). Flexible imputation of missing data. Chapman and Hall/CRC.
+
+van der Loo, M., de Jonge, E., & Hsieh, P. (2018). validate: Data validation infrastructure. R package version 0.2.6. https://cran.r-project.org/web/packages/validate/index.html
 
 
 

@@ -20,7 +20,9 @@
 # Classifications:
 # Make sure your classification is id, time, location, key, or domain as described below:
 # id: Identification variable (e.g. caseid), for variables that uniquely identify different units
-# time: Time variable denoting a period of time (e.g. reporting month)
+# time: Time variable denoting a period of time (e.g. reporting month). We recommend a time variable 
+#   similar to either YYYY format for year (ex: 2015) or YYYYMM format for year-month 
+#   (ex: 201503 for March 2015).
 # key: Most important variables that are focuses of the analysis (e.g. benefit receipt, outcomes)
 # domain: Specify different groups of interest for comparison for the research
 # location: Location variable describing area of case (zip codes or other geographic indicators)
@@ -30,6 +32,9 @@
 # cross-sectional, or does not involve a time component, a time variable can be added taking the 
 # same value for all records. For example, a user may create a variable titled "time" with the value 
 # '1' for all rows.
+
+# For proper sorting of time periods in the toolkit, we recommend a time variable similar to either 
+# YYYY format for year (ex: 2015) or YYYYMM format for month (ex: 201503 for March 2015).
 
 # Types
 # Make sure your type is categorical or numeric as described below:
