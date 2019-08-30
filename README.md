@@ -27,6 +27,8 @@ Learn more about the FSSDC [here](http://harris.uchicago.edu/centers/fssdc).
 
 ### [Sample TANF Data](/sample_TANF_data/README.md)
 
+### [Data Quality Toolkit](/data-file-orientation-toolkit/README.md)
+
 ## To Use and Contribute to this Repository
 This repository is publically accessible. All code is provided under the [MIT license](https://www.github.com/chapinhall/fssdc/blob/master/LICENSE.md).
 
