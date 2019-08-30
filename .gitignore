@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Jekyll directories and files for testing locally
+/_site
+/Gemfile* 
