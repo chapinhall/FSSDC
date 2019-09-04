@@ -16,7 +16,7 @@ This toolkit was developed at [NORC at the University of Chicago](http://www.nor
 
 The work is supported by the Family Self-Sufficiency Research Consortium, Grant Number #90PD0272, funded by the Office of Planning, Research, and Evaluation in the Administration for Children and Families, U.S Department of Health and Human Services to the University of Chicago, with NORC at the University of Chicago as a sub-grantee. The contents of the toolkit are solely the responsibility of the developers and do not necessarily represent the official views of the Office of Planning, Research, and Evaluation, the Administration for Children and Families, or the U.S. Department of Health and Human Services.
 
-## How to utilize this toolkit
+## How to Utilize this Toolkit
 In order to use this toolkit, you must first install R and RStudio on your computer. You may need to work with your IT team to have these programs installed in a place that can access the data file you wish to analyze. The following steps are needed to install this software.
 
 ### Install R (latest version, 3.6.1 as of August 2019) and RStudio
@@ -68,7 +68,7 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
     For more information on R packages, see the following DataCamp tutorial [https://www.datacamp.com/community/tutorials/r-packages-guide](https://www.datacamp.com/community/tutorials/r-packages-guide).
 
-### Modify '.Rmd' R Markdown files and [setup.yml](setup.yml) files to generate report
+### Modify '.Rmd' R Markdown files and [setup.yml](setup.yml) Files to Generate Report
 
 5. Next, using RStudio, navigate to the 'data-file-orientation-toolkit' folder and open the master [Toolkit.Rmd](Toolkit.Rmd) R Markdown script. You may also open the setup file 'setup.yml' in the same folder. Follow the instructions below to customize the input and R code for these files and other .Rmd R Markdown scripts in the subfolders to correspond with your data file. After following these instructions, clicking the 'knit' button in RStudio to run [Toolkit.Rmd](Toolkit.Rmd) will produce a report with data quality analysis for your data file.
 
@@ -96,35 +96,35 @@ While the toolkit requires a variable to be identified as a 'time' variable, the
 
 **NOTE:** While the toolkit will run successfully on any categorical variable input, some graphs and tables may not present well categorical variables with more than 15 categories. We recommend that users consider collapsing categorical variables to the groupings of most interest before running the toolkit. 
 
-## Setting up the report
+## Setting Up the Report
 The YAML file [setup.yml](setup.yml) provides a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed, including which variables are for identification, time periods, key for analysis (such as outcomes), domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs. Each variable should have a classification as 'id', 'time', 'key', 'domain', or 'location' and a type as 'categorical' or 'numeric'.
 
 There should be at least one variable classified as each of 'id', 'time', 'key', and 'domain.' 
 
 In the main [Toolkit.Rmd](Toolkit.Rmd) master script, you may specify the name of your data file, add new labels for your variables, and subset your data file as desired for analyses. More description of these steps is below under 'Modifying existing components.'
  
-## Running the report
+## Running the Report
 In the [Toolkit.Rmd](Toolkit.Rmd) RMarkdown file, click on the 'Knit' button at the top of the RStudio screen. You may be prompted to update R packages at the outset, and we advise allowing the R packages to update before rerunning the toolkit.
 
 Clicking the 'knit' button will run the entire script and, if there are no errors, produce an HTML document [Toolkit.html](Toolkit.html) when it is finished.
 
 The [Toolkit.Rmd](Toolkit.Rmd) master script sets up the data file for analysis and calls other scripts saved in the subfolders to conduct analysis for specific components of data quality. Setting up and running [Toolkit.Rmd](Toolkit.Rmd) allows for running the entire set of data quality analyses.
 
-## Modifying the output
+## Modifying the Output
 If you'd like to modify the report functionality, you can do so in two ways -- adding/removing components for analysis or modifying the existing components in the R scripts for analysis.
 
-### Adding/removing components
+### Adding/Removing Components
 At the bottom of the [Toolkit.Rmd](Toolkit.Rmd) file, you will find a series of lines that related to creating the report's various subcomponents. You can remove components from your final report by removing these lines.
 For instance, if you want to remove outlier analysis, simply comment out or remove the following lines:
 '''{r outliers, child='outliers/outliers.rmd', echo=True}
 '''
 If you'd like to add components back into the report, simply add these lines back into the report.
 
-### Modifying existing components
+### Modifying Existing Components
 If you'd like to modify the output of various report subcomponents, you can change the existing code. To do this, open the subfolder associated with that functionality. For instance, the outlier analysis is located in the 'outliers' folder.
 Most of the readily available input modifications are located at the top of each subcomponent's code. 
 
-# Description of components
+# Description of Components
 
 To run the toolkit on your data file, this section describes places where we expect changes will be needed to adapt the toolkit to your data file.
 
