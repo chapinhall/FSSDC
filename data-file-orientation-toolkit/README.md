@@ -128,7 +128,7 @@ Most of the readily available input modifications are located at the top of each
 
 To run the toolkit on your data file, this section describes places where we expect changes will be needed to adapt the toolkit to your data file.
 
-## Toolkit [Toolkit.Rmd](Toolkit.Rmd)
+## [Toolkit.Rmd](Toolkit.Rmd)
 Master script for the toolkit, including data input  
 Components to Modify:
 - analysis_file: Enter directory and name of your data file to read. There is no need for a directory if the data file is saved in the same location as [Toolkit.Rmd](Toolkit.Rmd).
