@@ -1,6 +1,6 @@
 # Data File Orientation Toolkit 
 
-This Data File Orientation Toolkit is an open source toolkit for researchers and analysts interested in assessing the quality of administrative data files and understanding the strengths and weaknesses of the file for conducting policy research. After going through a few set up steps, this toolkit will produce a report producing data quality insights regarding your data file. The content is guided by best practices for data quality assessment.
+This [Data File Orientation Toolkit](https://github.com/chapinhall/FSSDC/tree/master/data-file-orientation-toolkit) is an open source toolkit for researchers and analysts interested in assessing the quality of administrative data files and understanding the strengths and weaknesses of the file for conducting policy research. After going through a few set up steps, this toolkit will produce a report producing data quality insights regarding your data file. The content is guided by best practices for data quality assessment.
 
 The toolkit is particularly suited for data from state and local agencies that the [Family Self-Sufficiency Data Center](https://harris.uchicago.edu/research-impact/centers/family-self-sufficiency-data-center) supports, although it can run on any file that meets the format requirements. Each analysis presented includes guidance on how to interpret the results and take further steps to understand the quality of your data file before conducting analysis. 
 
