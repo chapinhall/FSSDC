@@ -21,7 +21,7 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
 ### Install R (latest version, 3.6.1 as of August 2019) and RStudio
 
-1. Install R (Latest version, currently 3.6.1): R is a free, open source, programming language often used for data manipulation, analysis, and visualization. The code for the toolkit is written in R. R software is available from the Comprehensive R Archive Network (CRAN) website (https://cran.r-project.org/). Click the download button for your operating system (Linux, Mac, or Windows). 
+1. Install R (Latest version, currently 3.6.1): R is a free, open source, programming language often used for data manipulation, analysis, and visualization. The code for the toolkit is written in R. R software is available from the Comprehensive R Archive Network (CRAN) website [https://cran.r-project.org/](https://cran.r-project.org/). Click the download button for your operating system (Linux, Mac, or Windows). 
 
     If you already have R installed on your computer, please work with your IT team to update R to the latest version. A description of how to do this is on Windows is described at (https://www.r-bloggers.com/upgrade-r-on-windows-with-the-installr-package/).
 
