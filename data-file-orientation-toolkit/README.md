@@ -23,9 +23,9 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
 1. Install R (Latest version, currently 3.6.1): R is a free, open source, programming language often used for data manipulation, analysis, and visualization. The code for the toolkit is written in R. R software is available from the Comprehensive R Archive Network (CRAN) website [https://cran.r-project.org/](https://cran.r-project.org/). Click the download button for your operating system (Linux, Mac, or Windows). 
 
-    If you already have R installed on your computer, please work with your IT team to update R to the latest version. A description of how to do this is on Windows is described at (https://www.r-bloggers.com/upgrade-r-on-windows-with-the-installr-package/).
+    If you already have R installed on your computer, please work with your IT team to update R to the latest version. A description of how to do this is on Windows is described at [https://www.r-bloggers.com/upgrade-r-on-windows-with-the-installr-package/](https://www.r-bloggers.com/upgrade-r-on-windows-with-the-installr-package/).
 
-2. Install RStudio: RStudio is a development environment that makes using R easier. It is also free to download. You can download RStudio from the RStudio website (https://www.rstudio.com/products/rstudio/download/). Select the RStudio Desktop Open Source option.
+2. Install RStudio: RStudio is a development environment that makes using R easier. It is also free to download. You can download RStudio from the RStudio website [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/). Select the RStudio Desktop Open Source option.
 
 ### Set Up R Scripts and Packages
 
@@ -66,7 +66,7 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
     **Please make sure you are using the latest version of R (3.6.1 as of August 2019) to install 'tabplot'.** Note that the installation of 'tabplot' may produce warning messages, but as long as you use the latest version of R, the installation should proceed successfully. 
 
-    For more information on R packages, see the following DataCamp tutorial (https://www.datacamp.com/community/tutorials/r-packages-guide).
+    For more information on R packages, see the following DataCamp tutorial [https://www.datacamp.com/community/tutorials/r-packages-guide](https://www.datacamp.com/community/tutorials/r-packages-guide).
 
 ### Modify '.Rmd' R Markdown files and 'setup.yml' files to generate report
 
