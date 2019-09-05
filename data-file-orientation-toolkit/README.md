@@ -70,7 +70,7 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
 ### Modify '.Rmd' R Markdown files and [setup.yml](setup.yml) Files to Generate Report
 
-5. Next, using RStudio, navigate to the 'data-file-orientation-toolkit' folder and open the master [Toolkit.Rmd](Toolkit.Rmd) R Markdown script. You may also open the setup file 'setup.yml' in the same folder. Follow the instructions below to customize the input and R code for these files and other .Rmd R Markdown scripts in the subfolders to correspond with your data file. After following these instructions, clicking the 'knit' button in RStudio to run [Toolkit.Rmd](Toolkit.Rmd) will produce a report with data quality analysis for your data file.
+5. Next, using RStudio, navigate to the 'data-file-orientation-toolkit' folder and open the master [Toolkit.Rmd](Toolkit.Rmd) R Markdown script. You may also open the setup file [setup.yml](setup.yml) in the same folder. Follow the instructions below to customize the input and R code for these files and other .Rmd R Markdown scripts in the subfolders to correspond with your data file. After following these instructions, clicking the 'knit' button in RStudio to run [Toolkit.Rmd](Toolkit.Rmd) will produce a report with data quality analysis for your data file.
 
 ## Example Data File and Report for Testing
 In this repository, we include an example data file [test_data_file.csv](test_data_file.csv) we simulated for users to test and explore the toolkit. The file is a longitudinal dataset representing benefit recipients tracking cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file [Codebook for test_data_file.txt](Codebook for test_data_file.txt).
