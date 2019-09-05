@@ -117,7 +117,8 @@ If you'd like to modify the report functionality, you can do so in two ways -- a
 At the bottom of the [Toolkit.Rmd](Toolkit.Rmd) file, you will find a series of lines that related to creating the report's various subcomponents. You can remove components from your final report by removing these lines.
 For instance, if you want to remove outlier analysis, simply comment out or remove the following lines:
 
-```{r outliers, child='outliers/outliers.rmd', echo=True}
+```
+{r outliers, child='outliers/outliers.rmd', echo=True}
 ```
 
 If you'd like to add components back into the report, simply add these lines back into the report.
