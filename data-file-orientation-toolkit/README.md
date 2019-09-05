@@ -141,7 +141,7 @@ Components to Modify:
 
 ## Accuracy and Completeness
 
-### Data Checks ([Data_Checks.Rmd](Data_Checks.Rmd))
+### Data Checks ([Data_Checks.Rmd](DataChecks/Data_Checks.Rmd))
 
 **NOTE:** This section is designed to be specific to the example data file. A user should either modify this to match expected rules corresponding to their input data file or mark out the running of the [Data_Checks.Rmd](Data_Checks.Rmd) script in the master [Toolkit.Rmd](Toolkit.Rmd) script, as described above under `Adding/removing components.`
 
@@ -152,32 +152,32 @@ Variables to Modify:
 - zip_detect: For verifying zip code; Can be marked out if zip code not in dataset
 - v: Validator object where user can specify variable rules
 
-### Outliers ([Outliers.Rmd](Outliers.Rmd))
+### Outliers ([Outliers.Rmd](distribution_analysis/outliers.Rmd))
 Assess distributions of single variables and detect potential outliers  
 Variables to Modify:
 - selected_var: Select variables for section's analyses
 
-### Examine Variable Distributions ([examine_var_distributions.Rmd](examine_var_distributions.Rmd))
+### Examine Variable Distributions ([examine_var_distributions.Rmd](distribution_analysis/examine_var_distributions.Rmd))
 Graphical analysis of variable distributions to detect any patterns suggesting inaccuracy.
 
-### Unit Completeness ([Completeness_unit.Rmd](Completeness_unit.Rmd))
+### Unit Completeness ([Completeness_unit.Rmd](completeness/Completeness_unit.Rmd))
 Assess completeness of data with respect to units in the dataset  
 Variables to Modify:
 - time_var: Designate the time variable
 - location_var: Designate the location/geographic variable for analysis
 
-### Value Completeness ([Completeness_values.Rmd](Completeness_values.Rmd))
+### Value Completeness ([Completeness_values.Rmd](completeness/Completeness_values.Rmd))
 Assess completeness of data with respect to variables within units (Item nonresponse)
 
 ## Comparability
 
-### Relationships Among Variables ([Comparability_Relationship_among_variables.Rmd](Comparability_Relationship_among_variables.Rmd))
+### Relationships Among Variables ([Comparability_Relationship_among_variables.Rmd](comparability/Comparability_Relationship_among_variables.Rmd))
 Assess comparability with respect to relationships among variables and by groups
 Variables to Modify:  
 - sort_var: Select sort variable to examine relationship among variables via tableplots
 - subgroup: Select subgroup variable for examining tableplots by subgroup
 
-### Patterns Over Time ([Comparability_Patterns_over_time.Rmd](Comparability_Patterns_over_time.Rmd))
+### Patterns Over Time ([Comparability_Patterns_over_time.Rmd](comparability/Comparability_Patterns_over_time.Rmd))
 Assess comparability of data over time  
 Variables to Modify:
 - selected_var: Select variables for section's analyses
