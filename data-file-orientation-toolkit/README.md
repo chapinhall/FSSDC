@@ -29,84 +29,84 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
 ### Set Up R Scripts and Packages
 
-3. After installing these programs, clone this repository to use the R scripts on your computer. Within the GitHub site, you can click on 'Clone or Download' to save the files to a convenient location on your computer.
+3. After installing these programs, clone this repository to use the R scripts on your computer. Within the GitHub site, you can click on `Clone or Download` to save the files to a convenient location on your computer.
 
-4. You will need to install the R packages required for the toolkit. To do so, use RStudio to open the script [“Step1_InstallPackages.R”](Step1_InstallPackages.R) included in the 'data-file-orientation-toolkit' folder. Run this script by clicking the 'Run' button. The script includes checks to verify that the packages below from CRAN are installed successfully: 
-- 'plyr',
-- 'dplyr',
-- 'data.table',
-- 'readxl',
-- 'bit64',
-- 'descr',
-- 'tinytex', 
-- 'stringr',
-- 'gdata',
-- 'knitr',
-- 'ggplot2',
-- 'ggthemes',
-- 'dataQualityR',
-- 'lvplot',
-- 'fda',
-- 'tables',
-- 'RDIDQ',
-- 'validate',
-- 'VIM',
-- 'lvplot',
-- 'tidyr',
-- 'gridExtra', 
-- 'yaml',
-- 'devtools',
-- 'glue',
-- 'lazyeval',
-- 'caTools',
-- 'bitops',
-- 'rmarkdown'.
+4. You will need to install the R packages required for the toolkit. To do so, use RStudio to open the script [“Step1_InstallPackages.R”](Step1_InstallPackages.R) included in the `data-file-orientation-toolkit` folder. Run this script by clicking the `Run` button. The script includes checks to verify that the packages below from CRAN are installed successfully: 
+- `plyr`,
+- `dplyr`,
+- `data.table`,
+- `readxl`,
+- `bit64`,
+- `descr`,
+- `tinytex`, 
+- `stringr`,
+- `gdata`,
+- `knitr`,
+- `ggplot2`,
+- `ggthemes`,
+- `dataQualityR`,
+- `lvplot`,
+- `fda`,
+- `tables`,
+- `RDIDQ`,
+- `validate`,
+- `VIM`,
+- `lvplot`,
+- `tidyr`,
+- `gridExtra`, 
+- `yaml`,
+- `devtools`,
+- `glue`,
+- `lazyeval`,
+- `caTools`,
+- `bitops`,
+- `rmarkdown`.
 
-    In addition, one package 'tabplot' needs to be installed from GitHub.
+    In addition, one package `tabplot` needs to be installed from GitHub.
 
-    **Please make sure you are using the latest version of R (3.6.1 as of August 2019) to install 'tabplot'.** Note that the installation of 'tabplot' may produce warning messages, but as long as you use the latest version of R, the installation should proceed successfully. 
+    **Please make sure you are using the latest version of R (3.6.1 as of August 2019) to install `tabplot`.** Note that the installation of `tabplot` may produce warning messages, but as long as you use the latest version of R, the installation should proceed successfully. 
 
     For more information on R packages, see the following DataCamp tutorial [https://www.datacamp.com/community/tutorials/r-packages-guide](https://www.datacamp.com/community/tutorials/r-packages-guide).
 
-### Modify '.Rmd' R Markdown files and [setup.yml](setup.yml) Files to Generate Report
+### Modify `.Rmd` R Markdown files and [setup.yml](setup.yml) Files to Generate Report
 
-5. Next, using RStudio, navigate to the 'data-file-orientation-toolkit' folder and open the master [Toolkit.Rmd](Toolkit.Rmd) R Markdown script. You may also open the setup file [setup.yml](setup.yml) in the same folder. Follow the instructions below to customize the input and R code for these files and other .Rmd R Markdown scripts in the subfolders to correspond with your data file. After following these instructions, clicking the 'knit' button in RStudio to run [Toolkit.Rmd](Toolkit.Rmd) will produce a report with data quality analysis for your data file.
+5. Next, using RStudio, navigate to the `data-file-orientation-toolkit` folder and open the master [Toolkit.Rmd](Toolkit.Rmd) R Markdown script. You may also open the setup file [setup.yml](setup.yml) in the same folder. Follow the instructions below to customize the input and R code for these files and other .Rmd R Markdown scripts in the subfolders to correspond with your data file. After following these instructions, clicking the `knit` button in RStudio to run [Toolkit.Rmd](Toolkit.Rmd) will produce a report with data quality analysis for your data file.
 
 ## Example Data File and Report for Testing
 In this repository, we include an example data file [test_data_file.csv](test_data_file.csv) we simulated for users to test and explore the toolkit. The file is a longitudinal dataset representing benefit recipients tracking cases/households over time for each month they are recorded in the file. A codebook for this test dataset is provided in the text file [Codebook for test_data_file.txt](Codebook for test_data_file.txt).
 
-The master R script [Toolkit.Rmd](Toolkit.Rmd) and set up file [setup.yml](setup.yml) incorporate defaults to analyze this data file. However, you may modify the report output and functionality through changes to these scripts (see the 'Modifying the output' section below). 
+The master R script [Toolkit.Rmd](Toolkit.Rmd) and set up file [setup.yml](setup.yml) incorporate defaults to analyze this data file. However, you may modify the report output and functionality through changes to these scripts (see the `Modifying the output` section below). 
 
 An example output report from the toolkit based on this data file is also provided in [Toolkit_Output_Example.html](Toolkit_Output_Example.html).
 
 **IMPORTANT NOTE:** We recommend reading through Sections 1 to 5 of the example report [Toolkit_Output_Example.html](Toolkit_Output_Example.html) and/or the text of [Toolkit.Rmd](Toolkit.Rmd) to orient yourself to the toolkit before running it to produce your report. Reading through this text will orient you to the content of the report and how to set it up. In addition, the report introduces the components of data quality assessment, including data relevance, which we recommend as an early step for investigating a data file. 
 
 ## Format of Data Files Needed for Toolkit
-[test_data_file.csv](test_data_file.csv) provides an example of the data file format needed for the toolkit. The toolkit is best suited to analyze data that come in a longitudinal 'long' format, containing a column for an ID variable identifying unique entities (for example, households) and a time variable to track the entities over time. This 'rectangular' data file would have rows for the units/time periods and columns for the variables. A user should avoid duplicate records for units/time periods. (A check for duplicates is planned for a later version of the toolkit.)
+[test_data_file.csv](test_data_file.csv) provides an example of the data file format needed for the toolkit. The toolkit is best suited to analyze data that come in a longitudinal `long` format, containing a column for an ID variable identifying unique entities (for example, households) and a time variable to track the entities over time. This `rectangular` data file would have rows for the units/time periods and columns for the variables. A user should avoid duplicate records for units/time periods. (A check for duplicates is planned for a later version of the toolkit.)
 
 As for [test_data_file.csv](test_data_file.csv), a header row in the data file should provide the variable names/labels.
 
-The input YAML file [setup.yml](setup.yml) (described below) can be used to identify the ID variable and time variable in the dataset by designating the classifications as 'id' or 'time'. 
+The input YAML file [setup.yml](setup.yml) (described below) can be used to identify the ID variable and time variable in the dataset by designating the classifications as `id` or `time`. 
 
 **NOTE:** For proper sorting of time periods in the toolkit, we recommend a time variable similar to either YYYY format for year (ex: 2015) or YYYYMM format for year-month (ex: 201503 for March 2015).
 
-While the toolkit requires a variable to be identified as a 'time' variable, the toolkit can also run on a cross-sectional data file (that does not involve different time periods) by adding a filler variable with the same value for all records. For example, a user may create a variable titled 'time' with the value '1' for all rows.
+While the toolkit requires a variable to be identified as a `time` variable, the toolkit can also run on a cross-sectional data file (that does not involve different time periods) by adding a filler variable with the same value for all records. For example, a user may create a variable titled `time` with the value `1` for all rows.
 
 **NOTE:** Please make sure that column labels for variable names match formats needed for R syntax. For example, variable names should not have spaces or other special characters.
 
 **NOTE:** While the toolkit will run successfully on any categorical variable input, some graphs and tables may not present well categorical variables with more than 15 categories. We recommend that users consider collapsing categorical variables to the groupings of most interest before running the toolkit. 
 
 ## Setting Up the Report
-The YAML file [setup.yml](setup.yml) provides a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed, including which variables are for identification, time periods, key for analysis (such as outcomes), domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs. Each variable should have a classification as 'id', 'time', 'key', 'domain', or 'location' and a type as 'categorical' or 'numeric'.
+The YAML file [setup.yml](setup.yml) provides a convenient setup for describing the variable types in your dataset for the toolkit analyze. The file can be used to designate different variable types to be analyzed, including which variables are for identification, time periods, key for analysis (such as outcomes), domains or groups to compare, and location-related variables. These variables provide inputs for analyses in the toolkit. Follow the instructions in the existing setup YAML file to learn how to modify it to fit your needs. Each variable should have a classification as `id`, `time`, `key`, `domain`, or `location` and a type as `categorical` or `numeric`.
 
-There should be at least one variable classified as each of 'id', 'time', 'key', and 'domain.' 
+There should be at least one variable classified as each of `id`, `time`, `key`, and `domain.` 
 
-In the main [Toolkit.Rmd](Toolkit.Rmd) master script, you may specify the name of your data file, add new labels for your variables, and subset your data file as desired for analyses. More description of these steps is below under 'Modifying existing components.'
+In the main [Toolkit.Rmd](Toolkit.Rmd) master script, you may specify the name of your data file, add new labels for your variables, and subset your data file as desired for analyses. More description of these steps is below under `Modifying existing components.`
  
 ## Running the Report
-In the [Toolkit.Rmd](Toolkit.Rmd) RMarkdown file, click on the 'Knit' button at the top of the RStudio screen. You may be prompted to update R packages at the outset, and we advise allowing the R packages to update before rerunning the toolkit.
+In the [Toolkit.Rmd](Toolkit.Rmd) RMarkdown file, click on the `Knit` button at the top of the RStudio screen. You may be prompted to update R packages at the outset, and we advise allowing the R packages to update before rerunning the toolkit.
 
-Clicking the 'knit' button will run the entire script and, if there are no errors, produce an HTML document [Toolkit.html](Toolkit.html) when it is finished.
+Clicking the `knit` button will run the entire script and, if there are no errors, produce an HTML document [Toolkit.html](Toolkit.html) when it is finished.
 
 The [Toolkit.Rmd](Toolkit.Rmd) master script sets up the data file for analysis and calls other scripts saved in the subfolders to conduct analysis for specific components of data quality. Setting up and running [Toolkit.Rmd](Toolkit.Rmd) allows for running the entire set of data quality analyses.
 
@@ -116,12 +116,14 @@ If you'd like to modify the report functionality, you can do so in two ways -- a
 ### Adding/Removing Components
 At the bottom of the [Toolkit.Rmd](Toolkit.Rmd) file, you will find a series of lines that related to creating the report's various subcomponents. You can remove components from your final report by removing these lines.
 For instance, if you want to remove outlier analysis, simply comment out or remove the following lines:
-'''{r outliers, child='outliers/outliers.rmd', echo=True}
-'''
+
+```{r outliers, child='outliers/outliers.rmd', echo=True}
+```
+
 If you'd like to add components back into the report, simply add these lines back into the report.
 
 ### Modifying Existing Components
-If you'd like to modify the output of various report subcomponents, you can change the existing code. To do this, open the subfolder associated with that functionality. For instance, the outlier analysis is located in the 'outliers' folder.
+If you'd like to modify the output of various report subcomponents, you can change the existing code. To do this, open the subfolder associated with that functionality. For instance, the outlier analysis is located in the `outliers` folder.
 Most of the readily available input modifications are located at the top of each subcomponent's code. 
 
 # Description of Components
@@ -133,16 +135,16 @@ Master script for the toolkit, including data input
 Components to Modify:
 - analysis_file: Enter directory and name of your data file to read. There is no need for a directory if the data file is saved in the same location as [Toolkit.Rmd](Toolkit.Rmd).
 - input_yaml: Location of the yaml to detail variables for analysis. For documentation on how to modify the YAML, refer to the existing YAML file [setup.yml](setup.yml).
-- Add labels for categorical variables: See the example for adding labels to categorical variables under 'EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES'
-- subset_param: Select subsetting parameters, including time period, for report output. For example, to subset [test_data_file.csv](test_data_file.csv) to months prior to July 2015, the user would enter " subset_param <- 'month < 201507' ". This can be set to "" if the user does not need subsetting.
+- Add labels for categorical variables: See the example for adding labels to categorical variables under `EDIT THIS SECTION TO DEFINE LABELS OF CHARACTER VARIABLES`
+- subset_param: Select subsetting parameters, including time period, for report output. For example, to subset [test_data_file.csv](test_data_file.csv) to months prior to July 2015, the user would enter ` subset_param <- 'month < 201507' `. This can be set to `""` if the user does not need subsetting.
 
 ## Accuracy and Completeness
 
 ### Data Checks ([Data_Checks.Rmd](Data_Checks.Rmd))
 
-**NOTE:** This section is designed to be specific to the example data file. A user should either modify this to match expected rules corresponding to their input data file or mark out the running of the [Data_Checks.Rmd](Data_Checks.Rmd) script in the master [Toolkit.Rmd](Toolkit.Rmd) script, as described above under "Adding/removing components."
+**NOTE:** This section is designed to be specific to the example data file. A user should either modify this to match expected rules corresponding to their input data file or mark out the running of the [Data_Checks.Rmd](Data_Checks.Rmd) script in the master [Toolkit.Rmd](Toolkit.Rmd) script, as described above under `Adding/removing components.`
 
-Check whether the data conform to rules based on the codebook or other sources. In this section, the user should add variable rules based on the codebook and verify the extent to which any of these rules are violated. The main section for adding codebook rules is for the validation object 'v'. See examples provided in the script based on the example file.
+Check whether the data conform to rules based on the codebook or other sources. In this section, the user should add variable rules based on the codebook and verify the extent to which any of these rules are violated. The main section for adding codebook rules is for the validation object `v`. See examples provided in the script based on the example file.
 Variables to Modify:  
 - selected_var: Select variables for section's analyses
 - zip_str: Regular expression used to check zip code consistency that can be modified or marked out
@@ -179,6 +181,3 @@ Assess comparability of data over time
 Variables to Modify:
 - selected_var: Select variables for section's analyses
 - subgroup: Select subgroup variable for examining tableplots by subgroup
-
-
-
