@@ -29,7 +29,7 @@ In order to use this toolkit, you must first install R and RStudio on your compu
 
 ### Set Up R Scripts and Packages
 
-3. After installing these programs, clone this repository to use the R scripts on your computer. Within the GitHub repo [https://github.com/chapinhall/FSSDC/tree/master/data-file-orientation-toolkit](https://github.com/chapinhall/FSSDC/tree/master/data-file-orientation-toolkit), you can click on Clone or Download to save the files to a convenient location on your computer.
+3. After installing these programs, clone this repository to use the R scripts on your computer. Within the [GitHub repo](https://github.com/chapinhall/FSSDC/tree/master/data-file-orientation-toolkit), you can click on Clone or Download to save the files to a convenient location on your computer.
 
 4. You will need to install the R packages required for the toolkit. To do so, use RStudio to open the script [“Step1_InstallPackages.R”](Step1_InstallPackages.R) included in the `data-file-orientation-toolkit` folder. Run this script by clicking the `Run` button. The script includes checks to verify that the packages below from CRAN are installed successfully: 
 - `plyr`
